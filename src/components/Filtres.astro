@@ -1,0 +1,97 @@
+---
+import type { Sujet } from '../lib/data';
+import SujetCarte from './SujetCarte.astro';
+
+interface Props {
+  sujets: Sujet[];
+  montrerSerie?: boolean;
+  montrerMatiere?: boolean;
+}
+const { sujets, montrerSerie = false, montrerMatiere = false } = Astro.props;
+
+const annees = [...new Set(sujets.map((s) => s.data.annee))].sort((a, b) => b - a);
+const matieres = montrerMatiere
+  ? [...new Set(sujets.map((s) => s.data.matiere))].sort((a, b) => a.localeCompare(b, 'fr'))
+  : [];
+const difficultes = ['Facile', 'Moyenne', 'Difficile'];
+---
+
+<div data-filtres>
+  <div class="no-print mb-5 flex flex-wrap items-end gap-3 text-[13px]">
+    <label class="flex flex-col gap-1.5">
+      <span class="font-medium text-[color:var(--color-muted)]">Année</span>
+      <select
+        data-filtre="annee"
+        class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3.5 py-1.5 text-[color:var(--color-ink)]"
+      >
+        <option value="">Toutes</option>
+        {annees.map((a) => <option value={a}>{a}</option>)}
+      </select>
+    </label>
+    {montrerMatiere && (
+      <label class="flex flex-col gap-1.5">
+        <span class="font-medium text-[color:var(--color-muted)]">Matière</span>
+        <select
+          data-filtre="matiere"
+          class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3.5 py-1.5 text-[color:var(--color-ink)]"
+        >
+          <option value="">Toutes</option>
+          {matieres.map((m) => <option value={m}>{m}</option>)}
+        </select>
+      </label>
+    )}
+    <label class="flex flex-col gap-1.5">
+      <span class="font-medium text-[color:var(--color-muted)]">Difficulté</span>
+      <select
+        data-filtre="difficulte"
+        class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3.5 py-1.5 text-[color:var(--color-ink)]"
+      >
+        <option value="">Toutes</option>
+        {difficultes.map((d) => <option value={d}>{d}</option>)}
+      </select>
+    </label>
+  </div>
+
+  <p data-vide class="hidden rounded-2xl bg-[color:var(--color-surface)] p-5 text-sm text-[color:var(--color-muted)]">
+    Aucun sujet ne correspond à ces filtres.
+  </p>
+
+  <div class="grid gap-4 sm:grid-cols-2" data-liste>
+    {sujets.map((sujet) => (
+      <div
+        data-carte
+        data-annee={sujet.data.annee}
+        data-matiere={sujet.data.matiere}
+        data-difficulte={sujet.data.difficulte}
+      >
+        <SujetCarte sujet={sujet} montrerSerie={montrerSerie} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-filtres]').forEach((bloc) => {
+    const selects = bloc.querySelectorAll<HTMLSelectElement>('select[data-filtre]');
+    const cartes = bloc.querySelectorAll<HTMLElement>('[data-carte]');
+    const vide = bloc.querySelector<HTMLElement>('[data-vide]');
+
+    function appliquer() {
+      const actifs: Record<string, string> = {};
+      selects.forEach((s) => {
+        if (s.value) actifs[s.dataset.filtre!] = s.value;
+      });
+      let visibles = 0;
+      cartes.forEach((carte) => {
+        const correspond = Object.entries(actifs).every(
+          ([cle, val]) => carte.dataset[cle] === val
+        );
+        carte.style.display = correspond ? '' : 'none';
+        if (correspond) visibles++;
+      });
+      if (vide) vide.classList.toggle('hidden', visibles > 0);
+    }
+
+    selects.forEach((s) => s.addEventListener('change', appliquer));
+  });
+</script>

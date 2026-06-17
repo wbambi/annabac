@@ -1,0 +1,105 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Fil from '../../components/Fil.astro';
+import BadgeStatut from '../../components/BadgeStatut.astro';
+import { tousLesSujets, toutesLesSeries, slugify } from '../../lib/data';
+
+export const getStaticPaths = (async () => {
+  const sujets = await tousLesSujets();
+  return sujets.map((sujet) => ({
+    params: { slug: sujet.slug },
+    props: { sujet },
+  }));
+}) satisfies GetStaticPaths;
+
+const { sujet } = Astro.props;
+const { data } = sujet;
+const { Content } = await render(sujet);
+
+const series = await toutesLesSeries();
+const serie = series.find((s) => s.data.code === data.serie);
+const intituleSerie = serie?.data.intitule ?? '';
+---
+
+<Layout titre={data.titre} description={`Sujet et corrigé : ${data.titre}.`}>
+  <Fil
+    items={[
+      { href: '/', label: 'Accueil' },
+      { href: '/series', label: 'Séries' },
+      { href: `/series/${data.serie.toLowerCase()}`, label: `Série ${data.serie}` },
+      {
+        href: `/series/${data.serie.toLowerCase()}/${slugify(data.matiere)}`,
+        label: data.matiere,
+      },
+      { label: String(data.annee) },
+    ]}
+  />
+
+  <header class="card p-6 sm:p-8">
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <h1 class="text-2xl font-semibold tracking-tight sm:text-3xl">{data.titre}</h1>
+      <BadgeStatut statut={data.statut} />
+    </div>
+    <dl class="mt-6 grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
+      <div>
+        <dt class="text-[color:var(--color-muted)]">Série</dt>
+        <dd class="mt-0.5 font-medium">{data.serie} — {intituleSerie}</dd>
+      </div>
+      <div>
+        <dt class="text-[color:var(--color-muted)]">Session</dt>
+        <dd class="mt-0.5 font-medium">{data.session}</dd>
+      </div>
+      {data.duree && (
+        <div>
+          <dt class="text-[color:var(--color-muted)]">Durée</dt>
+          <dd class="mt-0.5 font-medium">{data.duree}</dd>
+        </div>
+      )}
+      {data.coefficient && (
+        <div>
+          <dt class="text-[color:var(--color-muted)]">Coefficient</dt>
+          <dd class="mt-0.5 font-medium">{data.coefficient}</dd>
+        </div>
+      )}
+      <div>
+        <dt class="text-[color:var(--color-muted)]">Difficulté</dt>
+        <dd class="mt-0.5 font-medium">{data.difficulte}</dd>
+      </div>
+    </dl>
+
+    {data.chapitres.length > 0 && (
+      <ul class="mt-5 flex flex-wrap gap-1.5">
+        {data.chapitres.map((ch) => (
+          <li class="rounded-full bg-[color:var(--color-canvas)] px-2.5 py-0.5 text-[11px] text-[color:var(--color-muted)]">
+            {ch}
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <div class="no-print mt-6 flex flex-wrap gap-3">
+      {data.sujetPdf ? (
+        <a href={data.sujetPdf} download class="btn btn-primary">
+          Télécharger le sujet (PDF)
+        </a>
+      ) : (
+        <span class="btn border border-[color:var(--color-line)] text-[color:var(--color-muted)]">
+          PDF non encore disponible
+        </span>
+      )}
+      <button
+        type="button"
+        onclick="window.print()"
+        class="btn border border-[color:var(--color-line)] text-[color:var(--color-ink)] hover:bg-[color:var(--color-canvas)]"
+      >
+        Version imprimable
+      </button>
+    </div>
+  </header>
+
+  <article class="prose prose-neutral mt-10 max-w-none prose-headings:tracking-tight prose-headings:scroll-mt-20 prose-a:text-[color:var(--color-accent)]">
+    <Content />
+  </article>
+</Layout>

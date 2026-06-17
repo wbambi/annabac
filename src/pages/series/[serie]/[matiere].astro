@@ -1,0 +1,63 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../../layouts/Layout.astro';
+import Fil from '../../../components/Fil.astro';
+import Filtres from '../../../components/Filtres.astro';
+import {
+  tousLesSujets,
+  toutesLesSeries,
+  slugify,
+} from '../../../lib/data';
+
+export const getStaticPaths = (async () => {
+  const sujets = await tousLesSujets();
+  const series = await toutesLesSeries();
+  const serieParCode = new Map(series.map((s) => [s.data.code, s]));
+
+  const combinaisons = new Map<
+    string,
+    { serie: (typeof series)[number]; matiere: string; sujets: typeof sujets }
+  >();
+  for (const sujet of sujets) {
+    const serie = serieParCode.get(sujet.data.serie);
+    if (!serie) continue;
+    const cle = `${serie.data.code.toLowerCase()}/${slugify(sujet.data.matiere)}`;
+    if (!combinaisons.has(cle)) {
+      combinaisons.set(cle, { serie, matiere: sujet.data.matiere, sujets: [] });
+    }
+    combinaisons.get(cle)!.sujets.push(sujet);
+  }
+
+  return [...combinaisons.entries()].map(([cle, val]) => {
+    const [serie, matiere] = cle.split('/');
+    return {
+      params: { serie, matiere },
+      props: { serie: val.serie, matiereNom: val.matiere, sujets: val.sujets },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { serie, matiereNom, sujets } = Astro.props;
+---
+
+<Layout
+  titre={`${matiereNom} — Série ${serie.data.code}`}
+  description={`Annales de ${matiereNom} — Série ${serie.data.code} du baccalauréat congolais.`}
+>
+  <Fil
+    items={[
+      { href: '/', label: 'Accueil' },
+      { href: '/series', label: 'Séries' },
+      { href: `/series/${serie.data.code.toLowerCase()}`, label: `Série ${serie.data.code}` },
+      { label: matiereNom },
+    ]}
+  />
+  <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{matiereNom}</h1>
+  <p class="mt-2 text-[color:var(--color-muted)]">
+    Série {serie.data.code} · {sujets.length} sujet(s)
+  </p>
+
+  <div class="mt-8">
+    <Filtres sujets={sujets} />
+  </div>
+</Layout>

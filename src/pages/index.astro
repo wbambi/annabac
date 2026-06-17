@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SujetCarte from '../components/SujetCarte.astro';
+import { toutesLesSeries, tousLesSujets } from '../lib/data';
+
+const series = await toutesLesSeries();
+const sujets = await tousLesSujets();
+const corriges = sujets.filter((s) => s.data.statut === 'corrige-disponible');
+const derniers = corriges.slice(0, 4);
+---
+
+<Layout titre="Accueil">
+  <!-- Hero -->
+  <section class="py-12 text-center sm:py-20">
+    <h1
+      class="mx-auto max-w-3xl text-4xl font-semibold leading-[1.07] tracking-tight text-[color:var(--color-ink)] sm:text-6xl"
+    >
+      Le baccalauréat congolais,<br class="hidden sm:block" /> à la portée de tous.
+    </h1>
+    <p
+      class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-[color:var(--color-muted)] sm:text-xl"
+    >
+      Tous les sujets et corrigés, classés par série, matière et année.
+      Sur smartphone, hors-ligne, et entièrement gratuit.
+    </p>
+    <div class="mt-8 flex items-center justify-center gap-5">
+      <a href="/series" class="btn btn-primary">Parcourir les séries</a>
+      <a
+        href="/recherche"
+        class="text-sm font-medium text-[color:var(--color-accent)] hover:underline"
+      >
+        Rechercher un sujet ›
+      </a>
+    </div>
+  </section>
+
+  <!-- Séries -->
+  <section class="mt-6">
+    <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
+      Choisir sa série
+    </h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {series.map((s) => (
+        <a
+          href={`/series/${s.data.code.toLowerCase()}`}
+          class="card card-hover group p-6"
+        >
+          <div class="flex items-baseline justify-between">
+            <p class="text-3xl font-semibold tracking-tight text-[color:var(--color-ink)]">
+              {s.data.code}
+            </p>
+            <span class="text-xs text-[color:var(--color-muted)]">{s.data.filiere}</span>
+          </div>
+          <p class="mt-2 text-sm leading-snug text-[color:var(--color-muted)]">
+            {s.data.intitule}
+          </p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Corrigés récents -->
+  {derniers.length > 0 && (
+    <section class="mt-14">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
+          Corrigés récents
+        </h2>
+        <span class="text-xs text-[color:var(--color-muted)]">
+          {corriges.length} disponible(s)
+        </span>
+      </div>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        {derniers.map((sujet) => <SujetCarte sujet={sujet} montrerSerie />)}
+      </div>
+    </section>
+  )}
+</Layout>

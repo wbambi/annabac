@@ -1,0 +1,55 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../../layouts/Layout.astro';
+import Fil from '../../../components/Fil.astro';
+import {
+  toutesLesSeries,
+  matieresParSerie,
+  slugify,
+} from '../../../lib/data';
+
+export const getStaticPaths = (async () => {
+  const series = await toutesLesSeries();
+  return series.map((s) => ({
+    params: { serie: s.data.code.toLowerCase() },
+    props: { serie: s },
+  }));
+}) satisfies GetStaticPaths;
+
+const { serie } = Astro.props;
+const matieres = await matieresParSerie(serie.data.code);
+---
+
+<Layout
+  titre={`Série ${serie.data.code}`}
+  description={`Sujets et corrigés du baccalauréat — Série ${serie.data.code} (${serie.data.intitule}).`}
+>
+  <Fil
+    items={[
+      { href: '/', label: 'Accueil' },
+      { href: '/series', label: 'Séries' },
+      { label: `Série ${serie.data.code}` },
+    ]}
+  />
+  <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Série {serie.data.code}</h1>
+  <p class="mt-2 text-[color:var(--color-muted)]">{serie.data.intitule}</p>
+
+  <h2 class="mt-10 text-sm font-medium tracking-tight text-[color:var(--color-muted)]">Matières</h2>
+  {matieres.length === 0 ? (
+    <p class="mt-4 rounded-2xl bg-[color:var(--color-surface)] p-5 text-sm text-[color:var(--color-muted)]">
+      Aucune matière n'est encore disponible pour cette série.
+    </p>
+  ) : (
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {matieres.map((m) => (
+        <a
+          href={`/series/${serie.data.code.toLowerCase()}/${slugify(m.matiere)}`}
+          class="card card-hover flex items-center justify-between p-5"
+        >
+          <span class="font-medium tracking-tight text-[color:var(--color-ink)]">{m.matiere}</span>
+          <span class="text-[13px] text-[color:var(--color-muted)]">{m.nombre} sujet(s)</span>
+        </a>
+      ))}
+    </div>
+  )}
+</Layout>

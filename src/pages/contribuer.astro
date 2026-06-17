@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Fil from '../components/Fil.astro';
+---
+
+<Layout titre="Contribuer" description="Comment contribuer au projet Annales Bac Congo.">
+  <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'Contribuer' }]} />
+  <article class="prose prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-[color:var(--color-accent)]">
+    <h1>Contribuer au projet</h1>
+    <p>
+      Annales Bac Congo est une initiative collective. Chacun peut contribuer
+      selon son expertise.
+    </p>
+
+    <h2>Comment aider ?</h2>
+    <ul>
+      <li><strong>Collecter</strong> et numériser d'anciens sujets.</li>
+      <li><strong>Vérifier</strong> l'exactitude des contenus publiés.</li>
+      <li><strong>Rédiger</strong> des corrigés pédagogiques détaillés.</li>
+      <li><strong>Améliorer</strong> l'expérience numérique (design, code).</li>
+    </ul>
+
+    <h2>Ajouter un sujet</h2>
+    <p>
+      Chaque sujet est un fichier Markdown dans
+      <code>src/content/sujets/</code>. Il contient des métadonnées (année,
+      série, matière, difficulté…) et un corrigé rédigé. Exemple :
+    </p>
+    <pre><code>---
+titre: "Baccalauréat 2022 — Série C — Mathématiques"
+annee: 2022
+serie: "C"
+matiere: "Mathématiques"
+session: "Normale"
+difficulte: "Difficile"
+chapitres: ["Nombres complexes", "Suites"]
+statut: "corrige-disponible"
+---
+
+## Corrigé détaillé
+… démarche, notions mobilisées, pièges, conseils …
+</code></pre>
+    <p>
+      Les <code>statut</code> possibles sont&nbsp;:
+      <code>corrige-disponible</code>, <code>sujet-seul</code> et
+      <code>placeholder</code> (à venir).
+    </p>
+
+    <h2>Proposer une contribution</h2>
+    <p>
+      Le projet est ouvert : les contributions se font par dépôt de fichiers
+      (via une <em>pull request</em> sur le dépôt du projet) ou en transmettant
+      vos documents à l'équipe. Le guide complet figure dans le fichier
+      <code>CONTRIBUTING.md</code>.
+    </p>
+  </article>
+</Layout>

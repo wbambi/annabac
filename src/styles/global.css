@@ -1,0 +1,84 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* Palette & typographie épurées (esprit Apple) */
+@theme {
+  --color-ink: #1d1d1f; /* texte principal, presque noir */
+  --color-muted: #6e6e73; /* texte secondaire */
+  --color-line: #e8e8ed; /* filets / bordures discrètes */
+  --color-accent: #0071e3; /* bleu d'accent (liens, CTA) */
+  --color-accent-hover: #0077ed;
+  --color-surface: #ffffff; /* cartes */
+  --color-canvas: #fbfbfd; /* fond de page */
+
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  letter-spacing: -0.011em;
+}
+
+/* Titres : graisse maîtrisée, interlettrage resserré */
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+/* Boutons réutilisables */
+.btn {
+  @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition;
+}
+.btn-primary {
+  background-color: var(--color-accent);
+  @apply text-white;
+}
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+}
+.btn-ghost {
+  @apply text-[color:var(--color-accent)] hover:underline;
+}
+
+/* Carte de base */
+.card {
+  background-color: var(--color-surface);
+  @apply rounded-2xl border border-[color:var(--color-line)] transition duration-200;
+}
+.card-hover:hover {
+  @apply -translate-y-0.5 shadow-[0_8px_30px_rgba(0,0,0,0.06)];
+}
+
+/* Formules KaTeX : éviter le débordement horizontal sur mobile */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
+}
+
+/* Version imprimable : masquer l'habillage */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  a[href]::after {
+    content: '';
+  }
+}

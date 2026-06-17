@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Fil from '../components/Fil.astro';
+---
+
+<Layout titre="À propos" description="La vision du projet Annales Bac Congo.">
+  <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'À propos' }]} />
+  <article class="prose prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-[color:var(--color-accent)]">
+    <h1>À propos d'Annales Bac Congo</h1>
+    <p>
+      <strong>Annales Bac Congo</strong> est une bibliothèque numérique gratuite
+      des sujets et corrigés du baccalauréat congolais. Notre conviction est
+      simple :
+    </p>
+    <blockquote>
+      Un élève ne devrait pas être désavantagé dans sa préparation au
+      baccalauréat simplement parce qu'il n'a pas accès aux bonnes ressources.
+    </blockquote>
+
+    <h2>Nos principes</h2>
+    <ul>
+      <li><strong>Gratuité</strong> — l'accès reste gratuit pour tous les élèves.</li>
+      <li><strong>Fiabilité</strong> — les contenus sont vérifiés par des enseignants.</li>
+      <li><strong>Pérennité</strong> — les données sont conservées dans un format durable.</li>
+      <li><strong>Ouverture</strong> — le projet est collaboratif et ouvert aux contributions.</li>
+    </ul>
+
+    <h2>Pensé pour le contexte congolais</h2>
+    <ul>
+      <li>Utilisation optimale sur smartphone.</li>
+      <li>Fonctionnement avec une connexion limitée.</li>
+      <li>Documents téléchargeables pour une consultation hors-ligne.</li>
+      <li>Interface simple et compréhensible.</li>
+    </ul>
+
+    <p>
+      Le projet en est à ses débuts : la base est amorcée avec des contenus
+      d'exemple. Vous pouvez nous aider à l'enrichir —
+      <a href="/contribuer">découvrez comment contribuer</a>.
+    </p>
+  </article>
+</Layout>

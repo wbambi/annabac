@@ -1,0 +1,50 @@
+---
+import type { Sujet } from '../lib/data';
+import BadgeStatut from './BadgeStatut.astro';
+
+interface Props {
+  sujet: Sujet;
+  montrerSerie?: boolean;
+}
+const { sujet, montrerSerie = false } = Astro.props;
+const { data } = sujet;
+const href = `/sujets/${sujet.slug}`;
+
+const couleurDifficulte: Record<string, string> = {
+  Facile: 'text-emerald-600',
+  Moyenne: 'text-amber-600',
+  Difficile: 'text-rose-600',
+};
+---
+
+<a href={href} class="card card-hover group flex flex-col p-5">
+  <div class="flex items-start justify-between gap-2">
+    <div>
+      <p class="text-xs text-[color:var(--color-muted)]">
+        {data.annee} · Session {data.session.toLowerCase()}
+      </p>
+      <h3 class="mt-1 font-semibold tracking-tight text-[color:var(--color-ink)]">
+        {data.matiere}
+      </h3>
+      {montrerSerie && (
+        <p class="text-xs text-[color:var(--color-muted)]">Série {data.serie}</p>
+      )}
+    </div>
+    <BadgeStatut statut={data.statut} />
+  </div>
+
+  {data.chapitres.length > 0 && (
+    <ul class="mt-3 flex flex-wrap gap-1.5">
+      {data.chapitres.slice(0, 4).map((ch) => (
+        <li class="rounded-full bg-[color:var(--color-canvas)] px-2.5 py-0.5 text-[11px] text-[color:var(--color-muted)]">
+          {ch}
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <p class="mt-auto pt-4 text-xs text-[color:var(--color-muted)]">
+    <span class={couleurDifficulte[data.difficulte]}>{data.difficulte}</span>
+    {data.duree && <> · {data.duree}</>}
+  </p>
+</a>

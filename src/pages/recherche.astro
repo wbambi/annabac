@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Fil from '../components/Fil.astro';
+---
+
+<Layout titre="Recherche" description="Rechercher un sujet ou un corrigé du baccalauréat congolais.">
+  <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'Recherche' }]} />
+  <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Rechercher</h1>
+  <p class="mt-2 text-[color:var(--color-muted)]">
+    Trouvez un sujet par matière, année, chapitre ou mot-clé.
+  </p>
+
+  <div id="recherche" class="mt-8"></div>
+
+  <!-- Pagefind est généré au build ; absent en mode dev. is:inline évite que
+       Astro tente de bundler ces fichiers (qui n'existent pas encore). -->
+  <link is:inline href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script is:inline src="/pagefind/pagefind-ui.js" onerror="window.__pagefindAbsent=true"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      const el = document.getElementById('recherche');
+      if (window.PagefindUI) {
+        new window.PagefindUI({
+          element: '#recherche',
+          showSubResults: true,
+          translations: {
+            placeholder: 'Rechercher un sujet…',
+            zero_results: 'Aucun résultat pour « [SEARCH_TERM] »',
+          },
+        });
+      } else {
+        el.innerHTML =
+          '<p class="rounded bg-amber-50 p-4 text-sm text-amber-800">La recherche est disponible une fois le site généré : <code>npm run build</code> puis <code>npm run preview</code>.</p>';
+      }
+    });
+  </script>
+</Layout>
