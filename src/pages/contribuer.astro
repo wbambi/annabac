@@ -1,12 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Fil from '../components/Fil.astro';
-import { toutesLesSeries } from '../lib/data';
+import {
+  toutesLesSeries,
+  tousLesSujets,
+  MATIERES_COURANTES,
+  cleSujet,
+} from '../lib/data';
 
 const series = await toutesLesSeries();
 const cle = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
 const configure = cle.length > 0;
 const annees = Array.from({ length: 26 }, (_, i) => 2025 - i); // 2025 → 2000
+
+// Combinaisons (année·série·matière·session) pour lesquelles un sujet existe
+// déjà : un corrigé seul n'est autorisé que si l'une d'elles correspond.
+const sujets = await tousLesSujets();
+const clesAvecSujet = sujets
+  .filter((s) => s.data.sujetPdf)
+  .map((s) => cleSujet(s.data));
 ---
 
 <Layout titre="Contribuer" description="Soumettre un sujet ou un corrigé du baccalauréat congolais.">
@@ -56,13 +68,10 @@ const annees = Array.from({ length: 26 }, (_, i) => 2025 - i); // 2025 → 2000
       </label>
       <label class="flex flex-col gap-1.5 text-sm">
         <span class="font-medium">Matière</span>
-        <input
-          type="text"
-          name="Matiere"
-          required
-          placeholder="ex. Mathématiques"
-          class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2"
-        />
+        <select name="Matiere" required class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2">
+          <option value="" disabled selected>Choisir une matière…</option>
+          {MATIERES_COURANTES.map((m) => <option value={m}>{m}</option>)}
+        </select>
       </label>
       <label class="flex flex-col gap-1.5 text-sm">
         <span class="font-medium">Session</span>
@@ -114,12 +123,23 @@ const annees = Array.from({ length: 26 }, (_, i) => 2025 - i); // 2025 → 2000
       <li>Une fois validé, le document est <strong>publié</strong> sur le site, gratuitement et pour tous.</li>
     </ol>
   </section>
+
+  <script type="application/json" id="cles-avec-sujet" set:html={JSON.stringify(clesAvecSujet)} />
 </Layout>
 
 <script>
   const form = document.getElementById('form-soumission') as HTMLFormElement | null;
   const etat = document.getElementById('etat');
   const MAX = 5 * 1024 * 1024; // 5 Mo par fichier
+
+  // Combinaisons année·série·matière·session ayant déjà un sujet publié.
+  let clesAvecSujet = new Set<string>();
+  try {
+    const brut = document.getElementById('cles-avec-sujet')?.textContent;
+    if (brut) clesAvecSujet = new Set(JSON.parse(brut) as string[]);
+  } catch {
+    /* ignore */
+  }
 
   function message(texte: string, type: 'ok' | 'err' | 'info') {
     if (!etat) return;
@@ -152,6 +172,19 @@ const annees = Array.from({ length: 26 }, (_, i) => 2025 - i); // 2025 → 2000
     for (const erreur of [validerPdf(sujet), validerPdf(corrige)]) {
       if (erreur) {
         message(erreur, 'err');
+        return;
+      }
+    }
+
+    // Règle : un corrigé seul exige qu'un sujet existe déjà pour la même
+    // combinaison année·série·matière·session.
+    if (aCorrige && !aSujet) {
+      const cle = `${fd.get('Annee')}|${fd.get('Serie')}|${fd.get('Matiere')}|${fd.get('Session')}`;
+      if (!clesAvecSujet.has(cle)) {
+        message(
+          "Aucun sujet n'existe encore pour cette année/série/matière/session : joignez aussi le PDF du sujet.",
+          'err'
+        );
         return;
       }
     }

@@ -3,6 +3,35 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 export type Sujet = CollectionEntry<'sujets'>;
 export type Serie = CollectionEntry<'series'>;
 
+/**
+ * Matières courantes proposées à la soumission (liste de départ, à enrichir).
+ * Les libellés doivent rester identiques à ceux des fiches pour que le
+ * rapprochement sujet/corrigé fonctionne.
+ */
+export const MATIERES_COURANTES = [
+  'Mathématiques',
+  'Physique-Chimie',
+  'SVT',
+  'Philosophie',
+  'Français',
+  'Histoire-Géographie',
+  'Anglais',
+  'Espagnol',
+  'Allemand',
+  'Arts plastiques',
+  'EPS',
+] as const;
+
+/** Clé unique d'un sujet : année · série · matière · session. */
+export function cleSujet(data: {
+  annee: number | string;
+  serie: string;
+  matiere: string;
+  session: string;
+}): string {
+  return `${data.annee}|${data.serie}|${data.matiere}|${data.session}`;
+}
+
 /** Slug d'URL (sans accents, minuscule, tirets) pour matières/séries. */
 export function slugify(valeur: string): string {
   return valeur
