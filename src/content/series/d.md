@@ -1,10 +1,9 @@
 ---
 code: 'D'
-intitule: 'Sciences exactes et naturelles'
+intitule: 'Sciences'
 filiere: 'Générale'
 couleur: 'emerald'
 ordre: 6
 ---
 
-La série D associe mathématiques, sciences physiques et sciences de la vie et de
-la terre. C'est l'une des séries scientifiques les plus suivies au Congo.
+Série scientifique. *(Intitulé exact à confirmer.)*

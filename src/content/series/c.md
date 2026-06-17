@@ -1,10 +1,9 @@
 ---
 code: 'C'
-intitule: 'Mathématiques et sciences physiques'
+intitule: 'Sciences'
 filiere: 'Générale'
 couleur: 'indigo'
 ordre: 5
 ---
 
-La série C est la série scientifique à dominante mathématiques et sciences
-physiques, réputée pour son haut niveau d'abstraction.
+Série scientifique. *(Intitulé exact à confirmer.)*
