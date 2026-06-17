@@ -1,0 +1,12 @@
+# Normaliser les fins de ligne des fichiers texte en LF dans le dépôt
+* text=auto eol=lf
+
+# Fichiers binaires : ne jamais convertir (sinon les PDF seraient corrompus)
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
