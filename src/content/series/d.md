@@ -1,9 +1,9 @@
 ---
 code: 'D'
-intitule: 'Sciences'
+intitule: 'Sciences, dominante SVT'
 filiere: 'Générale'
 couleur: 'emerald'
 ordre: 6
 ---
 
-Série scientifique. *(Intitulé exact à confirmer.)*
+Série scientifique à dominante **sciences de la vie et de la terre (SVT)**.
