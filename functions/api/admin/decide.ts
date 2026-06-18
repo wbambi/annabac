@@ -1,0 +1,118 @@
+/// <reference types="@cloudflare/workers-types" />
+import { type Env, json, baseNom } from '../../_lib/util';
+import { adminEmail } from '../../_lib/access';
+import { commitFiles, getFileText, type FichierACommiter } from '../../_lib/github';
+
+interface Ligne {
+  id: string;
+  annee: number;
+  serie: string;
+  matiere: string;
+  session: string;
+  sujet_key: string | null;
+  corrige_key: string | null;
+  status: string;
+}
+
+function bytesToBase64(buf: ArrayBuffer): string {
+  const bytes = new Uint8Array(buf);
+  let bin = '';
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    bin += String.fromCharCode(...bytes.subarray(i, i + chunk));
+  }
+  return btoa(bin);
+}
+
+/** Lit un chemin PDF déjà référencé dans une fiche existante. */
+function champ(md: string | null, cle: string): string | null {
+  if (!md) return null;
+  const m = md.match(new RegExp(`^${cle}:\\s*["']?([^"'\\n]+)["']?`, 'm'));
+  return m ? m[1].trim() : null;
+}
+
+function construireMd(d: Ligne, sujetPdf: string | null, corrigePdf: string | null): string {
+  const lignes = [
+    '---',
+    `annee: ${d.annee}`,
+    `serie: "${d.serie}"`,
+    `matiere: "${d.matiere}"`,
+    `session: "${d.session}"`,
+  ];
+  if (sujetPdf) lignes.push(`sujetPdf: "${sujetPdf}"`);
+  if (corrigePdf) lignes.push(`corrigePdf: "${corrigePdf}"`);
+  lignes.push('---', '');
+  return lignes.join('\n');
+}
+
+export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+  const email = adminEmail(request);
+  if (!email) return json({ error: 'Non autorisé' }, 403);
+
+  const body = (await request.json().catch(() => null)) as
+    | { id?: string; action?: string; note?: string }
+    | null;
+  if (!body?.id || (body.action !== 'approve' && body.action !== 'reject')) {
+    return json({ error: 'Requête invalide' }, 400);
+  }
+
+  const ligne = (await env.DB.prepare(
+    `SELECT id, annee, serie, matiere, session, sujet_key, corrige_key, status
+       FROM submissions WHERE id = ?`
+  )
+    .bind(body.id)
+    .first()) as Ligne | null;
+  if (!ligne) return json({ error: 'Soumission introuvable' }, 404);
+  if (ligne.status !== 'pending') return json({ error: 'Déjà traitée' }, 409);
+
+  const finir = async (status: 'approved' | 'rejected') => {
+    await env.DB.prepare(
+      `UPDATE submissions SET status = ?, decided_at = ?, decided_by = ?, note = ? WHERE id = ?`
+    )
+      .bind(status, new Date().toISOString(), email, body.note ?? null, ligne.id)
+      .run();
+    // Nettoyage des fichiers en attente
+    if (ligne.sujet_key) await env.BUCKET.delete(ligne.sujet_key);
+    if (ligne.corrige_key) await env.BUCKET.delete(ligne.corrige_key);
+  };
+
+  if (body.action === 'reject') {
+    await finir('rejected');
+    return json({ success: true, status: 'rejected' });
+  }
+
+  // --- Validation : publier dans le dépôt via un commit Git ---
+  if (!env.GITHUB_TOKEN) return json({ error: 'GITHUB_TOKEN non configuré' }, 500);
+
+  const base = baseNom(ligne);
+  const mdPath = `src/content/sujets/${base}.md`;
+  const existant = await getFileText(env, mdPath); // fiche déjà présente ?
+
+  const fichiers: FichierACommiter[] = [];
+  let sujetPdf = champ(existant, 'sujetPdf');
+  let corrigePdf = champ(existant, 'corrigePdf');
+
+  if (ligne.sujet_key) {
+    const obj = await env.BUCKET.get(ligne.sujet_key);
+    if (!obj) return json({ error: 'PDF sujet introuvable' }, 500);
+    sujetPdf = `/pdfs/${base}-sujet.pdf`;
+    fichiers.push({ path: `public${sujetPdf}`, contentBase64: bytesToBase64(await obj.arrayBuffer()) });
+  }
+  if (ligne.corrige_key) {
+    const obj = await env.BUCKET.get(ligne.corrige_key);
+    if (!obj) return json({ error: 'PDF corrigé introuvable' }, 500);
+    corrigePdf = `/pdfs/${base}-corrige.pdf`;
+    fichiers.push({ path: `public${corrigePdf}`, contentBase64: bytesToBase64(await obj.arrayBuffer()) });
+  }
+
+  fichiers.push({ path: mdPath, contentText: construireMd(ligne, sujetPdf, corrigePdf) });
+
+  const sha = await commitFiles(
+    env,
+    fichiers,
+    `Publier ${base} (modération par ${email})`
+  );
+
+  await finir('approved');
+  return json({ success: true, status: 'approved', commit: sha });
+};

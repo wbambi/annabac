@@ -9,6 +9,9 @@ npm-debug.log*
 # environment
 .env
 .env.production
+# Cloudflare local secrets / build
+.dev.vars
+.wrangler/
 # Claude Code workspace
 .claude/
 # macOS

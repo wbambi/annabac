@@ -9,8 +9,7 @@ import {
 } from '../lib/data';
 
 const series = await toutesLesSeries();
-const cle = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
-const configure = cle.length > 0;
+const sitekey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? '';
 const annees = Array.from({ length: 26 }, (_, i) => 2025 - i); // 2025 → 2000
 
 // Combinaisons (année·série·matière·session) pour lesquelles un sujet existe
@@ -31,24 +30,13 @@ const clesExistantes = {
     l'équipe</strong> avant d'être publié sur le site.
   </p>
 
-  {!configure && (
-    <p class="mt-6 rounded-2xl bg-amber-50 p-4 text-sm text-amber-800">
-      Le formulaire n'est pas encore configuré. Renseignez
-      <code>PUBLIC_WEB3FORMS_KEY</code> dans le fichier <code>.env</code>
-      (voir <code>.env.example</code>) pour activer l'envoi.
-    </p>
-  )}
-
   <form
     id="form-soumission"
-    action="https://api.web3forms.com/submit"
+    action="/api/submit"
     method="POST"
     enctype="multipart/form-data"
     class="mt-8 grid max-w-2xl gap-5"
   >
-    {configure && <input type="hidden" name="access_key" value={cle} />}
-    <input type="hidden" name="subject" value="Nouvelle soumission — Annales Bac Congo" />
-    <input type="hidden" name="from_name" value="Annales Bac Congo" />
     <!-- Anti-spam (honeypot) : doit rester vide -->
     <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
 
@@ -108,13 +96,17 @@ const clesExistantes = {
       />
     </label>
 
+    {sitekey && <div class="cf-turnstile" data-sitekey={sitekey} data-language="fr" />}
+
     <div class="flex items-center gap-4">
-      <button type="submit" class="btn btn-primary" disabled={!configure}>
-        Envoyer pour vérification
-      </button>
+      <button type="submit" class="btn btn-primary">Envoyer pour vérification</button>
       <span id="etat" role="status" aria-live="polite" class="text-sm"></span>
     </div>
   </form>
+
+  {sitekey && (
+    <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+  )}
 
   <section class="prose prose-neutral mt-12 max-w-2xl prose-headings:tracking-tight prose-a:text-[color:var(--color-accent)]">
     <h2>Que deviennent les documents ?</h2>

@@ -16,7 +16,11 @@ Aucun compte ni connaissance de Git n'est nécessaire.
 
 ## 2. Publier un document validé (mainteneurs)
 
-Une fois un document vérifié, on l'ajoute à la bibliothèque :
+> Le plus simple : depuis l'espace **`/admin`** (protégé par Cloudflare Access),
+> cliquez sur **Valider** — le PDF et la fiche sont commités automatiquement
+> dans le dépôt et le site se reconstruit. Voir [DEPLOY.md](DEPLOY.md).
+
+Pour ajouter un document **à la main** dans la bibliothèque :
 
 1. Déposez le(s) PDF dans `public/pdfs/`, par ex.
    `2022-serie-c-mathematiques-sujet.pdf` et
@@ -39,15 +43,12 @@ Une fois un document vérifié, on l'ajoute à la bibliothèque :
    que le corrigé, ou les deux.
 3. Vérifiez en local puis redéployez.
 
-## Configurer le formulaire de soumission
+## Chaîne de soumission / modération
 
-Le formulaire utilise [Web3Forms](https://web3forms.com) (gratuit, sans
-backend). Obtenez une clé d'accès en indiquant l'adresse e-mail dédiée, puis
-renseignez-la dans `.env` :
-
-```
-PUBLIC_WEB3FORMS_KEY=votre-cle
-```
+Le formulaire `/contribuer` envoie les PDF à une API (Cloudflare Pages
+Functions) qui les met en file d'attente (R2 + D1). Un mainteneur les valide
+depuis `/admin` ; la validation publie le document en commitant dans le dépôt.
+Mise en place complète : [DEPLOY.md](DEPLOY.md).
 
 ## Vérifier localement
 

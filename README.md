@@ -14,15 +14,19 @@ et la consultation hors-ligne.
 - **Tailwind CSS v4** — interface épurée, mobile-first.
 - **Pagefind** — moteur de recherche statique (index généré au build).
 - **PWA** (`@vite-pwa/astro`) — installation et consultation hors-ligne.
-- **Web3Forms** — formulaire de soumission de PDF par e-mail, sans backend.
+- **Cloudflare** (Pages Functions + R2 + D1) — API de soumission et file de
+  modération ; **Turnstile** pour l'anti-spam. Voir [DEPLOY.md](DEPLOY.md).
 
 ## Concept (POC)
 
 Une bibliothèque de sujets : chaque fiche = **métadonnées** (année, série,
 matière, session) + un **PDF du sujet** et/ou un **PDF du corrigé**. Pas de
 corrigé rédigé en ligne pour l'instant — seuls les documents PDF font foi.
-La soumission se fait via un formulaire (PDF → e-mail de l'équipe), avec
-**validation manuelle** avant publication.
+
+Les visiteurs **soumettent** des PDF via `/contribuer` ; ils sont mis en file
+d'attente (R2 + D1). Un mainteneur les **valide** depuis `/admin` (protégé par
+Cloudflare Access) ; la validation **commite** le document dans le dépôt, ce qui
+reconstruit le site. Contenu donc toujours versionné dans git (pérennité).
 
 ## Démarrage
 
@@ -47,9 +51,13 @@ src/
   layouts/Layout.astro  # gabarit mobile-first + PWA
   pages/                # accueil + axes /series, /annees, /matieres, /sujets, /recherche, /contribuer…
   lib/data.ts           # helpers (tri, regroupements, statut, slugify)
+  pages/admin/          # espace de modération (protégé par Cloudflare Access)
+functions/              # Pages Functions : /api/submit, /api/admin/* + _lib
 scripts/seed.mjs               # génère des fiches d'exemple
 scripts/make-placeholder-pdfs.mjs  # génère des PDF d'exemple
 public/pdfs/            # PDF des sujets et corrigés
+wrangler.toml           # bindings Cloudflare (D1, R2, vars)
+schema.sql              # schéma D1 (file de modération)
 ```
 
 ## Contenus

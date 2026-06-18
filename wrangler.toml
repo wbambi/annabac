@@ -1,0 +1,31 @@
+# Configuration Cloudflare Pages (site statique Astro + Pages Functions).
+# Le site est servi depuis dist/ ; le dossier functions/ fournit l'API.
+name = "annabac"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "dist"
+
+# Base de données D1 : file d'attente de modération.
+# Créez-la avec : wrangler d1 create annabac
+# puis collez l'identifiant renvoyé ci-dessous.
+[[d1_databases]]
+binding = "DB"
+database_name = "annabac"
+database_id = "À_REMPLACER_APRES_wrangler_d1_create"
+
+# Stockage R2 : PDF soumis en attente de validation.
+# Créez-le avec : wrangler r2 bucket create annabac-soumissions
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "annabac-soumissions"
+
+# Variables publiques (non secrètes).
+[vars]
+GITHUB_OWNER = "wbambi"
+GITHUB_REPO = "annabac"
+GITHUB_BRANCH = "main"
+
+# Secrets (NE PAS mettre ici) — à définir via :
+#   wrangler pages secret put GITHUB_TOKEN
+#   wrangler pages secret put TURNSTILE_SECRET
+# GITHUB_TOKEN    : jeton à portée "contents:write" sur le dépôt
+# TURNSTILE_SECRET: clé secrète Cloudflare Turnstile (anti-spam)
