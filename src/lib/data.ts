@@ -106,3 +106,43 @@ export async function sujetsParSerieMatiere(
     (s) => s.data.serie === codeSerie && slugify(s.data.matiere) === slugMatiere
   );
 }
+
+/** Années distinctes (les plus récentes d'abord), avec le nombre de sujets. */
+export async function toutesLesAnnees(): Promise<
+  { annee: number; nombre: number }[]
+> {
+  const sujets = await tousLesSujets();
+  const compte = new Map<number, number>();
+  for (const s of sujets) {
+    compte.set(s.data.annee, (compte.get(s.data.annee) ?? 0) + 1);
+  }
+  return [...compte.entries()]
+    .map(([annee, nombre]) => ({ annee, nombre }))
+    .sort((a, b) => b.annee - a.annee);
+}
+
+/** Matières distinctes (toutes séries), avec le nombre de sujets. */
+export async function toutesLesMatieres(): Promise<
+  { matiere: string; nombre: number }[]
+> {
+  const sujets = await tousLesSujets();
+  const compte = new Map<string, number>();
+  for (const s of sujets) {
+    compte.set(s.data.matiere, (compte.get(s.data.matiere) ?? 0) + 1);
+  }
+  return [...compte.entries()]
+    .map(([matiere, nombre]) => ({ matiere, nombre }))
+    .sort((a, b) => a.matiere.localeCompare(b.matiere, 'fr'));
+}
+
+/** Sujets d'une année donnée. */
+export async function sujetsParAnnee(annee: number): Promise<Sujet[]> {
+  const sujets = await tousLesSujets();
+  return sujets.filter((s) => s.data.annee === annee);
+}
+
+/** Sujets d'une matière donnée (toutes séries / années). */
+export async function sujetsParMatiere(slugMatiere: string): Promise<Sujet[]> {
+  const sujets = await tousLesSujets();
+  return sujets.filter((s) => slugify(s.data.matiere) === slugMatiere);
+}

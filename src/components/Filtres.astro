@@ -5,36 +5,55 @@ import SujetCarte from './SujetCarte.astro';
 
 interface Props {
   sujets: Sujet[];
-  montrerSerie?: boolean;
-  montrerMatiere?: boolean;
+  montrerSerie?: boolean; // afficher la série sur la carte
+  filtreAnnee?: boolean;
+  filtreSerie?: boolean;
+  filtreMatiere?: boolean;
 }
-const { sujets, montrerSerie = false, montrerMatiere = false } = Astro.props;
+const {
+  sujets,
+  montrerSerie = false,
+  filtreAnnee = true,
+  filtreSerie = false,
+  filtreMatiere = false,
+} = Astro.props;
 
 const annees = [...new Set(sujets.map((s) => s.data.annee))].sort((a, b) => b - a);
-const matieres = montrerMatiere
-  ? [...new Set(sujets.map((s) => s.data.matiere))].sort((a, b) => a.localeCompare(b, 'fr'))
-  : [];
+const series = [...new Set(sujets.map((s) => s.data.serie))].sort((a, b) =>
+  a.localeCompare(b, 'fr')
+);
+const matieres = [...new Set(sujets.map((s) => s.data.matiere))].sort((a, b) =>
+  a.localeCompare(b, 'fr')
+);
+
+const selectClass =
+  'rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3.5 py-1.5 text-[color:var(--color-ink)]';
 ---
 
 <div data-filtres>
   <div class="no-print mb-5 flex flex-wrap items-end gap-3 text-[13px]">
-    <label class="flex flex-col gap-1.5">
-      <span class="font-medium text-[color:var(--color-muted)]">Année</span>
-      <select
-        data-filtre="annee"
-        class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3.5 py-1.5 text-[color:var(--color-ink)]"
-      >
-        <option value="">Toutes</option>
-        {annees.map((a) => <option value={a}>{a}</option>)}
-      </select>
-    </label>
-    {montrerMatiere && (
+    {filtreAnnee && (
+      <label class="flex flex-col gap-1.5">
+        <span class="font-medium text-[color:var(--color-muted)]">Année</span>
+        <select data-filtre="annee" class={selectClass}>
+          <option value="">Toutes</option>
+          {annees.map((a) => <option value={a}>{a}</option>)}
+        </select>
+      </label>
+    )}
+    {filtreSerie && (
+      <label class="flex flex-col gap-1.5">
+        <span class="font-medium text-[color:var(--color-muted)]">Série</span>
+        <select data-filtre="serie" class={selectClass}>
+          <option value="">Toutes</option>
+          {series.map((s) => <option value={s}>Série {s}</option>)}
+        </select>
+      </label>
+    )}
+    {filtreMatiere && (
       <label class="flex flex-col gap-1.5">
         <span class="font-medium text-[color:var(--color-muted)]">Matière</span>
-        <select
-          data-filtre="matiere"
-          class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3.5 py-1.5 text-[color:var(--color-ink)]"
-        >
+        <select data-filtre="matiere" class={selectClass}>
           <option value="">Toutes</option>
           {matieres.map((m) => <option value={m}>{m}</option>)}
         </select>
@@ -42,10 +61,7 @@ const matieres = montrerMatiere
     )}
     <label class="flex flex-col gap-1.5">
       <span class="font-medium text-[color:var(--color-muted)]">Disponibilité</span>
-      <select
-        data-filtre="dispo"
-        class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3.5 py-1.5 text-[color:var(--color-ink)]"
-      >
+      <select data-filtre="dispo" class={selectClass}>
         <option value="">Tous</option>
         <option value="disponible">Disponible</option>
         <option value="a-venir">À venir</option>
@@ -62,6 +78,7 @@ const matieres = montrerMatiere
       <div
         data-carte
         data-annee={sujet.data.annee}
+        data-serie={sujet.data.serie}
         data-matiere={sujet.data.matiere}
         data-dispo={statutSujet(sujet.data) === 'a-venir' ? 'a-venir' : 'disponible'}
       >

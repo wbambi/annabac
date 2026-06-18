@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Fil from '../../components/Fil.astro';
+import { toutesLesMatieres, slugify } from '../../lib/data';
+
+const matieres = await toutesLesMatieres();
+---
+
+<Layout titre="Matières" description="Parcourir les annales du baccalauréat congolais par matière.">
+  <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'Matières' }]} />
+  <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Par matière</h1>
+  <p class="mt-2 text-[color:var(--color-muted)]">
+    Tous les sujets d'une matière, toutes séries et années confondues.
+  </p>
+
+  <div class="mt-8 grid gap-4 sm:grid-cols-2">
+    {matieres.map((m) => (
+      <a href={`/matieres/${slugify(m.matiere)}`} class="card card-hover flex items-center justify-between p-5">
+        <span class="font-medium tracking-tight text-[color:var(--color-ink)]">{m.matiere}</span>
+        <span class="text-[13px] text-[color:var(--color-muted)]">{m.nombre} sujet(s)</span>
+      </a>
+    ))}
+  </div>
+</Layout>

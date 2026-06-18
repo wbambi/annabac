@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Fil from '../../components/Fil.astro';
+import { toutesLesAnnees } from '../../lib/data';
+
+const annees = await toutesLesAnnees();
+---
+
+<Layout titre="Années" description="Parcourir les annales du baccalauréat congolais par année.">
+  <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'Années' }]} />
+  <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Par année</h1>
+  <p class="mt-2 text-[color:var(--color-muted)]">
+    Tous les sujets d'une session, toutes séries confondues.
+  </p>
+
+  <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+    {annees.map((a) => (
+      <a href={`/annees/${a.annee}`} class="card card-hover flex items-baseline justify-between p-6">
+        <span class="text-2xl font-semibold tracking-tight text-[color:var(--color-ink)]">{a.annee}</span>
+        <span class="text-[13px] text-[color:var(--color-muted)]">{a.nombre}</span>
+      </a>
+    ))}
+  </div>
+</Layout>

@@ -1,12 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SujetCarte from '../components/SujetCarte.astro';
-import { toutesLesSeries, tousLesSujets, statutSujet } from '../lib/data';
+import {
+  toutesLesSeries,
+  toutesLesAnnees,
+  tousLesSujets,
+  statutSujet,
+} from '../lib/data';
 
 const series = await toutesLesSeries();
+const annees = await toutesLesAnnees();
 const sujets = await tousLesSujets();
 const disponibles = sujets.filter((s) => statutSujet(s.data) !== 'a-venir');
 const derniers = disponibles.slice(0, 4);
+
+const axes = [
+  { href: '/series', titre: 'Par série', desc: 'A1 à A4, C, D' },
+  { href: '/annees', titre: 'Par année', desc: `${annees.length} sessions` },
+  { href: '/matieres', titre: 'Par matière', desc: 'Toutes matières' },
+];
 ---
 
 <Layout titre="Accueil">
@@ -34,10 +46,25 @@ const derniers = disponibles.slice(0, 4);
     </div>
   </section>
 
-  <!-- Séries -->
+  <!-- Parcourir par axe -->
   <section class="mt-6">
     <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
-      Choisir sa série
+      Parcourir
+    </h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-3">
+      {axes.map((a) => (
+        <a href={a.href} class="card card-hover flex items-center justify-between p-6">
+          <span class="text-lg font-semibold tracking-tight text-[color:var(--color-ink)]">{a.titre}</span>
+          <span class="text-[13px] text-[color:var(--color-muted)]">{a.desc} ›</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Séries -->
+  <section class="mt-12">
+    <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
+      Séries
     </h2>
     <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {series.map((s) => (
@@ -59,7 +86,24 @@ const derniers = disponibles.slice(0, 4);
     </div>
   </section>
 
-  <!-- Corrigés récents -->
+  <!-- Années -->
+  <section class="mt-12">
+    <h2 class="text-sm font-medium tracking-tight text-[color:var(--color-muted)]">
+      Années
+    </h2>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {annees.map((a) => (
+        <a
+          href={`/annees/${a.annee}`}
+          class="rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-1.5 text-sm font-medium text-[color:var(--color-ink)] transition hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)]"
+        >
+          {a.annee}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Derniers documents -->
   {derniers.length > 0 && (
     <section class="mt-14">
       <div class="flex items-baseline justify-between">

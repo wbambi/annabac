@@ -15,11 +15,14 @@ const titreComplet =
 
 const liens = [
   { href: '/series', label: 'Séries' },
+  { href: '/annees', label: 'Années' },
+  { href: '/matieres', label: 'Matières' },
   { href: '/recherche', label: 'Recherche' },
   { href: '/contribuer', label: 'Contribuer' },
-  { href: '/a-propos', label: 'À propos' },
 ];
 const chemin = Astro.url.pathname;
+const estActif = (href: string) =>
+  chemin === href || chemin.startsWith(href + '/');
 ---
 
 <!doctype html>
@@ -44,14 +47,16 @@ const chemin = Astro.url.pathname;
           <img src="/favicon.svg" alt="" width="20" height="20" class="rounded-[5px]" />
           <span>Annales Bac Congo</span>
         </a>
-        <ul class="ml-auto flex items-center gap-6 text-[13px]">
+
+        <!-- Liens (bureau) -->
+        <ul class="ml-auto hidden items-center gap-6 text-[13px] sm:flex">
           {liens.map((l) => (
             <li>
               <a
                 href={l.href}
                 class:list={[
                   'transition hover:text-[color:var(--color-ink)]',
-                  chemin === l.href || chemin.startsWith(l.href + '/')
+                  estActif(l.href)
                     ? 'text-[color:var(--color-ink)]'
                     : 'text-[color:var(--color-muted)]',
                 ]}
@@ -61,8 +66,57 @@ const chemin = Astro.url.pathname;
             </li>
           ))}
         </ul>
+
+        <!-- Bouton menu (mobile) -->
+        <button
+          id="menu-bouton"
+          type="button"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+          aria-controls="menu-mobile"
+          class="ml-auto flex h-9 w-9 items-center justify-center rounded-full text-[color:var(--color-ink)] hover:bg-[color:var(--color-line)]/50 sm:hidden"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+        </button>
       </nav>
+
+      <!-- Menu déroulant (mobile) -->
+      <div id="menu-mobile" hidden class="border-t border-[color:var(--color-line)] sm:hidden">
+        <ul class="mx-auto flex max-w-5xl flex-col px-3 py-2 text-[15px]">
+          {liens.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                class:list={[
+                  'block rounded-lg px-3 py-2.5 transition',
+                  estActif(l.href)
+                    ? 'bg-[color:var(--color-line)]/50 font-medium text-[color:var(--color-ink)]'
+                    : 'text-[color:var(--color-muted)] hover:text-[color:var(--color-ink)]',
+                ]}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
+
+    <script>
+      const bouton = document.getElementById('menu-bouton');
+      const menu = document.getElementById('menu-mobile');
+      bouton?.addEventListener('click', () => {
+        const ouvert = menu?.hasAttribute('hidden');
+        if (ouvert) menu?.removeAttribute('hidden');
+        else menu?.setAttribute('hidden', '');
+        bouton.setAttribute('aria-expanded', String(Boolean(ouvert)));
+        bouton.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+      });
+    </script>
 
     <main class="mx-auto w-full max-w-5xl flex-1 px-5 py-10 sm:py-14">
       <slot />
