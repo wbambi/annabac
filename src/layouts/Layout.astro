@@ -38,6 +38,7 @@ const liens = [
   { href: '/annees', label: 'Années' },
   { href: '/matieres', label: 'Matières' },
   { href: '/contribuer', label: 'Contribuer' },
+  { href: '/a-propos', label: 'À propos' },
 ];
 const chemin = Astro.url.pathname;
 const estActif = (href: string) =>
@@ -161,19 +162,8 @@ const estActif = (href: string) =>
     </main>
 
     <footer class="no-print mt-10 border-t border-[color:var(--color-line)]">
-      <div
-        class="mx-auto max-w-7xl px-5 py-8 text-[13px] text-[color:var(--color-muted)]"
-      >
-        <p class="font-medium text-[color:var(--color-ink)]">Bac 242</p>
-        <p class="mt-1 max-w-md">
-          Une bibliothèque numérique gratuite pour la préparation au
-          baccalauréat congolais. Projet ouvert et collaboratif.
-        </p>
-        <p class="mt-3 flex gap-4">
-          <a href="/a-propos" class="hover:text-[color:var(--color-ink)]">À propos</a>
-          <a href="/contribuer" class="hover:text-[color:var(--color-ink)]">Contribuer</a>
-        </p>
-        <p class="mt-4 text-xs text-[color:var(--color-muted)]">Bac 242 · v{version}</p>
+      <div class="mx-auto max-w-7xl px-5 py-6 text-xs text-[color:var(--color-muted)]">
+        Bac 242 · v{version}
       </div>
     </footer>
 
