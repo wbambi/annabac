@@ -3,45 +3,31 @@ import Layout from '../layouts/Layout.astro';
 import Fil from '../components/Fil.astro';
 ---
 
-<Layout titre="À propos" description="La vision du projet Bac 242.">
+<Layout titre="À propos" description="L'ambition de Bac 242 : une bibliothèque collaborative, libre et gratuite d'annales du bac congolais.">
   <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'À propos' }]} />
-  <article class="prose prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-[color:var(--color-accent)]">
+  <article class="prose prose-neutral max-w-2xl prose-headings:tracking-tight prose-a:text-[color:var(--color-accent)]">
     <h1>À propos</h1>
     <p>
-      <strong>Bac 242</strong> rassemble les sujets et corrigés du
-      baccalauréat congolais en un seul endroit, gratuitement. L'objectif est
-      simple : que chaque élève puisse réviser sur les épreuves des années
-      passées, où qu'il soit et quels que soient ses moyens.
+      <strong>Bac 242</strong> est une bibliothèque en ligne d'annales du
+      baccalauréat congolais (sujets et corrigés), collaborative, libre
+      (open source) et gratuite.
     </p>
-    <blockquote>
-      Un élève ne devrait pas être désavantagé dans sa préparation au
-      baccalauréat simplement parce qu'il n'a pas accès aux bonnes ressources.
-    </blockquote>
     <p>
-      Le site est léger et utilisable depuis un téléphone, y compris avec une
-      connexion lente ; les documents se téléchargent pour une consultation
-      hors-ligne.
+      L'idée est de rassembler au même endroit, et de façon durable, les
+      épreuves des années passées. Chacun peut contribuer à l'enrichir : un
+      élève qui révise, un professeur qui prépare un devoir, un ancien
+      correcteur qui partage un corrigé.
     </p>
-
-    <h2>Nos principes</h2>
-    <ul>
-      <li><strong>Gratuité</strong> — l'accès reste gratuit pour tous les élèves.</li>
-      <li><strong>Fiabilité</strong> — chaque document est vérifié avant d'être publié.</li>
-      <li><strong>Pérennité</strong> — les contenus sont conservés dans un format durable.</li>
-      <li><strong>Ouverture</strong> — le projet est collaboratif et ouvert aux contributions.</li>
-    </ul>
-
-    <h2>Comment ça marche</h2>
-    <ol>
-      <li>Chacun peut <a href="/contribuer">envoyer un sujet ou un corrigé</a> au format PDF.</li>
-      <li>L'équipe le vérifie pour s'assurer de sa qualité et de son exactitude.</li>
-      <li>Une fois validé, il est publié et accessible à tous.</li>
-    </ol>
-
     <p>
-      Le projet en est à ses débuts et s'enrichit grâce aux contributions.
-      Vous avez d'anciens sujets ou souhaitez aider ?
-      <a href="/contribuer">Contribuez ici</a>.
+      L'ambition, à terme, est que Bac 242 devienne une ressource pérenne de
+      l'éducation au Congo : un support utile aux élèves comme aux enseignants,
+      ouvert à tous et maintenu par la communauté.
+    </p>
+    <p>
+      Le code est ouvert :
+      <a href="https://github.com/wbambi/annabac">voir le dépôt sur GitHub</a>.
+      Le projet n'en est qu'à ses débuts.
+      <a href="/contribuer">Contribuez</a> pour l'aider à grandir.
     </p>
   </article>
 </Layout>

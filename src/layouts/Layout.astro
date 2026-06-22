@@ -16,7 +16,7 @@ const {
   jsonLd,
 } = Astro.props;
 const titreComplet =
-  titre === 'Accueil' ? 'Bac 242' : `${titre} — Bac 242`;
+  titre === 'Accueil' ? 'Bac 242' : `${titre} · Bac 242`;
 
 const site = Astro.site ?? new URL('https://annabac.pages.dev');
 const canonical = new URL(Astro.url.pathname, site).href;
@@ -38,7 +38,6 @@ const liens = [
   { href: '/annees', label: 'Années' },
   { href: '/matieres', label: 'Matières' },
   { href: '/contribuer', label: 'Contribuer' },
-  { href: '/a-propos', label: 'À propos' },
 ];
 const chemin = Astro.url.pathname;
 const estActif = (href: string) =>
@@ -163,7 +162,8 @@ const estActif = (href: string) =>
 
     <footer class="no-print mt-10 border-t border-[color:var(--color-line)]">
       <div class="mx-auto max-w-7xl px-5 py-6 text-xs text-[color:var(--color-muted)]">
-        Bac 242 · v{version}
+        Bac 242 · v{version} ·
+        <a href="/a-propos" class="transition hover:text-[color:var(--color-ink)]">À propos</a>
       </div>
     </footer>
 

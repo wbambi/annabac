@@ -1,92 +1,83 @@
 # Bac 242
 
-Bibliothèque numérique **gratuite** des sujets et corrigés du baccalauréat
-congolais (Congo-Brazzaville). Pensée pour le smartphone, la connexion limitée
-et la consultation hors-ligne.
+Bibliothèque **collaborative, libre et gratuite** des annales (sujets et
+corrigés) du baccalauréat congolais. Site statique, pensé pour le mobile et la
+consultation hors-ligne.
 
-> Un élève ne devrait pas être désavantagé dans sa préparation au baccalauréat
-> simplement parce qu'il n'a pas accès aux bonnes ressources.
+> Projet à ses débuts. Séries A, C, D (enseignement général). Le site n'affiche
+> que les ressources réellement disponibles.
 
 ## Stack technique
 
-- **[Astro](https://astro.build)** — site statique, HTML rapide, JS minimal.
-- **Content Collections** — base de données en fichiers Markdown versionnables.
-- **Tailwind CSS v4** — interface épurée, mobile-first.
-- **Pagefind** — moteur de recherche statique (index généré au build).
-- **PWA** (`@vite-pwa/astro`) — installation et consultation hors-ligne.
-- **SEO / partage** — Open Graph + Twitter Card (aperçus WhatsApp), données
-  structurées schema.org, image de partage générée (`public/og.png`).
-- **Cloudflare** (Pages Functions + R2 + D1) — API de soumission et file de
-  modération ; **Turnstile** (anti-spam) et **Web Analytics** (sans cookie).
+- **[Astro](https://astro.build)** : site statique, HTML rapide, JS minimal.
+- **Content Collections** : contenu en fichiers Markdown versionnables.
+- **Tailwind CSS v4** : interface mobile-first (bleu nuit + turquoise).
+- **PWA** (`@vite-pwa/astro`) : installation et consultation hors-ligne.
+- **SEO / partage** : Open Graph + Twitter Card, données structurées schema.org,
+  image de partage générée (`public/og.png`).
+- **Cloudflare** (Pages Functions + R2 + D1) : API de soumission et file de
+  modération, **Turnstile** (anti-spam), **Web Analytics** (sans cookie).
   Voir [DEPLOY.md](DEPLOY.md).
+- **Pagefind** : moteur de recherche statique (présent mais désactivé pour
+  l'instant côté interface).
 
-## Concept (POC)
+## Concept
 
-Une bibliothèque de sujets : chaque fiche = **métadonnées** (année, série,
-matière, session) + un **PDF du sujet** et/ou un **PDF du corrigé**. Pas de
-corrigé rédigé en ligne pour l'instant — seuls les documents PDF font foi.
+Une fiche par sujet : **métadonnées** (année, série, matière, session) + un
+**PDF du sujet** et/ou un **PDF du corrigé**.
 
 Les visiteurs **soumettent** des PDF via `/contribuer` ; ils sont mis en file
 d'attente (R2 + D1). Un mainteneur les **valide** depuis `/admin` (protégé par
 Cloudflare Access) ; la validation **commite** le document dans le dépôt, ce qui
-reconstruit le site. Contenu donc toujours versionné dans git (pérennité).
+reconstruit le site. Le contenu reste donc versionné dans git.
 
 ## Démarrage
 
 ```bash
 npm install
-npm run dev          # serveur de développement (http://localhost:4321)
-npm run build        # génère le site statique + l'index de recherche
-npm run preview      # prévisualise le site généré (recherche active)
+npm run dev        # serveur de développement (http://localhost:4321)
+npm run build      # génère le site statique dans dist/
+npm run preview    # prévisualise le site généré
 ```
-
-> La recherche (Pagefind) n'est active qu'après `npm run build` / `npm run preview`.
 
 ## Structure
 
 ```
 src/
-  content/config.ts     # schémas (Zod) des collections
-  content/series/*.md    # séries (A1–A4, C, D)
-  content/sujets/*.md    # fiches : métadonnées + chemins des PDF
-  components/            # SujetCarte, Filtres, BadgeStatut, Fil…
-  layouts/Layout.astro   # gabarit + SEO/Open Graph + PWA
-  pages/                 # accueil, /series, /annees, /matieres, /sujets, /recherche, /contribuer, 404
-  pages/admin/           # modération (protégé par Cloudflare Access)
-  lib/data.ts            # helpers (tri, regroupements, statut, slugify)
-functions/               # Pages Functions : /api/submit, /api/admin/* (+ _lib)
+  content/config.ts      # schémas (Zod) des collections
+  content/series/*.md     # séries (A, C, D)
+  content/sujets/*.md     # fiches : métadonnées + chemins des PDF
+  components/             # SujetCarte, Filtres, Icone, BadgeStatut, Fil…
+  layouts/Layout.astro    # gabarit + SEO/Open Graph + PWA
+  pages/                  # accueil, /series, /annees, /matieres, /sujets, /contribuer, /a-propos, 404
+  pages/admin/            # modération (protégé par Cloudflare Access)
+  lib/data.ts             # helpers (tri, regroupements, statut, couleurs/icônes)
+functions/                # Pages Functions : /api/submit, /api/admin/* (+ _lib)
 scripts/make-og-image.mjs # génère l'image de partage Open Graph
-public/pdfs/             # PDF des sujets et corrigés
-public/og.png            # image de partage (Open Graph)
+public/                   # favicon, icône PWA, og.png, PDF des sujets
 wrangler.toml, schema.sql # config Cloudflare (D1/R2) + schéma de modération
 ```
 
-## Contenus
+## Contribuer
 
-Séries couvertes : **A, C, D** (enseignement général). Une fiche par sujet dans
-`src/content/sujets/` (métadonnées + PDF). Le site n'affiche que les
-**ressources réellement disponibles** : une année ou une matière n'apparaît que
-si au moins un sujet existe. Pour ajouter du contenu, voir
-[CONTRIBUTING.md](CONTRIBUTING.md).
+Le plus simple : le formulaire `/contribuer` (envoi d'un PDF, sans connaissance
+technique). Détails et ajout manuel dans [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Configuration
 
-Variables publiques (injectées au build) — copier `.env.example` en `.env` :
+Variables publiques (au build) : copier `.env.example` en `.env`.
 
-- `PUBLIC_TURNSTILE_SITEKEY` — widget anti-spam du formulaire (optionnel)
-- `PUBLIC_CF_BEACON_TOKEN` — analytics Cloudflare sans cookie (optionnel)
+- `PUBLIC_TURNSTILE_SITEKEY` : widget anti-spam du formulaire (optionnel)
+- `PUBLIC_CF_BEACON_TOKEN` : analytics Cloudflare sans cookie (optionnel)
 
-Sans ces clés, le site fonctionne (juste sans captcha ni statistiques). Les
-secrets serveur (jeton GitHub, secret Turnstile) et la mise en place complète
-sont décrits dans [DEPLOY.md](DEPLOY.md).
+Sans ces clés, le site fonctionne (sans captcha ni statistiques). Les secrets
+serveur et la mise en place complète sont décrits dans [DEPLOY.md](DEPLOY.md).
 
-## Déploiement
+## Licence
 
-Hébergé sur **Cloudflare Pages** : site statique (`dist/`) + Pages Functions
-(soumission/modération) + R2 (PDF en attente) + D1 (file de modération). Build :
-`npm run build`, sortie `dist`. Procédure pas à pas (ressources, secrets,
-Cloudflare Access) : [DEPLOY.md](DEPLOY.md).
+Le **code** est publié sous licence **MIT** (voir [LICENSE](LICENSE)).
 
-La bibliothèque est du HTML statique (déployable n'importe où) ; seule la chaîne
-de soumission/modération dépend de Cloudflare. Adresse publique configurée dans
-`astro.config.mjs` (`site`).
+Le **contenu pédagogique** (sujets et corrigés) **n'est pas** couvert par cette
+licence : il reste la propriété de ses auteurs et est publié avec leur
+autorisation. Merci de ne pas le réutiliser sans l'accord des ayants droit, et
+de conserver l'attribution affichée sur chaque document.
