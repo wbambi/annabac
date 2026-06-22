@@ -29,6 +29,7 @@ const sujets = defineCollection({
     session: z.enum(['Normale', 'Remplacement', 'Spéciale']).default('Normale'),
     sujetPdf: z.string().optional(), // chemin public vers le PDF du sujet
     corrigePdf: z.string().optional(), // chemin public vers le PDF du corrigé
+    source: z.string().optional(), // attribution (auteur / origine des documents)
   }),
 });
 

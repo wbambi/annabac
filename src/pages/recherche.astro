@@ -28,6 +28,14 @@ import Fil from '../components/Fil.astro';
             zero_results: 'Aucun résultat pour « [SEARCH_TERM] »',
           },
         });
+        var q = new URLSearchParams(location.search).get('q');
+        if (q) {
+          var champ = document.querySelector('#recherche input');
+          if (champ) {
+            champ.value = q;
+            champ.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
       } else {
         el.innerHTML =
           '<p class="rounded bg-amber-50 p-4 text-sm text-amber-800">La recherche est disponible une fois le site généré : <code>npm run build</code> puis <code>npm run preview</code>.</p>';

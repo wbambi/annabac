@@ -13,7 +13,7 @@ const {
   jsonLd,
 } = Astro.props;
 const titreComplet =
-  titre === 'Accueil' ? 'Annales Bac Congo' : `${titre} — Annales Bac Congo`;
+  titre === 'Accueil' ? 'Bac 242' : `${titre} — Bac 242`;
 
 const site = Astro.site ?? new URL('https://annabac.pages.dev');
 const canonical = new URL(Astro.url.pathname, site).href;
@@ -23,7 +23,7 @@ const beacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN ?? '';
 const siteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Annales Bac Congo',
+  name: 'Bac 242',
   description:
     'Bibliothèque numérique gratuite des sujets et corrigés du baccalauréat congolais.',
   url: site.href,
@@ -55,7 +55,7 @@ const estActif = (href: string) =>
 
     <!-- Open Graph (aperçus WhatsApp, Facebook, LinkedIn…) -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Annales Bac Congo" />
+    <meta property="og:site_name" content="Bac 242" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:title" content={titreComplet} />
     <meta property="og:description" content={description} />
@@ -76,13 +76,12 @@ const estActif = (href: string) =>
     <header
       class="no-print sticky top-0 z-20 border-b border-[color:var(--color-line)] bg-[color:var(--color-canvas)]/80 backdrop-blur-xl"
     >
-      <nav class="mx-auto flex h-12 max-w-5xl items-center gap-6 px-5">
-        <a
-          href="/"
-          class="flex items-center gap-2 text-[15px] font-semibold tracking-tight text-[color:var(--color-ink)]"
-        >
-          <img src="/favicon.svg" alt="" width="20" height="20" class="rounded-[5px]" />
-          <span>Annales Bac Congo</span>
+      <nav class="mx-auto flex h-12 max-w-7xl items-center gap-6 px-5">
+        <a href="/" class="flex items-center gap-2">
+          <img src="/favicon.svg" alt="" width="28" height="28" />
+          <span class="text-[17px] font-semibold tracking-tight text-[color:var(--color-navy)]">
+            Bac <span style="color:var(--color-teal)">242</span>
+          </span>
         </a>
 
         <!-- Liens (bureau) -->
@@ -123,7 +122,7 @@ const estActif = (href: string) =>
 
       <!-- Menu déroulant (mobile) -->
       <div id="menu-mobile" hidden class="border-t border-[color:var(--color-line)] sm:hidden">
-        <ul class="mx-auto flex max-w-5xl flex-col px-3 py-2 text-[15px]">
+        <ul class="mx-auto flex max-w-7xl flex-col px-3 py-2 text-[15px]">
           {liens.map((l) => (
             <li>
               <a
@@ -155,15 +154,15 @@ const estActif = (href: string) =>
       });
     </script>
 
-    <main class="mx-auto w-full max-w-5xl flex-1 px-5 py-10 sm:py-14">
+    <main class="mx-auto w-full max-w-7xl flex-1 px-5 py-10 sm:py-14">
       <slot />
     </main>
 
     <footer class="no-print mt-10 border-t border-[color:var(--color-line)]">
       <div
-        class="mx-auto max-w-5xl px-5 py-8 text-[13px] text-[color:var(--color-muted)]"
+        class="mx-auto max-w-7xl px-5 py-8 text-[13px] text-[color:var(--color-muted)]"
       >
-        <p class="font-medium text-[color:var(--color-ink)]">Annales Bac Congo</p>
+        <p class="font-medium text-[color:var(--color-ink)]">Bac 242</p>
         <p class="mt-1 max-w-md">
           Une bibliothèque numérique gratuite pour la préparation au
           baccalauréat congolais. Projet ouvert et collaboratif.

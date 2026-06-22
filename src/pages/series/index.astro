@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Fil from '../../components/Fil.astro';
-import { toutesLesSeries, tousLesSujets, statutSujet } from '../../lib/data';
+import { toutesLesSeries, tousLesSujets, statutSujet, styleSerie } from '../../lib/data';
 
 const series = await toutesLesSeries();
 const sujets = await tousLesSujets();
@@ -35,21 +35,21 @@ const groupes = [
         {groupe.titre}
       </h2>
       <div class="mt-4 grid gap-4 sm:grid-cols-2">
-        {groupe.liste.map((s) => (
-          <a
-            href={`/series/${s.data.code.toLowerCase()}`}
-            class="card card-hover flex items-center justify-between p-6"
-          >
-            <div>
-              <p class="text-2xl font-semibold tracking-tight text-[color:var(--color-ink)]">
-                Série {s.data.code}
-              </p>
-            </div>
-            <span class="text-[13px] text-[color:var(--color-muted)]">
-              {compteParSerie.get(s.data.code) ?? 0} sujet(s)
-            </span>
-          </a>
-        ))}
+        {groupe.liste.map((s) => {
+          const st = styleSerie(s.data.code);
+          return (
+            <a
+              href={`/series/${s.data.code.toLowerCase()}`}
+              class="flex items-center justify-between rounded-2xl p-6 transition hover:-translate-y-0.5"
+              style={`background:${st.bg};color:${st.fg}`}
+            >
+              <span class="text-3xl font-semibold tracking-tight">Série {s.data.code}</span>
+              <span class="text-[13px] opacity-80">
+                {compteParSerie.get(s.data.code) ?? 0} sujet(s)
+              </span>
+            </a>
+          );
+        })}
       </div>
     </section>
   ))}

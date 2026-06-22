@@ -2,10 +2,12 @@
 import type { GetStaticPaths } from 'astro';
 import Layout from '../../../layouts/Layout.astro';
 import Fil from '../../../components/Fil.astro';
+import Icone from '../../../components/Icone.astro';
 import {
   toutesLesSeries,
   matieresParSerie,
   slugify,
+  styleMatiere,
 } from '../../../lib/data';
 
 export const getStaticPaths = (async () => {
@@ -40,15 +42,24 @@ const matieres = await matieresParSerie(serie.data.code);
     </p>
   ) : (
     <div class="mt-4 grid gap-4 sm:grid-cols-2">
-      {matieres.map((m) => (
-        <a
-          href={`/series/${serie.data.code.toLowerCase()}/${slugify(m.matiere)}`}
-          class="card card-hover flex items-center justify-between p-5"
-        >
-          <span class="font-medium tracking-tight text-[color:var(--color-ink)]">{m.matiere}</span>
-          <span class="text-[13px] text-[color:var(--color-muted)]">{m.nombre} sujet(s)</span>
-        </a>
-      ))}
+      {matieres.map((m) => {
+        const st = styleMatiere(m.matiere);
+        return (
+          <a
+            href={`/series/${serie.data.code.toLowerCase()}/${slugify(m.matiere)}`}
+            class="card card-hover flex items-center gap-3 p-4"
+          >
+            <span
+              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+              style={`background:${st.bg};color:${st.fg}`}
+            >
+              <Icone nom={st.icon} taille={20} />
+            </span>
+            <span class="flex-1 font-medium tracking-tight text-[color:var(--color-ink)]">{m.matiere}</span>
+            <span class="text-[13px] text-[color:var(--color-muted)]">{m.nombre} sujet(s)</span>
+          </a>
+        );
+      })}
     </div>
   )}
 </Layout>

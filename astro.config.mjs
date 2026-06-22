@@ -15,8 +15,8 @@ export default defineConfig({
     AstroPWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Annales Bac Congo',
-        short_name: 'Annales Bac',
+        name: 'Bac 242',
+        short_name: 'Bac 242',
         description:
           'Sujets et corrigés du baccalauréat congolais, gratuits et accessibles hors-ligne.',
         lang: 'fr',

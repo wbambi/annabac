@@ -3,7 +3,8 @@ import type { GetStaticPaths } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import Fil from '../../components/Fil.astro';
 import Filtres from '../../components/Filtres.astro';
-import { toutesLesMatieres, sujetsParMatiere, slugify } from '../../lib/data';
+import Icone from '../../components/Icone.astro';
+import { toutesLesMatieres, sujetsParMatiere, slugify, styleMatiere } from '../../lib/data';
 
 export const getStaticPaths = (async () => {
   const matieres = await toutesLesMatieres();
@@ -29,10 +30,20 @@ const { matiere, sujets } = Astro.props;
       { label: matiere },
     ]}
   />
-  <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{matiere}</h1>
-  <p class="mt-2 text-[color:var(--color-muted)]">
-    {sujets.length} sujet(s), toutes séries et années confondues.
-  </p>
+  <div class="flex items-center gap-4">
+    <span
+      class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl"
+      style={`background:${styleMatiere(matiere).bg};color:${styleMatiere(matiere).fg}`}
+    >
+      <Icone nom={styleMatiere(matiere).icon} taille={28} />
+    </span>
+    <div>
+      <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{matiere}</h1>
+      <p class="mt-1 text-[color:var(--color-muted)]">
+        {sujets.length} sujet(s), toutes séries et années confondues.
+      </p>
+    </div>
+  </div>
 
   <div class="mt-8">
     <Filtres sujets={sujets} montrerSerie filtreAnnee filtreSerie />

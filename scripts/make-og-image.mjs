@@ -9,15 +9,15 @@ const out = join(__dirname, '..', 'public', 'og.png');
 
 const svg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#15803d"/>
-  <g transform="translate(96,150)">
-    <path d="M0 30c45-22 90-22 135 0v225c-45-22-90-22-135 0V30z" fill="#ffffff" opacity="0.95"/>
-    <path d="M285 30c-45-22-90-22-135 0v225c45-22 90-22 135 0V30z" fill="#ffffff" opacity="0.75"/>
-    <rect x="128" y="18" width="30" height="252" rx="15" fill="#15803d"/>
+  <rect width="1200" height="630" fill="#14245C"/>
+  <g transform="translate(120,232)">
+    <path d="M0 36 L120 -8 L240 36 L120 80 Z" fill="#ffffff"/>
+    <path d="M186 56 V96 q0 30 -66 30 q-66 0 -66 -30 V56" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round"/>
+    <line x1="240" y1="36" x2="240" y2="108" stroke="#ffffff" stroke-width="14"/>
+    <circle cx="240" cy="122" r="14" fill="#34D7A6"/>
   </g>
-  <text x="412" y="262" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700" fill="#ffffff">Annales Bac Congo</text>
-  <text x="414" y="328" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#dcfce7">Sujets et corrigés du baccalauréat</text>
-  <text x="414" y="378" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#dcfce7">congolais — gratuits pour tous.</text>
+  <text x="430" y="300" font-family="Arial, Helvetica, sans-serif" font-size="120" font-weight="700" fill="#ffffff">Bac <tspan fill="#34D7A6">242</tspan></text>
+  <text x="434" y="372" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#C7D2EC">Annales du baccalauréat congolais — gratuit</text>
 </svg>`;
 
 await sharp(Buffer.from(svg)).png().toFile(out);

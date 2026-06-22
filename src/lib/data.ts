@@ -32,6 +32,54 @@ export function cleSujet(data: {
   return `${data.annee}|${data.serie}|${data.matiere}|${data.session}`;
 }
 
+/** Couleur (fond clair + texte/icône foncé) et icône par matière. */
+export interface StyleMatiere {
+  bg: string;
+  fg: string;
+  icon: string;
+}
+
+const STYLES_MATIERE: Record<string, StyleMatiere> = {
+  Mathématiques: { bg: '#E6F1FB', fg: '#0C447C', icon: 'calculator' },
+  'Physique-Chimie': { bg: '#EEEDFE', fg: '#3C3489', icon: 'atom' },
+  SVT: { bg: '#EAF3DE', fg: '#27500A', icon: 'leaf' },
+  Philosophie: { bg: '#FAEEDA', fg: '#633806', icon: 'bulb' },
+  Français: { bg: '#FAECE7', fg: '#712B13', icon: 'book' },
+  'Histoire-Géographie': { bg: '#E1F5EE', fg: '#085041', icon: 'globe' },
+  Anglais: { bg: '#FBEAF0', fg: '#72243E', icon: 'language' },
+  Espagnol: { bg: '#FCEBEB', fg: '#791F1F', icon: 'language' },
+};
+
+const RAMPS_FALLBACK: { bg: string; fg: string }[] = [
+  { bg: '#E6F1FB', fg: '#0C447C' },
+  { bg: '#EEEDFE', fg: '#3C3489' },
+  { bg: '#EAF3DE', fg: '#27500A' },
+  { bg: '#FAEEDA', fg: '#633806' },
+  { bg: '#FAECE7', fg: '#712B13' },
+  { bg: '#E1F5EE', fg: '#085041' },
+  { bg: '#FBEAF0', fg: '#72243E' },
+  { bg: '#FCEBEB', fg: '#791F1F' },
+];
+
+export function styleMatiere(matiere: string): StyleMatiere {
+  const trouve = STYLES_MATIERE[matiere];
+  if (trouve) return trouve;
+  let h = 0;
+  for (const c of matiere) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  return { ...RAMPS_FALLBACK[h % RAMPS_FALLBACK.length], icon: 'file' };
+}
+
+/** Couleur par série. */
+const STYLES_SERIE: Record<string, { bg: string; fg: string }> = {
+  A: { bg: '#FAECE7', fg: '#712B13' },
+  C: { bg: '#E6F1FB', fg: '#0C447C' },
+  D: { bg: '#E1F5EE', fg: '#085041' },
+};
+
+export function styleSerie(code: string): { bg: string; fg: string } {
+  return STYLES_SERIE[code] ?? { bg: '#F1EFE8', fg: '#2C2C2A' };
+}
+
 /** Slug d'URL (sans accents, minuscule, tirets) pour matières/séries. */
 export function slugify(valeur: string): string {
   return valeur

@@ -1,4 +1,4 @@
-# Annales Bac Congo
+# Bac 242
 
 Bibliothèque numérique **gratuite** des sujets et corrigés du baccalauréat
 congolais (Congo-Brazzaville). Pensée pour le smartphone, la connexion limitée

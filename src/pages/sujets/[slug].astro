@@ -5,11 +5,13 @@ import { join } from 'node:path';
 import Layout from '../../layouts/Layout.astro';
 import Fil from '../../components/Fil.astro';
 import BadgeStatut from '../../components/BadgeStatut.astro';
+import Icone from '../../components/Icone.astro';
 import {
   tousLesSujets,
   slugify,
   titreSujet,
   statutSujet,
+  styleMatiere,
 } from '../../lib/data';
 
 /** Taille lisible d'un PDF de public/, ou null s'il est absent. */
@@ -67,8 +69,16 @@ const jsonLd = {
   />
 
   <header class="card p-6 sm:p-8">
-    <div class="flex flex-wrap items-start justify-between gap-3">
-      <h1 class="text-2xl font-semibold tracking-tight sm:text-3xl">{titre}</h1>
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-start gap-4">
+        <span
+          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
+          style={`background:${styleMatiere(data.matiere).bg};color:${styleMatiere(data.matiere).fg}`}
+        >
+          <Icone nom={styleMatiere(data.matiere).icon} taille={26} />
+        </span>
+        <h1 class="text-2xl font-semibold tracking-tight sm:text-3xl">{titre}</h1>
+      </div>
       <BadgeStatut statut={statut} />
     </div>
     <dl class="mt-6 grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
@@ -138,5 +148,11 @@ const jsonLd = {
       </a>
       — il sera vérifié avant publication.
     </p>
+  )}
+
+  {data.source && (
+    <footer class="mt-10 border-t border-[color:var(--color-line)] pt-4 text-xs text-[color:var(--color-muted)]">
+      Source : {data.source}
+    </footer>
   )}
 </Layout>
