@@ -5,6 +5,18 @@ const MAX = 5 * 1024 * 1024; // 5 Mo par fichier
 const SERIES = ['A', 'C', 'D'];
 const SESSIONS = ['Normale', 'Remplacement', 'Spéciale'];
 
+// Garde-fous anti-abus (protègent le stockage R2 et la file de modération).
+const MAX_PENDING_GLOBAL = 300; // nb max de soumissions en attente, tous contributeurs confondus
+const MAX_PER_IP_24H = 15; // nb max de soumissions par IP sur 24 h
+
+/** Hache l'IP (SHA-256) pour limiter les abus sans jamais stocker l'IP en clair. */
+async function hashIp(ip: string | null): Promise<string | null> {
+  if (!ip) return null;
+  const data = new TextEncoder().encode(ip);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
 async function verifierTurnstile(env: Env, token: string | null, ip: string | null): Promise<boolean> {
   if (!env.TURNSTILE_SECRET) return true; // non configuré (dev)
   if (!token) return false;
@@ -66,6 +78,33 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     if (!v.ok) return json({ success: false, message: v.raison }, 400);
   }
 
+  // Anti-abus : plafond global de la file et limite par IP sur 24 h.
+  const enAttente = (await env.DB.prepare(
+    `SELECT COUNT(*) AS n FROM submissions WHERE status = 'pending'`
+  ).first()) as { n: number } | null;
+  if (enAttente && enAttente.n >= MAX_PENDING_GLOBAL) {
+    return json(
+      { success: false, message: 'La file de modération est pleine. Réessayez plus tard.' },
+      503
+    );
+  }
+
+  const ipHash = await hashIp(ip);
+  if (ipHash) {
+    const depuis = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const recent = (await env.DB.prepare(
+      `SELECT COUNT(*) AS n FROM submissions WHERE ip_hash = ? AND created_at >= ?`
+    )
+      .bind(ipHash, depuis)
+      .first()) as { n: number } | null;
+    if (recent && recent.n >= MAX_PER_IP_24H) {
+      return json(
+        { success: false, message: 'Trop d\u2019envois depuis cet appareil. Réessayez demain.' },
+        429
+      );
+    }
+  }
+
   // Stockage R2 (dossier "pending")
   const id = uuid();
   let sujetKey: string | null = null;
@@ -86,10 +125,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   // File de modération
   await env.DB.prepare(
     `INSERT INTO submissions
-       (id, created_at, annee, serie, matiere, session, sujet_key, corrige_key, contributor, status)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')`
+       (id, created_at, annee, serie, matiere, session, sujet_key, corrige_key, contributor, ip_hash, status)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')`
   )
-    .bind(id, new Date().toISOString(), annee, serie, matiere, session, sujetKey, corrigeKey, contributor)
+    .bind(id, new Date().toISOString(), annee, serie, matiere, session, sujetKey, corrigeKey, contributor, ipHash)
     .run();
 
   return json({ success: true, id });

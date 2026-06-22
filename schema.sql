@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS submissions (
   sujet_key     TEXT,                       -- clé R2 du PDF sujet (ou NULL)
   corrige_key   TEXT,                       -- clé R2 du PDF corrigé (ou NULL)
   contributor   TEXT,                       -- e-mail du contributeur (optionnel)
+  ip_hash       TEXT,                       -- IP hachée (SHA-256) pour anti-abus, jamais en clair
   status        TEXT NOT NULL DEFAULT 'pending', -- pending | approved | rejected
   decided_at    TEXT,
   decided_by    TEXT,                       -- e-mail de l'admin ayant décidé
@@ -20,3 +21,10 @@ CREATE TABLE IF NOT EXISTS submissions (
 
 CREATE INDEX IF NOT EXISTS idx_submissions_status
   ON submissions (status, created_at);
+
+-- Anti-abus : compter les soumissions récentes d'une même IP (hachée).
+CREATE INDEX IF NOT EXISTS idx_submissions_ip
+  ON submissions (ip_hash, created_at);
+
+-- Migration d'une base existante (colonne ajoutée après coup) :
+--   ALTER TABLE submissions ADD COLUMN ip_hash TEXT;

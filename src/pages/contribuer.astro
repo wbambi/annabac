@@ -94,6 +94,10 @@ const clesExistantes = {
         placeholder="vous@exemple.com"
         class="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-3 py-2"
       />
+      <span class="text-xs text-[color:var(--color-muted)]">
+        Sert uniquement à vous recontacter au sujet de cet envoi. Jamais publié
+        ni revendu. <a href="/a-propos#donnees" class="underline hover:text-[color:var(--color-ink)]">En savoir plus</a>.
+      </span>
     </label>
 
     {sitekey && <div class="cf-turnstile" data-sitekey={sitekey} data-language="fr" />}

@@ -88,3 +88,59 @@ Créez un fichier `.dev.vars` (non versionné) pour les secrets locaux :
 GITHUB_TOKEN=...
 TURNSTILE_SECRET=
 ```
+
+## Sécurité, coûts et identité du projet
+
+Le projet est public et open source. Quelques précautions, surtout tant que
+tout repose sur des comptes personnels (GitHub, Cloudflare, carte bancaire).
+
+### Jeton GitHub (limiter la casse en cas de fuite)
+
+Le `GITHUB_TOKEN` sert à committer les documents validés. Utilisez un
+**fine-grained personal access token** plutôt qu'un token classique :
+
+- **Repository access** : *Only select repositories* → `wbambi/annabac` uniquement.
+- **Permissions** : *Repository permissions* → **Contents : Read and write** (rien d'autre).
+- **Expiration** : 90 jours, avec rappel pour le **rotater** (puis
+  `wrangler pages secret put GITHUB_TOKEN`).
+
+Ainsi, même compromis, le jeton ne peut écrire que dans ce dépôt.
+
+### Coûts et limites du free tier Cloudflare
+
+L'architecture est conçue pour rester gratuite ; l'**egress est gratuit et
+illimité**, donc pas de facture surprise liée au trafic.
+
+| Service | Inclus (plan gratuit) | Au-delà |
+| --- | --- | --- |
+| Workers / Pages Functions | 100 000 requêtes/jour (compte entier) | **Arrêt** (erreur 1027), pas de facturation sur le plan Free |
+| D1 | 5 M lignes lues/j, 100 k écrites/j, 5 Go | **Arrêt** (erreurs), pas de facturation |
+| R2 | 10 Go, 1 M ops écriture, 10 M ops lecture /mois | **Facturé** (≈ 0,015 $/Go-mois) — seul vrai poste facturable |
+| Pages | 500 builds/mois, bande passante illimitée | Arrêt des builds |
+
+À faire :
+
+- **Rester sur le plan Workers Free** sauf besoin explicite (Workers et D1
+  s'arrêtent au lieu de facturer).
+- Activer les **notifications de facturation / budget** dans le dashboard
+  Cloudflare (alerte au moindre montant).
+- Surveiller le stockage **R2** (10 Go) ; chaque validation/rejet supprime déjà
+  les PDF en attente. Garde-fous anti-abus dans `functions/api/submit.ts`
+  (`MAX_PENDING_GLOBAL`, `MAX_PER_IP_24H`).
+- Optionnel : une règle **WAF Rate Limiting** sur `/api/submit`.
+
+### Dissocier le projet de l'identité personnelle
+
+Recommandé dès que le projet prend de l'ampleur :
+
+- **Organisation GitHub** dédiée (ex. `bac242`) : créer l'orga puis
+  *Settings → Transfer ownership* du dépôt. Mettre à jour `GITHUB_OWNER` dans
+  `wrangler.toml` et régénérer le `GITHUB_TOKEN` au nom de l'orga.
+- **Adresse e-mail dédiée** au projet (alias) à utiliser partout : contact du
+  site (`src/pages/a-propos.astro`), compte Cloudflare, compte/orga GitHub —
+  afin de ne pas exposer l'e-mail personnel.
+- **Page « À propos »** (`/a-propos`) : tenir à jour le contact, les mentions
+  légales et la procédure de retrait ; retirer rapidement tout document sur
+  demande d'un ayant droit.
+- À terme, envisager une structure (association) pour porter le projet plutôt
+  qu'à titre personnel.
