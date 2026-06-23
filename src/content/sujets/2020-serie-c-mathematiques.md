@@ -4,5 +4,5 @@ serie: "C"
 matiere: "Mathématiques"
 session: "Normale"
 sujetPdf: "/pdfs/2020-serie-c-mathematiques-sujet.pdf"
-source: "Valérien Eberlin · maths.congo.free.fr"
+corrigePdf: "/pdfs/2020-serie-c-mathematiques-corrige.pdf"
 ---
