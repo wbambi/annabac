@@ -103,6 +103,28 @@ h4 {
   html {
     scroll-behavior: auto;
   }
+  .menu-depliant:not([hidden]) {
+    animation: none;
+  }
+}
+
+/* Menus déroulants : légère animation d'entrée */
+.menu-depliant:not([hidden]) {
+  animation: menu-deplier 0.18s ease-out;
+  transform-origin: top center;
+}
+.menu-depliant:not([hidden]).menu-depliant-mobile {
+  transform-origin: top;
+}
+@keyframes menu-deplier {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* Version imprimable : masquer l'habillage */

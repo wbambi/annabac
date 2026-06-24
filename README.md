@@ -21,6 +21,8 @@ consultation hors-ligne.
   cryptographique du jeton (JWT). Voir [DEPLOY.md](DEPLOY.md).
 - **Pagefind** : moteur de recherche statique (présent mais désactivé pour
   l'instant côté interface).
+- **Vitest** : tests unitaires des fonctions pures (helpers de données, nommage
+  des fichiers).
 
 ## Concept
 
@@ -45,8 +47,8 @@ Le formulaire **ne collecte aucune donnée de contact** (pas d'e-mail). À la pl
   de droits** ; un corrigé porte une **source / auteur** publiée en attribution ;
 - la page [`/contributeurs`](/contributeurs) liste les crédits.
 
-Pour toute question, le bouton **« Contactez-nous »** (pied de page) ouvre la
-messagerie de l'utilisateur via un lien `mailto`, sans rien enregistrer.
+Pour toute question, le bouton **« Contactez-nous »** (menu « Le projet ») ouvre
+la messagerie de l'utilisateur via un lien `mailto`, sans rien enregistrer.
 
 ## Démarrage
 
@@ -55,6 +57,8 @@ npm install
 npm run dev        # serveur de développement (http://localhost:4321)
 npm run build      # génère le site statique dans dist/
 npm run preview    # prévisualise le site généré
+npm test           # lance les tests unitaires (Vitest)
+npm run test:watch # tests en mode interactif
 ```
 
 ## Structure
@@ -69,10 +73,26 @@ src/
   pages/                  # accueil, /series, /annees, /matieres, /sujets, /contribuer, /contributeurs, /a-propos, 404
   pages/admin/            # modération (protégé par Cloudflare Access)
   lib/data.ts             # helpers (tri, regroupements, statut, couleurs/icônes)
+  **/*.test.ts            # tests unitaires (Vitest), co-localisés avec le code
 functions/                # Pages Functions : /api/submit, /api/admin/* (+ _lib)
 scripts/make-og-image.mjs # génère l'image de partage Open Graph
+test/stubs/               # stubs pour les tests (ex. astro:content)
 public/                   # favicon, icône PWA, og.png, PDF des sujets
 wrangler.toml, schema.sql # config Cloudflare (D1/R2) + schéma de modération
+vitest.config.ts          # configuration des tests
+```
+
+## Tests
+
+Tests unitaires avec **Vitest**, ciblant les fonctions pures (helpers de
+[src/lib/data.ts](src/lib/data.ts) et utilitaires de
+[functions/_lib/util.ts](functions/_lib/util.ts)) : pas de dépendance à Astro ni
+à Cloudflare au runtime. Le module virtuel `astro:content` est remplacé par un
+stub (voir [vitest.config.ts](vitest.config.ts)).
+
+```bash
+npm test           # une passe
+npm run test:watch # mode interactif
 ```
 
 ## Contribuer

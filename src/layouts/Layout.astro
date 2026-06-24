@@ -42,6 +42,11 @@ const liens = [
   { href: '/matieres', label: 'Matières' },
   { href: '/contribuer', label: 'Contribuer' },
 ];
+// Liens secondaires (à propos du projet), regroupés dans un sous-menu « Le projet ».
+const liensProjet = [
+  { href: '/contributeurs', label: 'Contributeurs' },
+  { href: '/a-propos', label: 'À propos' },
+];
 const chemin = Astro.url.pathname;
 const estActif = (href: string) =>
   chemin === href || chemin.startsWith(href + '/');
@@ -106,6 +111,47 @@ const estActif = (href: string) =>
               </a>
             </li>
           ))}
+
+          <!-- Sous-menu « Le projet » (bureau) -->
+          <li class="relative">
+            <button
+              id="menu-projet-bouton"
+              type="button"
+              aria-expanded="false"
+              aria-controls="menu-projet"
+              class="flex items-center gap-1 text-[color:var(--color-muted)] transition hover:text-[color:var(--color-ink)] [&[aria-expanded=true]_svg]:rotate-180"
+            >
+              Le projet
+              <svg class="transition-transform duration-200 ease-out" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div
+              id="menu-projet"
+              hidden
+              class="menu-depliant origin-top-right absolute right-0 z-30 mt-2 min-w-44 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-canvas)] p-1.5 shadow-lg"
+            >
+              {liensProjet.map((l) => (
+                <a
+                  href={l.href}
+                  class:list={[
+                    'block rounded-lg px-3 py-2 transition',
+                    estActif(l.href)
+                      ? 'bg-[color:var(--color-line)]/50 text-[color:var(--color-ink)]'
+                      : 'text-[color:var(--color-muted)] hover:bg-[color:var(--color-line)]/40 hover:text-[color:var(--color-ink)]',
+                  ]}
+                >
+                  {l.label}
+                </a>
+              ))}
+              <button
+                type="button"
+                class="js-contact block w-full rounded-lg px-3 py-2 text-left font-medium text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-line)]/40"
+              >
+                Contactez-nous
+              </button>
+            </div>
+          </li>
         </ul>
 
         <!-- Bouton menu (mobile) -->
@@ -126,7 +172,7 @@ const estActif = (href: string) =>
       </nav>
 
       <!-- Menu déroulant (mobile) -->
-      <div id="menu-mobile" hidden class="border-t border-[color:var(--color-line)] sm:hidden">
+      <div id="menu-mobile" hidden class="menu-depliant menu-depliant-mobile border-t border-[color:var(--color-line)] sm:hidden">
         <ul class="mx-auto flex max-w-7xl flex-col px-3 py-2 text-[15px]">
           {liens.map((l) => (
             <li>
@@ -144,18 +190,83 @@ const estActif = (href: string) =>
             </li>
           ))}
         </ul>
+        <div class="mx-auto max-w-7xl border-t border-[color:var(--color-line)] px-3 py-2">
+          <p class="px-3 pb-1 pt-1.5 text-xs font-medium uppercase tracking-wide text-[color:var(--color-muted)]">
+            Le projet
+          </p>
+          <ul class="flex flex-col text-[15px]">
+            {liensProjet.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  class:list={[
+                    'block rounded-lg px-3 py-2.5 transition',
+                    estActif(l.href)
+                      ? 'bg-[color:var(--color-line)]/50 font-medium text-[color:var(--color-ink)]'
+                      : 'text-[color:var(--color-muted)] hover:text-[color:var(--color-ink)]',
+                  ]}
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <button
+                type="button"
+                class="js-contact block w-full rounded-lg px-3 py-2.5 text-left font-medium text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-line)]/40"
+              >
+                Contactez-nous
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </header>
 
     <script>
+      // Menu hamburger (mobile).
       const bouton = document.getElementById('menu-bouton');
       const menu = document.getElementById('menu-mobile');
+      function fermerMenuMobile() {
+        menu?.setAttribute('hidden', '');
+        bouton?.setAttribute('aria-expanded', 'false');
+        bouton?.setAttribute('aria-label', 'Ouvrir le menu');
+      }
       bouton?.addEventListener('click', () => {
         const ouvert = menu?.hasAttribute('hidden');
         if (ouvert) menu?.removeAttribute('hidden');
         else menu?.setAttribute('hidden', '');
         bouton.setAttribute('aria-expanded', String(Boolean(ouvert)));
         bouton.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+      });
+
+      // Sous-menu « Le projet » (bureau).
+      const projetBouton = document.getElementById('menu-projet-bouton');
+      const projetMenu = document.getElementById('menu-projet');
+      function fermerProjet() {
+        projetMenu?.setAttribute('hidden', '');
+        projetBouton?.setAttribute('aria-expanded', 'false');
+      }
+      projetBouton?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const ouvert = projetMenu?.hasAttribute('hidden');
+        if (ouvert) projetMenu?.removeAttribute('hidden');
+        else projetMenu?.setAttribute('hidden', '');
+        projetBouton.setAttribute('aria-expanded', String(Boolean(ouvert)));
+      });
+      // Fermer le sous-menu au clic extérieur ou avec Échap.
+      document.addEventListener('click', (e) => {
+        if (
+          projetMenu &&
+          !projetMenu.hasAttribute('hidden') &&
+          !projetMenu.contains(e.target as Node) &&
+          e.target !== projetBouton
+        ) {
+          fermerProjet();
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') fermerProjet();
       });
     </script>
 
@@ -166,24 +277,8 @@ const estActif = (href: string) =>
     <footer
       class="no-print sticky bottom-0 z-10 mt-10 border-t border-[color:var(--color-line)] bg-[color:var(--color-canvas)]/85 backdrop-blur-xl"
     >
-      <div
-        class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 py-4 text-center text-xs text-[color:var(--color-muted)]"
-      >
-        <span>Bac 242</span>
-        <span aria-hidden="true" class="opacity-50">·</span>
-        <span>v{version}</span>
-        <span aria-hidden="true" class="opacity-50">·</span>
-        <a href="/contributeurs" class="transition hover:text-[color:var(--color-ink)]">Contributeurs</a>
-        <span aria-hidden="true" class="opacity-50">·</span>
-        <a href="/a-propos" class="transition hover:text-[color:var(--color-ink)]">À propos</a>
-        <span aria-hidden="true" class="opacity-50">·</span>
-        <button
-          type="button"
-          id="contact-ouvrir"
-          class="font-medium text-[color:var(--color-accent)] transition hover:underline"
-        >
-          Contactez-nous
-        </button>
+      <div class="mx-auto max-w-7xl px-5 py-2 text-center text-xs text-[color:var(--color-muted)]">
+        v{version}
       </div>
     </footer>
 
@@ -231,13 +326,20 @@ const estActif = (href: string) =>
     </dialog>
 
     <script>
-      const ouvrir = document.getElementById('contact-ouvrir');
       const modal = document.getElementById('contact-modal') as HTMLDialogElement | null;
       const fermerContact = document.getElementById('contact-fermer');
       const annuler = document.getElementById('contact-annuler');
       const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
 
-      ouvrir?.addEventListener('click', () => modal?.showModal());
+      // Plusieurs déclencheurs possibles (menu bureau + menu mobile).
+      document.querySelectorAll('.js-contact').forEach((el) =>
+        el.addEventListener('click', () => {
+          // Referme les menus de navigation avant d'ouvrir la modale.
+          document.getElementById('menu-mobile')?.setAttribute('hidden', '');
+          document.getElementById('menu-projet')?.setAttribute('hidden', '');
+          modal?.showModal();
+        })
+      );
       fermerContact?.addEventListener('click', () => modal?.close());
       annuler?.addEventListener('click', () => modal?.close());
       // Clic sur l'arrière-plan : fermer.
