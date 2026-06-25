@@ -5,7 +5,7 @@
   "description": "Bibliothèque numérique gratuite des sujets et corrigés du baccalauréat congolais",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",

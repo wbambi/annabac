@@ -1,26 +1,24 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
+import matieresParSerieData from '../../shared/matieres.json';
 
 export type Sujet = CollectionEntry<'sujets'>;
 export type Serie = CollectionEntry<'series'>;
 
 /**
- * Matières courantes proposées à la soumission (liste de départ, à enrichir).
- * Les libellés doivent rester identiques à ceux des fiches pour que le
- * rapprochement sujet/corrigé fonctionne.
+ * Matières proposées à la soumission, par série. Source unique partagée avec la
+ * validation serveur (functions/_lib/util.ts) via shared/matieres.json.
  */
+export const MATIERES_PAR_SERIE: Record<string, string[]> = matieresParSerieData;
+
+/** Matières d'une série donnée (liste vide si série inconnue). */
+export function matieresDeSerie(code: string): string[] {
+  return MATIERES_PAR_SERIE[code] ?? [];
+}
+
+/** Union de toutes les matières (toutes séries confondues). */
 export const MATIERES_COURANTES = [
-  'Mathématiques',
-  'Physique-Chimie',
-  'SVT',
-  'Philosophie',
-  'Français',
-  'Histoire-Géographie',
-  'Anglais',
-  'Espagnol',
-  'Allemand',
-  'Arts plastiques',
-  'EPS',
-] as const;
+  ...new Set(Object.values(MATIERES_PAR_SERIE).flat()),
+];
 
 /** Clé unique d'un sujet : année · série · matière · session. */
 export function cleSujet(data: {

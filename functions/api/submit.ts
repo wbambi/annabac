@@ -1,5 +1,5 @@
 /// <reference types="@cloudflare/workers-types" />
-import { type Env, json, uuid, erreurServeur, MATIERES_ACCEPTEES } from '../_lib/util';
+import { type Env, json, uuid, erreurServeur, matiereValide } from '../_lib/util';
 
 const MAX = 5 * 1024 * 1024; // 5 Mo par fichier
 const SERIES = ['A', 'C', 'D'];
@@ -100,8 +100,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   if (!annee || annee < 1980 || annee > 2100) return json({ success: false, message: 'Année invalide.' }, 400);
   if (!SERIES.includes(serie)) return json({ success: false, message: 'Série invalide.' }, 400);
-  if (!(MATIERES_ACCEPTEES as readonly string[]).includes(matiere)) {
-    return json({ success: false, message: 'Matière invalide.' }, 400);
+  if (!matiereValide(serie, matiere)) {
+    return json({ success: false, message: 'Matière invalide pour cette série.' }, 400);
   }
   if (!SESSIONS.includes(session)) return json({ success: false, message: 'Session invalide.' }, 400);
   if (!TYPES.includes(type)) return json({ success: false, message: 'Type de document invalide.' }, 400);

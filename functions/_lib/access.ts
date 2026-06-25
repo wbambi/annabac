@@ -88,8 +88,16 @@ export async function adminEmail(request: Request, env: Env): Promise<string | n
   if (entete.alg !== 'RS256' || !entete.kid) return null;
 
   try {
-    const cles = await clesPubliques(teamDomain);
-    const cle = cles.get(entete.kid);
+    let cles = await clesPubliques(teamDomain);
+    let cle = cles.get(entete.kid);
+    if (!cle) {
+      // kid inconnu : Cloudflare a peut-être renouvelé ses clés. On invalide le
+      // cache et on rafraîchit une fois avant de refuser (évite un blocage admin
+      // jusqu'à l'expiration du TTL).
+      cacheCles = null;
+      cles = await clesPubliques(teamDomain);
+      cle = cles.get(entete.kid);
+    }
     if (!cle) return null;
     const valide = await crypto.subtle.verify(
       { name: 'RSASSA-PKCS1-v1_5' },

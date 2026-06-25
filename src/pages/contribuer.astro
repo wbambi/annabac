@@ -6,11 +6,13 @@ import Icone from '../components/Icone.astro';
 import {
   toutesLesSeries,
   tousLesSujets,
-  MATIERES_COURANTES,
+  matieresDeSerie,
+  MATIERES_PAR_SERIE,
   cleSujet,
 } from '../lib/data';
 
 const series = await toutesLesSeries();
+const matieresDefaut = matieresDeSerie(series[0]?.data.code ?? 'A');
 const sitekey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY ?? '';
 const annees = Array.from({ length: 26 }, (_, i) => 2025 - i); // 2025 → 2000
 
@@ -79,12 +81,12 @@ const champ =
     <fieldset class="flex flex-col gap-2 text-sm">
       <legend class="font-medium">De quoi s'agit-il ?</legend>
       <div class="grid gap-3 sm:grid-cols-2">
-        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-accent)] has-[:checked]:bg-[color:var(--color-canvas)]">
+        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-accent)] has-[:checked]:bg-[color:var(--color-canvas)] has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[color:var(--color-accent)]">
           <input type="radio" name="Type" value="sujet" required class="sr-only" />
           <span class="font-medium">Un sujet</span>
           <span class="text-xs text-[color:var(--color-muted)]">L'énoncé de l'épreuve</span>
         </label>
-        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-accent)] has-[:checked]:bg-[color:var(--color-canvas)]">
+        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-accent)] has-[:checked]:bg-[color:var(--color-canvas)] has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[color:var(--color-accent)]">
           <input type="radio" name="Type" value="corrige" class="sr-only" />
           <span class="font-medium">Un corrigé</span>
           <span class="text-xs text-[color:var(--color-muted)]">La correction d'un sujet existant</span>
@@ -112,7 +114,7 @@ const champ =
         <span class="font-medium">Matière</span>
         <select name="Matiere" required class={champ}>
           <option value="" disabled selected>Choisir une matière…</option>
-          {MATIERES_COURANTES.map((m) => <option value={m}>{m}</option>)}
+          {matieresDefaut.map((m) => <option value={m}>{m}</option>)}
         </select>
       </label>
       <label class="flex flex-col gap-1.5 text-sm">
@@ -144,6 +146,8 @@ const champ =
         </span>
       </label>
     </div>
+
+    <p id="dispo-hint" role="status" aria-live="polite" class="text-sm" hidden></p>
 
     <!-- 5. Crédit (les deux types) -->
     <label class="flex flex-col gap-1.5 text-sm">
@@ -208,6 +212,7 @@ const champ =
   </section>
 
   <script type="application/json" id="cles-existantes" set:html={JSON.stringify(clesExistantes)} />
+  <script type="application/json" id="matieres-par-serie" set:html={JSON.stringify(MATIERES_PAR_SERIE)} />
 </Layout>
 
 <script>
@@ -441,6 +446,72 @@ const champ =
     chargement(false);
     afficherFichier();
     appliquerType();
+    majMatieres();
     form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+
+  // --- Matières dépendantes de la série ---
+  const serieSelect = form?.elements.namedItem('Serie') as HTMLSelectElement | null;
+  const matiereSelect = form?.elements.namedItem('Matiere') as HTMLSelectElement | null;
+  let matieresParSerie: Record<string, string[]> = {};
+  try {
+    const brut = document.getElementById('matieres-par-serie')?.textContent;
+    if (brut) matieresParSerie = JSON.parse(brut);
+  } catch {
+    /* ignore */
+  }
+
+  function majMatieres() {
+    if (!serieSelect || !matiereSelect) return;
+    const liste = matieresParSerie[serieSelect.value] ?? [];
+    const courant = matiereSelect.value;
+    const garde = liste.includes(courant);
+    matiereSelect.innerHTML =
+      `<option value="" disabled ${garde ? '' : 'selected'}>Choisir une matière…</option>` +
+      liste
+        .map((m) => `<option value="${m}" ${m === courant ? 'selected' : ''}>${m}</option>`)
+        .join('');
+    majDispo();
+  }
+  serieSelect?.addEventListener('change', majMatieres);
+
+  // --- Indice de disponibilité en direct ---
+  // Lecture instantanée d'un Set en mémoire (aucune requête réseau) : changer
+  // l'année/série/matière recalcule juste une chaîne de clé et fait un Set.has.
+  const dispoHint = document.getElementById('dispo-hint');
+  function majDispo() {
+    if (!dispoHint || !form) return;
+    const fd = new FormData(form);
+    const type = String(fd.get('Type') ?? '');
+    const matiere = String(fd.get('Matiere') ?? '');
+    if (!type || !matiere) {
+      dispoHint.hidden = true;
+      return;
+    }
+    const cle = `${fd.get('Annee')}|${fd.get('Serie')}|${fd.get('Matiere')}|${fd.get('Session')}`;
+    const sujetExiste = clesSujet.has(cle);
+    const corrigeExiste = clesCorrige.has(cle);
+    let msg = '';
+    let cls = 'text-[color:var(--color-muted)]';
+    if (type === 'corrige' && !sujetExiste) {
+      msg = "Aucun sujet n'est encore publié pour cette combinaison : envoyez d'abord le sujet.";
+      cls = 'text-rose-600';
+    } else if (type === 'corrige' && corrigeExiste) {
+      msg = 'Un corrigé existe déjà ici ; vous pouvez tout de même en proposer un autre.';
+    } else if (type === 'sujet' && sujetExiste) {
+      msg = 'Un sujet existe déjà ici ; vous pouvez tout de même en proposer un autre.';
+    }
+    dispoHint.textContent = msg;
+    dispoHint.hidden = !msg;
+    dispoHint.className = 'text-sm ' + cls;
+  }
+  ['Annee', 'Serie', 'Matiere', 'Session'].forEach((n) =>
+    form?.elements.namedItem(n)?.addEventListener('change', majDispo)
+  );
+  form?.querySelectorAll('input[name="Type"]').forEach((r) =>
+    r.addEventListener('change', majDispo)
+  );
+
+  majMatieres();
+  majDispo();
 </script>

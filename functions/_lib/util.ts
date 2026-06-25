@@ -14,24 +14,18 @@ export interface Env {
   ACCESS_AUD?: string;
 }
 
+import matieresParSerie from '../../shared/matieres.json';
+
 /**
- * Matières acceptées à la soumission. Doit rester aligné avec
- * `MATIERES_COURANTES` de `src/lib/data.ts` (la validation côté serveur ne peut
- * pas importer le code du front).
+ * Matières acceptées par série. Source unique partagée avec le front
+ * (src/lib/data.ts) via shared/matieres.json.
  */
-export const MATIERES_ACCEPTEES = [
-  'Mathématiques',
-  'Physique-Chimie',
-  'SVT',
-  'Philosophie',
-  'Français',
-  'Histoire-Géographie',
-  'Anglais',
-  'Espagnol',
-  'Allemand',
-  'Arts plastiques',
-  'EPS',
-] as const;
+export const MATIERES_PAR_SERIE: Record<string, string[]> = matieresParSerie;
+
+/** Vrai si la matière est valide pour cette série. */
+export function matiereValide(serie: string, matiere: string): boolean {
+  return (MATIERES_PAR_SERIE[serie] ?? []).includes(matiere);
+}
 
 /** Slug sans accents (identique à src/lib/data.ts). */
 export function slugify(valeur: string): string {
