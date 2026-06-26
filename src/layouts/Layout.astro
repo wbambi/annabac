@@ -9,12 +9,14 @@ interface Props {
   titre: string;
   description?: string;
   jsonLd?: Record<string, unknown>;
+  noindex?: boolean;
 }
 
 const {
   titre,
   description = 'Sujets et corrigés du baccalauréat congolais, gratuits pour tous les élèves.',
   jsonLd,
+  noindex = false,
 } = Astro.props;
 const titreComplet =
   titre === 'Accueil' ? 'Bac 242' : `${titre} · Bac 242`;
@@ -24,6 +26,8 @@ const canonical = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL('/og.png', site).href;
 const beacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN ?? '';
 
+const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
+
 const siteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -32,6 +36,16 @@ const siteJsonLd = {
     'Bibliothèque numérique gratuite des sujets et corrigés du baccalauréat congolais.',
   url: site.href,
   inLanguage: 'fr',
+};
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Bac 242',
+  url: site.href,
+  logo: new URL('/og.png', site).href,
+  description:
+    "Bibliothèque collaborative, libre et gratuite d'annales du baccalauréat congolais.",
 };
 
 const liens = [
@@ -56,6 +70,8 @@ const estActif = (href: string) =>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
     <meta name="theme-color" content="#f6f8fb" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
@@ -78,6 +94,7 @@ const estActif = (href: string) =>
     <meta name="twitter:image" content={ogImage} />
 
     <script type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body class="flex min-h-screen flex-col">

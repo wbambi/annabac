@@ -11,7 +11,10 @@ const SITE = 'https://annabac.pages.dev';
 export default defineConfig({
   site: SITE,
   integrations: [
-    sitemap(),
+    sitemap({
+      // Exclut les pages privées/techniques du sitemap public.
+      filter: (page) => !page.includes('/admin') && !page.includes('/offline'),
+    }),
     AstroPWA({
       registerType: 'autoUpdate',
       manifest: {

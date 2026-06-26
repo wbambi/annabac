@@ -20,11 +20,22 @@ export const getStaticPaths = (async () => {
 
 const { serie } = Astro.props;
 const matieres = await matieresParSerie(serie.data.code);
+
+const intro = `Annales de la série ${serie.data.code} du baccalauréat congolais (Congo-Brazzaville) : choisissez une matière pour accéder aux sujets et corrigés des années passées, à télécharger gratuitement au format PDF.`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `Série ${serie.data.code}`,
+  description: `Sujets et corrigés du baccalauréat congolais, série ${serie.data.code}.`,
+  inLanguage: 'fr',
+  isAccessibleForFree: true,
+};
 ---
 
 <Layout
   titre={`Série ${serie.data.code}`}
-  description={`Sujets et corrigés du baccalauréat — Série ${serie.data.code}.`}
+  description={`Annales du baccalauréat congolais en série ${serie.data.code} : sujets et corrigés par matière, à télécharger gratuitement en PDF.`}
+  jsonLd={jsonLd}
 >
   <Fil
     items={[
@@ -34,6 +45,9 @@ const matieres = await matieresParSerie(serie.data.code);
     ]}
   />
   <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Série {serie.data.code}</h1>
+  <p class="mt-3 max-w-2xl text-[15px] leading-relaxed text-[color:var(--color-muted)]">
+    {intro}
+  </p>
 
   <h2 class="mt-10 text-sm font-medium tracking-tight text-[color:var(--color-muted)]">Matières</h2>
   {matieres.length === 0 ? (

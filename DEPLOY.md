@@ -81,6 +81,28 @@ Cloudflare → **Turnstile** → créez un widget pour votre domaine. Reportez l
 envois** (fail-closed) : en local, utilisez la clé secrète de test Turnstile
 `1x0000000000000000000000000000000AA` (validation toujours réussie).
 
+## 6. Référencement (Google Search Console / Bing)
+
+Le site expose déjà : `robots.txt` (avec la directive `Sitemap:`), un sitemap
+(`/sitemap-index.xml`, généré au build, sans `/admin` ni `/offline`), des
+canoniques, Open Graph, et des données structurées (`WebSite`, `Organization`,
+`BreadcrumbList`, `LearningResource`, `CollectionPage`).
+
+1. **Google Search Console** → ajouter une propriété **préfixe d'URL**
+   `https://annabac.pages.dev`.
+2. Vérification par **balise HTML** : copier la valeur `content` de la balise
+   fournie et la mettre dans la variable de build **`PUBLIC_GSC_VERIFICATION`**
+   (dashboard Pages → variables d'environnement), puis redéployer. La balise
+   `<meta name="google-site-verification">` est alors injectée sur toutes les pages.
+3. Dans Search Console, **soumettre le sitemap** : `sitemap-index.xml`. Puis
+   *Inspection d'URL* → *Demander l'indexation* sur quelques pages clés.
+4. **Bing Webmaster Tools** : créer un compte et **importer depuis Search
+   Console** (récupère propriété + sitemap).
+
+> Domaine custom plus tard : changer `SITE` dans `astro.config.mjs` (et le
+> `Sitemap:` de `public/robots.txt`), redéployer, puis créer une **nouvelle
+> propriété** Search Console pour le nouveau domaine.
+
 ## Flux de bout en bout
 
 1. Un visiteur envoie **un PDF** via `/contribuer` (sujet ou corrigé) → `POST /api/submit`.

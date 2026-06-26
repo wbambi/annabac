@@ -21,7 +21,10 @@ const axes = [
 ];
 ---
 
-<Layout titre="Accueil">
+<Layout
+  titre="Accueil"
+  description="Bac 242 : la bibliothèque gratuite des annales du baccalauréat congolais. Sujets et corrigés classés par série (A, C, D), matière et année, à télécharger en PDF."
+>
   <!-- Hero -->
   <section class="overflow-hidden rounded-3xl" style="background:var(--color-navy)">
     <div class="grid gap-8 px-6 py-14 sm:px-10 sm:py-16 lg:grid-cols-[1.6fr_1fr] lg:items-center">
@@ -121,4 +124,17 @@ const axes = [
       </div>
     </section>
   )}
+
+  <section class="mt-16 max-w-2xl">
+    <h2 class="text-lg font-medium tracking-tight text-[color:var(--color-navy)]">
+      Annales du baccalauréat congolais
+    </h2>
+    <p class="mt-3 text-[15px] leading-relaxed text-[color:var(--color-muted)]">
+      Bac 242 rassemble les sujets et corrigés des épreuves du baccalauréat au
+      Congo-Brazzaville, gratuitement. Parcourez les annales par série (A, C, D),
+      par matière (mathématiques, physique-chimie, SVT, philosophie, français,
+      anglais, histoire-géographie…) ou par année, et téléchargez chaque sujet
+      au format PDF pour réviser, en ligne ou hors-ligne.
+    </p>
+  </section>
 </Layout>

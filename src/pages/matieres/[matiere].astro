@@ -17,11 +17,22 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { matiere, sujets } = Astro.props;
+
+const intro = `Toutes les annales de ${matiere} du baccalauréat congolais (Congo-Brazzaville), toutes séries et toutes années. Chaque épreuve est téléchargeable gratuitement au format PDF, avec le corrigé lorsqu'il est disponible.`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `Annales de ${matiere}`,
+  description: `Sujets et corrigés de ${matiere} au baccalauréat congolais.`,
+  inLanguage: 'fr',
+  isAccessibleForFree: true,
+};
 ---
 
 <Layout
   titre={matiere}
-  description={`Tous les sujets de ${matiere} au baccalauréat congolais.`}
+  description={`Annales de ${matiere} au baccalauréat congolais : sujets et corrigés, toutes séries, à télécharger gratuitement en PDF.`}
+  jsonLd={jsonLd}
 >
   <Fil
     items={[
@@ -44,6 +55,10 @@ const { matiere, sujets } = Astro.props;
       </p>
     </div>
   </div>
+
+  <p class="mt-6 max-w-2xl text-[15px] leading-relaxed text-[color:var(--color-muted)]">
+    {intro}
+  </p>
 
   <div class="mt-8">
     <Filtres sujets={sujets} montrerSerie filtreAnnee filtreSerie />

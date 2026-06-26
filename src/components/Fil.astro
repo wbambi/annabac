@@ -3,6 +3,19 @@ interface Props {
   items: { href?: string; label: string }[];
 }
 const { items } = Astro.props;
+
+// Données structurées du fil d'Ariane (rich snippet dans les résultats Google).
+const site = Astro.site;
+const filJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.label,
+    ...(item.href && site ? { item: new URL(item.href, site).href } : {}),
+  })),
+};
 ---
 
 <nav aria-label="Fil d'Ariane" class="no-print mb-6 text-[13px] text-[color:var(--color-muted)]">
@@ -19,3 +32,4 @@ const { items } = Astro.props;
     ))}
   </ol>
 </nav>
+<script type="application/ld+json" set:html={JSON.stringify(filJsonLd)} />

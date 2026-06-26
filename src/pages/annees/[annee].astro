@@ -16,11 +16,22 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { annee, sujets } = Astro.props;
+
+const intro = `Tous les sujets du baccalauréat ${annee} au Congo-Brazzaville, toutes séries (A, C, D) et toutes matières confondues. Sujets et corrigés à télécharger gratuitement au format PDF.`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `Baccalauréat ${annee}`,
+  description: `Sujets et corrigés du baccalauréat ${annee} (Congo), toutes séries.`,
+  inLanguage: 'fr',
+  isAccessibleForFree: true,
+};
 ---
 
 <Layout
   titre={`Baccalauréat ${annee}`}
-  description={`Tous les sujets du baccalauréat ${annee}, toutes séries.`}
+  description={`Sujets et corrigés du baccalauréat ${annee} au Congo, toutes séries, à télécharger gratuitement en PDF.`}
+  jsonLd={jsonLd}
 >
   <Fil
     items={[
@@ -32,6 +43,9 @@ const { annee, sujets } = Astro.props;
   <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Baccalauréat {annee}</h1>
   <p class="mt-2 text-[color:var(--color-muted)]">
     {sujets.length} sujet(s), toutes séries confondues.
+  </p>
+  <p class="mt-4 max-w-2xl text-[15px] leading-relaxed text-[color:var(--color-muted)]">
+    {intro}
   </p>
 
   <div class="mt-8">

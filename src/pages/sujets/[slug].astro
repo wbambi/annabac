@@ -41,20 +41,35 @@ const statut = statutSujet(data);
 const tailleSujet = taillePdf(data.sujetPdf);
 const tailleCorrige = taillePdf(data.corrigePdf);
 
+const site = Astro.site;
+const descriptionSeo = `Sujet${data.corrigePdf ? ' et corrigé' : ''} de ${data.matiere} au baccalauréat ${data.annee}, série ${data.serie} (Congo-Brazzaville). Téléchargement PDF gratuit.`;
+const introTexte = `Retrouvez ${data.corrigePdf ? 'le sujet et le corrigé' : 'le sujet'} de l'épreuve de ${data.matiere}, série ${data.serie}, du baccalauréat ${data.annee} au Congo-Brazzaville. Téléchargement gratuit au format PDF.`;
+
+const media = [
+  data.sujetPdf && site
+    ? { '@type': 'MediaObject', name: 'Sujet (PDF)', encodingFormat: 'application/pdf', contentUrl: new URL(data.sujetPdf, site).href }
+    : null,
+  data.corrigePdf && site
+    ? { '@type': 'MediaObject', name: 'Corrigé (PDF)', encodingFormat: 'application/pdf', contentUrl: new URL(data.corrigePdf, site).href }
+    : null,
+].filter(Boolean);
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LearningResource',
   name: titre,
   inLanguage: 'fr',
   educationalLevel: 'Baccalauréat',
-  learningResourceType: 'Sujet d’examen',
+  learningResourceType: 'exam',
   about: data.matiere,
   datePublished: String(data.annee),
   isAccessibleForFree: true,
+  publisher: { '@type': 'Organization', name: 'Bac 242', ...(site ? { url: site.href } : {}) },
+  ...(media.length ? { associatedMedia: media } : {}),
 };
 ---
 
-<Layout titre={titre} description={`Sujet et corrigé : ${titre}.`} jsonLd={jsonLd}>
+<Layout titre={titre} description={descriptionSeo} jsonLd={jsonLd}>
   <Fil
     items={[
       { href: '/', label: 'Accueil' },
@@ -100,6 +115,10 @@ const jsonLd = {
       </div>
     </dl>
   </header>
+
+  <p class="mt-6 max-w-2xl text-[15px] leading-relaxed text-[color:var(--color-muted)]">
+    {introTexte}
+  </p>
 
   <!-- Documents téléchargeables -->
   <section class="mt-6 grid gap-4 sm:grid-cols-2">
