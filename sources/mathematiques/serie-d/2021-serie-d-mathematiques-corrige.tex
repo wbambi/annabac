@@ -1,0 +1,119 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+
+\begin{document}
+
+\entetesujet{Correction bac 2021 -- Série D}
+
+\exo{1}{}
+\textbf{1. a.} $(2i)^3 + 8i = -8i + 8i = 0$ : $a = 2i$ est solution de $(E) : z^3 + 8i = 0$.
+
+\textbf{b.} $(z - 2i)(z^2 + 2iz - 4) = z^3 + 8i$.
+
+\textbf{c.} $z^2 + 2iz - 4 = 0$ a pour discriminant réduit $\delta = i^2 + 4 = 3$, d'où $z = -i - \sqrt{3}$ ou $z = -i + \sqrt{3}$. Les solutions de $(E)$ sont $S = \{2i\,;\ -i - \sqrt{3}\,;\ -i + \sqrt{3}\}$.
+
+\textbf{2. a.} $u = \dfrac{z_C - z_A}{z_B - z_A} = \dfrac{\sqrt{3} - 3i}{-\sqrt{3} - 3i} = \dfrac{1}{2} + i\dfrac{\sqrt{3}}{2}$, donc $|u| = 1$ et $\arg(u) \equiv \dfrac{\pi}{3}\ [2\pi]$.
+
+\textbf{b.} $|u| = 1$ donne $AC = AB$ (triangle isocèle en $A$) et $(\vv{AB}, \vv{AC}) \equiv \dfrac{\pi}{3}\ [2\pi]$. Donc le triangle $ABC$ est équilatéral.
+
+\textbf{3. a.} Soit $z' = az + b$ l'expression de la similitude $S$.
+\[ \begin{cases} S(A) = A \\ S(C) = I \end{cases} \Leftrightarrow \begin{cases} 2ia + b = 2i \\ a(\sqrt{3} - i) + b = -i \end{cases} \Rightarrow a = \frac{3}{4} - i\frac{\sqrt{3}}{4},\quad b = -\frac{\sqrt{3}}{2} + i\frac{1}{2}. \]
+D'où $z' = \left(\dfrac{3}{4} - i\dfrac{\sqrt{3}}{4}\right)z - \dfrac{\sqrt{3}}{2} + i\dfrac{1}{2}$.
+
+\textbf{b.} $|a| = \dfrac{\sqrt{3}}{2}$ et $a = \dfrac{\sqrt{3}}{2}\left(\dfrac{\sqrt{3}}{2} - i\dfrac{1}{2}\right) = \dfrac{\sqrt{3}}{2}e^{-i\frac{\pi}{6}}$ : $S$ est la similitude d'angle $-\dfrac{\pi}{6}$ et de rapport $k = \dfrac{\sqrt{3}}{2}$.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.8,every node/.style={font=\footnotesize}]
+  \draw[->] (-3,0)--(3,0) node[right]{$x$};
+  \draw[->] (0,-2.3)--(0,3) node[above]{$y$};
+  \coordinate (A) at (0,2); \coordinate (B) at (-1.732,-1); \coordinate (C) at (1.732,-1); \coordinate (I) at (0,-1);
+  \draw (A)--(B)--(C)--cycle; \draw (A)--(I);
+  \draw (-0.25,-1)--(-0.25,-0.75)--(0,-0.75);
+  \draw (0,1.1) arc[start angle=-90,end angle=-60,radius=1.1];
+  \node at (0.3,0.75){\scriptsize$\frac{\pi}{6}$};
+  \fill (A) circle (1.6pt) node[above right]{$A$};
+  \fill (B) circle (1.6pt) node[below left]{$B$};
+  \fill (C) circle (1.6pt) node[below right]{$C$};
+  \fill (I) circle (1.6pt) node[below]{$I$};
+\end{tikzpicture}
+\end{center}
+(Comme $S(A) = A$ et $S(C) = I$, l'angle est $(\vv{AC}, \vv{AI}) \equiv -\dfrac{\pi}{6}$ et le rapport $\dfrac{AI}{AC} = \cos\dfrac{\pi}{6} = \dfrac{\sqrt{3}}{2}$, $I$ étant le pied de la hauteur issue de $A$.)
+
+\exo{2}{}
+\textbf{1. a.} $\begin{cases} f(\vec{v_1}) = \vec{0} \\ f(\vec{v_2}) = \vec{v_2} \end{cases} \Leftrightarrow \begin{cases} -f(\vi) + 5f(\vj) = \vec{0} \\ -2f(\vi) + 5f(\vj) = -2\vi + 5\vj \end{cases}$, d'où $f(\vi) = 2\vi - 5\vj$ et $f(\vj) = \dfrac{2}{5}\vi - \vj$.
+
+\textbf{b.} Matrice de $f$ : $\begin{pmatrix} 2 & \frac{2}{5} \\ -5 & -1 \end{pmatrix}$.
+
+\textbf{2.} $\det = 2\times(-1) - (-5)\times\dfrac{2}{5} = 0$ : $f$ n'est pas bijectif.
+
+\textbf{3. a.} $f(\vec{u}) = x(2\vi - 5\vj) + y(\tfrac{2}{5}\vi - \vj)$, d'où $\begin{cases} x' = 2x + \frac{2}{5}y \\ y' = -5x - y \end{cases}$.
+
+\textbf{b.} $f\circ f(\vi) = f(\vi)$ et $f\circ f(\vj) = f(\vj)$ (calcul direct).
+
+\textbf{c.} $f\circ f = f$ : $f$ est une projection vectorielle, de base l'ensemble des vecteurs invariants et de direction le noyau de $f$.
+
+\textbf{d.} \underline{Base :} $f(\vec{u}) = \vec{u} \Leftrightarrow 5x + 2y = 0$ : droite engendrée par $(-2, 5)$. \underline{Direction :} $f(\vec{u}) = \vec{0} \Leftrightarrow 5x + y = 0$ : droite engendrée par $(-1, 5)$.
+
+\exo{3}{}
+\partieT{A}
+\textbf{1.} $f = (\ln)^2$ est dérivable sur $]0;+\infty[$ et $f'(x) = 2\ln x\cdot\dfrac{1}{x}$.
+
+\textbf{2.} $f'$ s'annule en $x = 1$, du signe de $\ln x$ : $f$ décroît sur $]0;1[$, croît sur $]1;+\infty[$.
+
+\textbf{3.} $\lim\limits_{x\to 0^+} f(x) = +\infty$ ; $\lim\limits_{x\to+\infty} f(x) = +\infty$.
+
+\textbf{4.}
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline $x$ & $0$ & & $1$ & & $+\infty$ \\\hline $f'(x)$ & $\|$ & $-$ & $0$ & $+$ & \\\hline $f$ & $+\infty$ & $\searrow$ & $0$ & $\nearrow$ & $+\infty$ \\\hline
+\end{tabular}
+\end{center}
+
+\textbf{5.} En posant $x = \dfrac{1}{u^2}$ : $\lim\limits_{x\to+\infty}\dfrac{f(x)}{x} = \lim\limits_{u\to 0^+} 4(u\ln u)^2 = 0$ (car $\lim_{u\to 0^+} u\ln u = 0$).
+
+\textbf{6.} $(\mathcal{C}) : y = (\ln x)^2$ et $(\mathcal{C}') : y = -(\ln x)^2$ (symétrique par rapport à $(Ox)$).
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.62,every node/.style={font=\footnotesize}]
+  \draw[->] (-0.3,0)--(7.3,0) node[right]{$x$};
+  \draw[->] (0,-5.3)--(0,5.3) node[above]{$y$};
+  \foreach \x in {1,2,3,4,5,6,7}{\draw (\x,0.08)--(\x,-0.08) node[below]{\scriptsize$\x$};}
+  \foreach \y in {-4,-2,2,4}{\draw (0.08,\y)--(-0.08,\y) node[left]{\scriptsize$\y$};}
+  \draw[thick] plot[domain=0.1:7,samples=90] (\x,{min(5.2,(ln(\x))^2)});
+  \draw[thick] plot[domain=0.1:7,samples=90] (\x,{max(-5.2,-(ln(\x))^2)});
+  \node at (5.3,3.2){$(\mathcal{C})$}; \node at (5.3,-3.2){$(\mathcal{C}')$};
+\end{tikzpicture}
+\end{center}
+
+\partieT{B}
+\textbf{1.} Si $(x, y) \in (\mathcal{C})$, alors $(x, -y) \in (\mathcal{C}')$ : $(\mathcal{C}')$ s'obtient de $(\mathcal{C})$ par la symétrie par rapport à l'axe des abscisses.
+
+\textbf{2.} Avec $g = -f$ :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline $x$ & $0$ & & $1$ & & $+\infty$ \\\hline $g'(x)$ & $\|$ & $+$ & $0$ & $-$ & \\\hline $g$ & $-\infty$ & $\nearrow$ & $0$ & $\searrow$ & $-\infty$ \\\hline
+\end{tabular}
+\end{center}
+
+\partieT{C}
+\textbf{1.} $H(x) = x(\ln x)^2 - 2x\ln x + 2x$ vérifie $H'(x) = (\ln x)^2 = f(x)$ : $H$ est une primitive de $f$ sur $]0;+\infty[$.
+
+\textbf{2.} $\displaystyle\int_1^e (f(x) - g(x))\,dx = 2\int_1^e f(x)\,dx = 2\big[x(\ln x)^2 - 2x\ln x + 2x\big]_1^e = 2(e - 2)$. L'aire est $\mathcal{A} = 2(e-2)\times 4 = 8(e - 2)\ \text{cm}^2$.
+
+\exo{4}{}
+On note $(x_i, n_{i\bullet})$ et $(y_j, n_{\bullet j})$ les distributions marginales, $N = 80$.
+
+\textbf{1.} Lois marginales :
+\begin{center}\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|c|c|}\hline $X$ & 0 & 1 & 2 & 3 & 4 \\\hline $n_{i\bullet}$ & 10 & 18 & 27 & 18 & 7 \\\hline\end{tabular}\qquad
+\begin{tabular}{|c|c|c|c|}\hline $Y$ & 1 & 2 & 3 \\\hline $n_{\bullet j}$ & 13 & 30 & 37 \\\hline\end{tabular}
+\end{center}
+
+\textbf{2.} $\overline{X} = 1{,}93$, $\overline{Y} = 2{,}3$.
+\[ V(X) = \frac{10(0)^2 + 18(1)^2 + 27(2)^2 + 18(3)^2 + 7(4)^2}{80} - 1{,}93^2 = 1{,}275 \]
+\[ V(Y) = \frac{13(1)^2 + 30(2)^2 + 37(3)^2}{80} - 2{,}3^2 = 0{,}535 \]
+
+\textbf{3.} $Y = aX + b$ avec $a = \dfrac{\mathrm{Cov}(X,Y)}{V(X)} = \dfrac{0{,}44}{1{,}275} = 0{,}345$ et $b = 2{,}3 - 0{,}345\times 1{,}93 = 1{,}634$. D'où $Y = 0{,}345X + 1{,}634$.
+
+\textbf{4.} $\rho_{X,Y} = \dfrac{\mathrm{Cov}(X,Y)}{\sqrt{V(X)}\sqrt{V(Y)}} = \dfrac{0{,}44}{\sqrt{1{,}275}\,\sqrt{0{,}535}} = 0{,}533$.
+
+\end{document}

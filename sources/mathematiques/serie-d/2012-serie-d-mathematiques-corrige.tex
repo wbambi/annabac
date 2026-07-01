@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+
+\begin{document}
+
+\entetesujet{Correction bac 2012 -- Série D}
+
+% ================= EXERCICE 1 =================
+\exo{1}{}
+
+\textbf{1.} $\overline{X} = \dfrac{1}{5}\displaystyle\sum_{i=1}^5 x_i = \dfrac{a + 3}{5}$ et $\overline{Y} = \dfrac{1}{5}\displaystyle\sum_{i=1}^5 y_i = \dfrac{b - 6}{5}$. Les coordonnées du point moyen vérifient :
+\[ \begin{cases} \dfrac{a + 3}{5} = 1 \\[1ex] \dfrac{b - 6}{5} = -2 \end{cases} \qquad \text{D'où } a = 2 \text{ et } b = -4. \]
+
+\textbf{2. a.} La série est $\{(-2, -10), (0, -8), (1, -4), (2, 0), (4, 12)\}$.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.85,every node/.style={font=\footnotesize}]
+  \draw[->] (-2.6,0)--(4.6,0) node[right]{$X$};
+  \draw[->] (0,-3.4)--(0,4) node[above]{$Y$};
+  \foreach \x in {-2,-1,1,2,3,4}{\draw (\x,0.05)--(\x,-0.05) node[below]{\scriptsize$\x$};}
+  \foreach \yl in {-10,-5,5,10}{\draw (0.05,{0.3*\yl})--(-0.05,{0.3*\yl}) node[left]{\scriptsize$\yl$};}
+  \foreach \px/\py in {-2/-10,0/-8,1/-4,2/0,4/12}{\fill (\px,{0.3*\py}) circle (2pt);}
+  \fill (1,-0.6) circle (1.3pt) node[below right]{\scriptsize $G$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{b.} Pour $a = 2$ et $b = -4$, $\overline{X} = 1$, $\overline{Y} = -2$. L'équation de la droite de régression linéaire de $X$ en $Y$ est $X = aY + b$ où $a = \dfrac{\mathrm{Cov}(X, Y)}{V(Y)}$ et $b = \overline{X} - a\overline{Y}$.
+\begin{align*}
+\mathrm{Cov}(X, Y) &= \frac{1}{5}\sum_{i=1}^5 x_i y_i - \overline{X}\cdot\overline{Y} \\
+&= \frac{1}{5}\big((-2)(-10) + 0(-8) + 1(-4) + 2 \times 0 + 4 \times 12\big) - 1 \times (-2) = 14{,}8 \\
+V(Y) &= \frac{1}{5}\sum_{i=1}^5 y_i^2 - \overline{Y}^2 = \frac{1}{5}\big((-10)^2 + (-8)^2 + (-4)^2 + 0^2 + 12^2\big) - (-2)^2 = 60{,}8
+\end{align*}
+D'où $a = \dfrac{14{,}8}{60{,}8} = 0{,}243$ et $b = 1 - 0{,}243 \times (-2) = 1{,}486$. L'équation de la droite de régression linéaire de $X$ en $Y$ est $X = 0{,}243\,Y + 1{,}486$.
+
+\textbf{c.} Le coefficient de corrélation linéaire entre $X$ et $Y$ est $\rho_{X,Y} = \dfrac{\mathrm{Cov}(X, Y)}{\sqrt{V(X)}\sqrt{V(Y)}}$.
+\[ V(X) = \frac{1}{5}\sum_{i=1}^5 x_i^2 - \overline{X}^2 = \frac{1}{5}\big((-2)^2 + 0^2 + 1^2 + 2^2 + 4^2\big) - 1^2 = 4. \]
+D'où $\rho_{X,Y} = \dfrac{14{,}8}{\sqrt{4}\sqrt{60{,}8}} = 0{,}949$.
+
+\underline{Interprétation.} Le coefficient de corrélation linéaire est proche de 1 : il existe une relation linéaire forte entre les variables $X$ et $Y$. Le coefficient est également positif, cela signifie que lorsqu'une variable augmente, l'autre variable augmente aussi.
+
+% ================= EXERCICE 2 =================
+\exo{2}{}
+
+\textbf{1. a.} Soit $z = re^{i\theta}$ une solution de l'équation $(E)$.
+\[ z^2 = -8\sqrt{3} + 8i \Longleftrightarrow r^2 e^{2i\theta} = 16e^{i\frac{5\pi}{6}} \Longleftrightarrow \begin{cases} r^2 = 16 \\ 2\theta \equiv \dfrac{5\pi}{6}\ [2\pi] \end{cases} \Longleftrightarrow \begin{cases} r = 4 \\ \theta = \dfrac{5\pi}{12} + k\pi,\ k \in \Z \end{cases} \]
+D'où les solutions : $z_1 = 4e^{i\frac{5\pi}{12}} = 4\left(\cos\tfrac{5\pi}{12} + i\sin\tfrac{5\pi}{12}\right)$ et $z_2 = 4e^{i\left(\frac{5\pi}{12} + \pi\right)} = 4\left(\cos\left(\tfrac{5\pi}{12} + \pi\right) + i\sin\left(\tfrac{5\pi}{12} + \pi\right)\right) = 4\left(-\cos\tfrac{5\pi}{12} - i\sin\tfrac{5\pi}{12}\right)$.
+
+\textbf{b.} On cherche un nombre complexe $z = x + iy$ tel que $z^2 = -8\sqrt{3} + 8i$. $x^2 - y^2 + 2ixy = -8\sqrt{3} + 8i$. Par identification, $x^2 - y^2 = -8\sqrt{3}$ et $xy = 4$. D'autre part, comme $|z|^2 = |-8\sqrt{3} + 8i|$, alors $x^2 + y^2 = 16$. On obtient le système :
+\[ \begin{cases} x^2 - y^2 = -8\sqrt{3} & (1) \\ x^2 + y^2 = 16 & (2) \\ xy = 4 & (3) \end{cases} \]
+En additionnant (1) et (2), $x^2 = 8 - 4\sqrt{3} = (\sqrt{2} - \sqrt{6})^2$, d'où $x = \sqrt{2} - \sqrt{6}$ ou $x = \sqrt{6} - \sqrt{2}$. En ajoutant (2) à $-(1)$, $y^2 = 8 + 4\sqrt{3} = (\sqrt{2} + \sqrt{6})^2$, d'où $y = \sqrt{2} + \sqrt{6}$ ou $y = -\sqrt{2} - \sqrt{6}$. L'équation (3) indique que $x$ et $y$ sont de même signe. Les solutions sont :
+\[ z_1 = -\sqrt{2} + \sqrt{6} + i(\sqrt{2} + \sqrt{6}) \quad \text{et} \quad z_2 = \sqrt{2} - \sqrt{6} - i(\sqrt{2} + \sqrt{6}). \]
+
+\textbf{2.}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.55,every node/.style={font=\footnotesize}]
+  \draw[->] (-5,0)--(5,0) node[right]{$\vec{u}$};
+  \draw[->] (0,-5)--(0,5) node[above]{$\vec{v}$};
+  \draw (0,0) circle (4);
+  \coordinate (Z1) at ({4*cos(75)},{4*sin(75)});
+  \coordinate (Z2) at ({4*cos(255)},{4*sin(255)});
+  \draw[densely dashed] (Z2)--(Z1);
+  \fill (Z1) circle (3pt) node[above right]{$z_1$};
+  \fill (Z2) circle (3pt) node[below left]{$z_2$};
+  \draw (1.4,0) arc[start angle=0,end angle=75,radius=1.4];
+  \node at (1.1,1){\scriptsize$\frac{5\pi}{12}$};
+  \node at (-3.2,-3.6){\scriptsize Cercle de rayon 4 cm};
+\end{tikzpicture}
+\end{center}
+
+\textbf{3.} De l'égalité $-\sqrt{2} + \sqrt{6} + i(\sqrt{2} + \sqrt{6}) = 4\left(\cos\tfrac{5\pi}{12} + i\sin\tfrac{5\pi}{12}\right)$, on déduit :
+\[ \cos\tfrac{5\pi}{12} = \frac{-\sqrt{2} + \sqrt{6}}{4} = \frac{\sqrt{6} - \sqrt{2}}{4} \quad \text{et} \quad \sin\tfrac{5\pi}{12} = \frac{\sqrt{2} + \sqrt{6}}{4}. \]
+
+% ================= PROBLÈME =================
+\prob{}
+
+\partieT{A}
+\textbf{1.} L'équation caractéristique associée à l'équation différentielle $y'' + 2y' + y = 0$ est $r^2 + 2r + 1 = 0$. Elle admet une racine double $r_0 = -1$. Donc la solution générale est $y(x) = (c_1 x + c_2)e^{-x}$ où $c_1, c_2$ sont des constantes réelles quelconques.
+
+\textbf{2.} $u$ est de la forme $u(x) = (c_1 x + c_2)e^{-x}$ avec $u(0) = 1$ et $u'(0) = 0$.
+\[ \begin{cases} u(0) = 1 \\ u'(0) = 0 \end{cases} \Longleftrightarrow \begin{cases} c_2 = 1 \\ c_1 - c_2 = 0 \end{cases} \Longleftrightarrow \begin{cases} c_2 = 1 \\ c_1 = 1 \end{cases} \]
+La solution particulière est la fonction $u$ définie pour tout $x \in \R$ par $u(x) = (x + 1)e^{-x}$.
+
+\partieT{B}
+\textbf{3.} La fonction $x \mapsto (x + 1)e^{-x}$ existe sur $]-\infty\,;0]$. La fonction $x \mapsto 1 - 2x + x\ln x$ existe si et seulement si $x > 0$. Donc la fonction $f$ est définie sur $\R$.
+
+\textbf{4.} \underline{Continuité en 0.} $\lim\limits_{x\to 0^-} f(x) = \lim\limits_{x\to 0^-}(x + 1)e^{-x} = 1$ ; $\lim\limits_{x\to 0^+} f(x) = \lim\limits_{x\to 0^+}(1 - 2x + x\ln x) = 1 = f(0)$. Comme $\lim\limits_{x\to 0^-} f(x) = \lim\limits_{x\to 0^+} f(x) = f(0)$, $f$ est continue en 0.
+
+\underline{Dérivabilité en 0.} $\lim\limits_{x\to 0^-}\dfrac{f(x) - f(0)}{x} = \lim\limits_{x\to 0^-}\dfrac{(x + 1)e^{-x} - 1}{x} = 0$ ; $\lim\limits_{x\to 0^+}\dfrac{f(x) - f(0)}{x} = \lim\limits_{x\to 0^+}(-2 + \ln x) = -\infty$. Comme cette dernière limite n'est pas une valeur finie, $f$ n'est pas dérivable en 0.
+
+\textbf{5.} $f$ est dérivable sur $]-\infty\,;0[\,\cup\,]0\,;+\infty[$. Pour $x < 0$, $f'(x) = -xe^{-x} > 0$ ; pour $x > 0$, $f'(x) = \ln x - 1$ ($f'(x) \ge 0 \Leftrightarrow x \ge e$).
+
+\underline{Tableau de variation} ($\lim\limits_{x\to-\infty} f(x) = \lim\limits_{x\to-\infty}(x + 1)e^{-x} = -\infty$ ; $\lim\limits_{x\to+\infty} f(x) = \lim\limits_{x\to+\infty} x\ln x\left(\dfrac{1}{x\ln x} - \dfrac{2}{\ln x} + 1\right) = +\infty$) :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccccccc|}
+\hline
+$x$ & $-\infty$ & & $0$ & & $e$ & & $\alpha$ & & $+\infty$ \\
+\hline
+$f'(x)$ & & $+$ & $\|$ & $-$ & $0$ & $+$ & & $+$ & \\
+\hline
+$f(x)$ & $-\infty$ & $\nearrow$ & $1$ & $\searrow$ & $1 - e$ & $\nearrow$ & $0$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{6.} \underline{Point d'intersection avec l'axe des abscisses pour $x \le 0$.} Si $x \le 0$, $f(x) = 0 \Longleftrightarrow (x + 1)e^{-x} = 0 \Longleftrightarrow x = -1$. Le point d'intersection de $(\mathscr{C})$ avec l'axe des abscisses est le point $(-1, 0)$.
+
+\underline{Équation de la tangente.} L'équation de la tangente $(\mathscr{T})$ à $(\mathscr{C})$ en ce point est $y = f'(-1)(x + 1) + f(-1)$. D'où $(\mathscr{T}) : y = ex + e$.
+
+\textbf{7.} $f(6) \approx -0{,}25$ ; $f(7) \approx 0{,}62$. $f$ est continue, strictement croissante sur $]6\,;7[$ et $f(6) \times f(7) < 0$. D'après le théorème des valeurs intermédiaires, il existe un unique réel $\alpha \in ]6\,;7[$ tel que $f(\alpha) = 0$.
+
+\textbf{8. a.} $\lim\limits_{x\to-\infty}\dfrac{f(x)}{x} = \lim\limits_{x\to-\infty} e^{-x}\left(1 + \dfrac{1}{x}\right) = +\infty$. La courbe $(\mathscr{C})$ admet une branche parabolique de direction $(Oy)$ en $-\infty$.
+
+\textbf{b.} $\lim\limits_{x\to+\infty}\dfrac{f(x)}{x} = \lim\limits_{x\to+\infty}\left(\dfrac{1}{x} - 2 + \ln x\right) = +\infty$. La courbe $(\mathscr{C})$ admet une branche parabolique de direction $(Oy)$ en $+\infty$.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.5,every node/.style={font=\footnotesize}]
+  \draw[->] (-2.6,0)--(8.4,0) node[right]{$x$};
+  \draw[->] (0,-5.4)--(0,5.6) node[above]{$y$};
+  \foreach \x in {-2,-1,1,2,3,4,5,6,7,8}{\draw (\x,0.08)--(\x,-0.08) node[below]{\tiny$\x$};}
+  \foreach \y in {-5,-4,-3,-2,-1,1,2,3,4,5}{\draw (0.08,\y)--(-0.08,\y) node[left]{\tiny$\y$};}
+  % tangente y=ex+e
+  \draw (-2,{2.718*(-2)+2.718})--(1,{2.718+2.718});
+  \node at (-1.9,-3){$(\mathscr{T})$};
+  % C
+  \draw[very thick] plot[domain=-1.85:0,samples=60] (\x,{(\x+1)*exp(-\x)});
+  \draw[very thick] plot[domain=0.04:8,samples=120] (\x,{1-2*\x+\x*ln(\x)});
+  \node at (4.6,-1.8){$(\mathscr{C})$};
+  % C' = -f (symetrique / axe des abscisses)
+  \draw[very thick,densely dashed] plot[domain=-1.85:0,samples=60] (\x,{-(\x+1)*exp(-\x)});
+  \draw[very thick,densely dashed] plot[domain=0.04:8,samples=120] (\x,{-(1-2*\x+\x*ln(\x))});
+  \node at (2.6,2.2){$(\mathscr{C}')$};
+\end{tikzpicture}
+\end{center}
+
+\partieT{C}
+\textbf{9. a.} \underline{Tableau de variation de $h$} (où $h = -f$) :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccccccc|}
+\hline
+$x$ & $-\infty$ & & $0$ & & $e$ & & $\alpha$ & & $+\infty$ \\
+\hline
+$h'(x)$ & & $-$ & $\|$ & $+$ & $0$ & $-$ & & $-$ & \\
+\hline
+$h(x)$ & $+\infty$ & $\searrow$ & $-1$ & $\nearrow$ & $-1 + e$ & $\searrow$ & $0$ & $\searrow$ & $-\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{b.} Voir graphique.
+
+\textbf{c.} $\mathscr{A} = \displaystyle\int_{-1}^0 \big[f(x) - h(x)\big]\,dx = 2\int_{-1}^0 (1 + x)e^{-x}\,dx$. Si l'on choisit $\begin{cases} u(x) = 1 + x \\ v'(x) = e^{-x} \end{cases}$ alors $\begin{cases} u'(x) = 1 \\ v(x) = -e^{-x} \end{cases}$. Il vient, en intégrant par parties :
+\[ \mathscr{A} = 2\int_{-1}^0 (1 + x)e^{-x}\,dx = -2\Big[(1 + x)e^{-x}\Big]_{-1}^0 + 2\int_{-1}^0 e^{-x}\,dx. \]
+D'où $\mathscr{A} = 2(-2 + e)$ u.a $= 8(-2 + e)$ cm$^2$.
+
+\end{document}

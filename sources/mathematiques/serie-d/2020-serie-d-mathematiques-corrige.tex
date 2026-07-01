@@ -1,0 +1,97 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+
+\begin{document}
+
+\entetesujet{Correction bac 2020 -- Série D}
+
+\exo{1}{}
+\textbf{1.} $i\overline{z_2} = 1 - 2i \Leftrightarrow -i z_2 = 1 + 2i \Leftrightarrow z_2 = -2 + i$. Puis $z_1 = -3 + i - z_2 = -1$ et $z_3 = \dfrac{-1 - 2i}{-2 + i} = i$. D'où $z_1 = -1$, $z_2 = -2 + i$, $z_3 = i$.
+
+\textbf{2. a.} $P(i) = i^3 + (3 - 2i)i^2 + (1 - 4i)i - 1 - 2i = 0$.
+
+\textbf{b.} Dans $(z - i)(z - z_0)(z + 2 - i)$, le terme constant est $i z_0(2 - i)$ ; par identification $z_0(1 + 2i) = -1 - 2i$, d'où $z_0 = \dfrac{-1 - 2i}{1 + 2i} = -1$.
+
+\textbf{c.} $P(z) = 0 \Leftrightarrow (z - i)(z + 1)(z + 2 - i) = 0$, soit $z \in \{i,\ -1,\ -2 + i\}$.
+
+\textbf{3. a.} $R$ : $z' - z_A = a(z - z_A)$ avec $|a| = 1$. Comme $R(B) = C$, $a = \dfrac{z_C - z_A}{z_B - z_A} = \dfrac{1 + i}{-1 + i} = -i$. D'où $z' = -i(z + 1) - 1 = -iz - i - 1$.
+
+\textbf{b.} $a = -i = e^{-i\frac{\pi}{2}}$ : l'angle de $R$ est $-\dfrac{\pi}{2}$.
+
+\exo{2}{}
+\textbf{1. a.} $\det_{(\vi,\vj)}(\vec{u}, \vec{v}) = \begin{vmatrix} 1 & -1 \\ 1 & 2 \end{vmatrix} = 3 \ne 0$, donc $\{\vec{u}, \vec{v}\}$ est une base de $\R^2$.
+
+\textbf{b.} De $\begin{cases} \vi + \vj = \vec{u} \\ -\vi + 2\vj = \vec{v} \end{cases}$ on tire $\vi = \dfrac{2}{3}\vec{u} - \dfrac{1}{3}\vec{v}$ et $\vj = \dfrac{1}{3}\vec{u} + \dfrac{1}{3}\vec{v}$.
+
+\textbf{2. a.} $f(\vi) = \dfrac{2}{3}f(\vec{u}) - \dfrac{1}{3}f(\vec{v}) = \dfrac{2}{3}\vec{u} + \dfrac{1}{3}\vec{v} = \dfrac{1}{3}\vi + \dfrac{4}{3}\vj$ ; $f(\vj) = \dfrac{1}{3}\vec{u} - \dfrac{1}{3}\vec{v} = \dfrac{2}{3}\vi - \dfrac{1}{3}\vj$.
+
+\textbf{b.} $f\circ f(\vi) = \vi$ et $f\circ f(\vj) = \vj$.
+
+\textbf{c.} $f\circ f = \mathrm{id}$ sur la base $(\vi,\vj)$ : $f$ est une symétrie vectorielle.
+
+\textbf{d.} Comme $f(\vec{u}) = \vec{u}$ et $f(\vec{v}) = -\vec{v}$ : la base $\mathscr{E}$ est engendrée par $\vec{u}$, la direction $\mathscr{D}$ par $\vec{v}$.
+
+\exo{3}{}
+\partieT{A}
+\textbf{1. a.} $\forall x \in \R$, $h'(x) = (x - 2)e^{2-x}$. \textbf{b.} $h'$ s'annule en $x = 2$, du signe de $x - 2$.
+
+\textbf{c.}
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline $x$ & $-\infty$ & & $2$ & & $+\infty$ \\\hline $h'(x)$ & & $-$ & $0$ & $+$ & \\\hline $h$ & $+\infty$ & $\searrow$ & $0$ & $\nearrow$ & $1$ \\\hline
+\end{tabular}
+\end{center}
+
+\textbf{2.} $h$ décroît de $]-\infty;2]$ sur $[0;+\infty[$ et croît de $[2;+\infty[$ sur $[0;1[$. Donc $h(x) \ge 0$ pour tout $x \in \R$.
+
+\partieT{B}
+\textbf{1.} $\lim\limits_{x\to+\infty} f(x) = \lim\limits_{x\to+\infty} x\cdot\underbrace{(1 + e^{2-x})}_{\to 1} = +\infty$.
+
+\textbf{2. a.} $\forall x \in \R$, $f'(x) = (1 + e^{2-x}) + x(-e^{2-x}) = (1 - x)e^{2-x} + 1 = h(x) \ge 0$.
+
+\textbf{b.} $f$ est strictement croissante ($f'(2) = h(2) = 0$, $f(2) = 4$), $\lim\limits_{-\infty} f = -\infty$, $\lim\limits_{+\infty} f = +\infty$ :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline $x$ & $-\infty$ & & $2$ & & $+\infty$ \\\hline $f'(x)$ & & $+$ & $0$ & $+$ & \\\hline $f$ & $-\infty$ & $\nearrow$ & $4$ & $\nearrow$ & $+\infty$ \\\hline
+\end{tabular}
+\end{center}
+
+\textbf{3. a.} $f$ est continue strictement croissante sur $\R$ : elle admet une bijection réciproque $f^{-1}$ définie sur $\R$.
+
+\textbf{b.} $f$ et $f^{-1}$ ont même sens de variation. $f$ a une tangente horizontale en $x = 2$, donc $f^{-1}$ a une tangente verticale en $f(2) = 4$ : $f^{-1}$ n'est pas dérivable en 4.
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccc|}
+\hline $x$ & $-\infty$ & $4$ & $+\infty$ \\\hline $(f^{-1})'(x)$ & $+$ & $\|$ & $+$ \\\hline $f^{-1}$ & $-\infty$ & $2$ & $+\infty$ \\\hline
+\end{tabular}
+\end{center}
+
+\textbf{4. a.} $\lim\limits_{x\to-\infty}\dfrac{f(x)}{x} = \lim\limits_{x\to-\infty}(1 + e^{2-x}) = +\infty$ : branche parabolique de direction $(Oy)$ en $-\infty$.
+
+\textbf{b.} $\lim\limits_{x\to+\infty}(f(x) - x) = \lim\limits_{x\to+\infty} x e^{2-x} = 0$ : la droite $(\Delta) : y = x$ est asymptote en $+\infty$.
+
+\textbf{c.} $f(x) - x = x e^{2-x}$ : $(\mathcal{C})$ est au-dessus de $(\Delta)$ sur $\R_+$ et en dessous sur $\R_-$.
+
+\textbf{5.}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.5,every node/.style={font=\footnotesize}]
+  \draw[->] (-6.3,0)--(6.3,0) node[right]{$x$};
+  \draw[->] (0,-7.3)--(0,7.3) node[above]{$y$};
+  \foreach \x in {-6,-4,-2,2,4,6}{\draw (\x,0.1)--(\x,-0.1) node[below]{\scriptsize$\x$};}
+  \foreach \y in {-6,-4,-2,2,4,6}{\draw (0.1,\y)--(-0.1,\y) node[left]{\scriptsize$\y$};}
+  \draw[densely dashed] (-7,-7)--(7,7) node[below right]{$(\Delta)$};
+  % (C) : f
+  \draw[thick] plot[domain=-0.55:6,samples=90] (\x,{max(-7,min(7,\x*(1+exp(2-\x))))});
+  % (C') : f^{-1} (reflexion par rapport a y=x)
+  \draw[thick] plot[domain=-0.55:6,samples=90] ({max(-7,min(7,\x*(1+exp(2-\x))))},\x);
+  \node at (1.8,5.2){$(\mathcal{C})$}; \node at (5.2,1.8){$(\mathcal{C}')$};
+\end{tikzpicture}
+\end{center}
+
+\exo{4}{}
+\textbf{1.} $p(A \cap B) = p(A)\times p(B) = 0{,}9\times 0{,}95 = 0{,}855$.
+
+\textbf{2.} $p(C) = 1 - p(A \cap B) = 1 - 0{,}855 = 0{,}145$.
+
+\textbf{3.} $p(A \cup B) = p(A) + p(B) - p(A \cap B) = 0{,}9 + 0{,}95 - 0{,}855 = 0{,}995$.
+
+\end{document}

@@ -4,4 +4,5 @@ serie: "D"
 matiere: "Mathématiques"
 session: "Normale"
 sujetPdf: "/pdfs/2018-serie-d-mathematiques-sujet.pdf"
+corrigePdf: "/pdfs/2018-serie-d-mathematiques-corrige.pdf"
 ---

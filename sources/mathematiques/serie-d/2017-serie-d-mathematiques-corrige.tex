@@ -1,0 +1,107 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+
+\begin{document}
+
+\entetesujet{Correction bac 2017 -- Série D}
+
+\exo{1}{}
+\textbf{1. a.} $P(1) = 1 + 1 - 2 = 0$ : 1 est racine de $P$.
+
+\textbf{b.} $(Z - 1)(Z^2 + 2Z + 2) = Z^3 + 2Z^2 + 2Z - Z^2 - 2Z - 2 = Z^3 + Z^2 - 2$.
+
+\textbf{c.} $P(Z) = 0 \Leftrightarrow Z = 1$ ou $Z^2 + 2Z + 2 = 0$. Ce dernier a pour discriminant réduit $\Delta' = i^2$, d'où $Z = -1 - i$ ou $Z = -1 + i$. L'ensemble des solutions est $\{1,\ -1 - i,\ -1 + i\}$.
+
+\textbf{2. a.}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.9,every node/.style={font=\footnotesize}]
+  \draw[->] (-2.4,0)--(2.4,0) node[right]{$x$};
+  \draw[->] (0,-2.4)--(0,2.4) node[above]{$y$};
+  \foreach \x in {-2,-1,1,2}{\draw (\x,0.06)--(\x,-0.06) node[below]{\scriptsize$\x$};}
+  \foreach \y in {-2,-1,1,2}{\draw (0.06,\y)--(-0.06,\y) node[left]{\scriptsize$\y$};}
+  \coordinate (A) at (1,0); \coordinate (B) at (-1,1); \coordinate (C) at (-1,-1); \coordinate (D) at (1,-2);
+  \draw (A)--(B)--(C)--cycle; \draw[densely dashed,red] (C)--(D)--(A);
+  \fill (A) circle (2pt) node[above right]{$A$};
+  \fill (B) circle (2pt) node[above left]{$B$};
+  \fill (C) circle (2pt) node[below left]{$C$};
+  \fill[red] (D) circle (2pt) node[below right]{$D$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{b.} $ABCD$ est un parallélogramme ssi $\vv{AB} = \vv{DC}$, soit $z_B - z_A = z_C - z_D$. D'où $z_D = 1 - 2i$.
+
+\textbf{3. a.} La rotation $R$ de centre $A$ et d'angle $\dfrac{\pi}{3}$ : $Z' - z_A = e^{i\frac{\pi}{3}}(Z - z_A)$, d'où $Z' = \left(\tfrac{1}{2} + i\tfrac{\sqrt{3}}{2}\right)Z + \left(\tfrac{1}{2} - i\tfrac{\sqrt{3}}{2}\right)$.
+
+\textbf{b.} Par identification des parties réelle et imaginaire :
+\[ \begin{cases} x' = \dfrac{1}{2}x - \dfrac{\sqrt{3}}{2}y + \dfrac{1}{2} \\[1ex] y' = \dfrac{\sqrt{3}}{2}x + \dfrac{1}{2}y - \dfrac{\sqrt{3}}{2} \end{cases} \]
+
+\exo{2}{}
+\textbf{1.} Matrice de $f$ dans $(\vi,\vj)$ : $\begin{pmatrix} \frac{a}{5} & \frac{4}{5} \\[2pt] \frac{4}{5} & -\frac{3}{5} \end{pmatrix}$.
+
+\textbf{2.} Expression analytique : $\begin{cases} x' = \frac{a}{5}x + \frac{4}{5}y \\[2pt] y' = \frac{4}{5}x - \frac{3}{5}y \end{cases}$
+
+\textbf{3.} $f$ est une symétrie vectorielle ssi $f\circ f(\vi) = \vi$ et $f\circ f(\vj) = \vj$. On calcule $f\circ f(\vj) = \left(\dfrac{4a}{25} - \dfrac{12}{25}, 1\right)$ ; $f\circ f(\vj) = \vj \Leftrightarrow \dfrac{4a}{25} - \dfrac{12}{25} = 0 \Leftrightarrow a = 3$. Pour $a = 3$, on vérifie aussi $f\circ f(\vi) = \vi$. Donc $f$ est une symétrie vectorielle ssi $a = 3$.
+
+\textbf{4. a.} Pour $a = 3$ : \underline{Base} $f(\vec{u}) = \vec{u} \Leftrightarrow x - 2y = 0$ ; \underline{Direction} $f(\vec{u}) = -\vec{u} \Leftrightarrow 2x + y = 0$.
+
+\textbf{b.} $\vec{e_1} = (2, 1)$. \quad \textbf{c.} $\vec{e_2} = (-1, 2)$.
+
+\textbf{d.} $\det_{(\vi,\vj)}(\vec{e_1}, \vec{e_2}) = \begin{vmatrix} 2 & -1 \\ 1 & 2 \end{vmatrix} = 5 \ne 0$, donc $(\vec{e_1}, \vec{e_2})$ est une base de $\R^2$.
+
+\textbf{e.} Comme $\vec{e_1}$ engendre la base de $f$ et $\vec{e_2}$ la direction, $f(\vec{e_1}) = \vec{e_1}$ et $f(\vec{e_2}) = -\vec{e_2}$. Matrice de $f$ dans $(\vec{e_1}, \vec{e_2})$ : $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$.
+
+\exo{3}{}
+\partieT{A}
+\textbf{1.} $\lim\limits_{x\to 0^+} g = -\infty$ ; $\lim\limits_{x\to+\infty} g = +\infty$.
+
+\textbf{2. a.} $\forall x \in ]0;+\infty[$, $g'(x) = \dfrac{1 + x}{x^2}$. \textbf{b.} $g'(x) > 0$ :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccc|}
+\hline $x$ & $0$ & & $+\infty$ \\\hline $g'(x)$ & $\|$ & $+$ & \\\hline $g$ & $-\infty$ & $\nearrow$ & $+\infty$ \\\hline
+\end{tabular}
+\end{center}
+
+\textbf{3. a.} $g\left(\tfrac{3}{2}\right) \approx -0{,}26$ et $g(2) \approx 0{,}19$ ; $g$ est continue strictement croissante sur $\left]\tfrac{3}{2};2\right[$ avec $g(\tfrac{3}{2})g(2) < 0$. D'après le TVI, il existe un unique $\alpha \in \left]\tfrac{3}{2};2\right[$ tel que $g(\alpha) = 0$.
+
+\textbf{b.} $g(x) < 0$ sur $]0;\alpha[$ et $g(x) > 0$ sur $]\alpha;+\infty[$.
+
+\partieT{B}
+\textbf{1.} $\lim\limits_{x\to 0^+} f(x) = \lim\limits_{x\to 0^+}(x - x\ln x + \ln x) = -\infty$ ; $\lim\limits_{x\to+\infty} f(x) = -\infty$.
+
+\textbf{2. a.} $\forall x \in ]0;+\infty[$, $f'(x) = 1 - \ln x - (x-1)\cdot\dfrac{1}{x} = -g(x)$.
+
+\textbf{b.} $f'$ est de signe contraire à $g$ et s'annule en $\alpha$ :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline $x$ & $0$ & & $\alpha\approx 1{,}7$ & & $+\infty$ \\\hline $f'(x)$ & $\|$ & $+$ & $0$ & $-$ & \\\hline $f$ & $-\infty$ & $\nearrow$ & $\approx 1{,}3$ & $\searrow$ & $-\infty$ \\\hline
+\end{tabular}
+\end{center}
+
+\textbf{3. a.} $\lim\limits_{x\to+\infty}\dfrac{f(x)}{x} = \lim\limits_{x\to+\infty}\left(1 - \ln x + \dfrac{\ln x}{x}\right) = -\infty$ : branche parabolique de direction $(Oy)$ en $+\infty$. $\lim\limits_{x\to 0^+} f = -\infty$ : asymptote verticale $x = 0$.
+
+\textbf{b.} $(\mathcal{C}) : y = f(x)$ et $(\mathcal{C}') : y = -f(x)$ (symétrique par rapport à $(Ox)$).
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.6,every node/.style={font=\footnotesize}]
+  \draw[->] (-0.3,0)--(7.3,0) node[right]{$x$};
+  \draw[->] (0,-5.5)--(0,5.5) node[above]{$y$};
+  \foreach \x in {1,2,3,4,5,6,7}{\draw (\x,0.08)--(\x,-0.08) node[below]{\scriptsize$\x$};}
+  \foreach \y in {-5,-3,-1,1,3,5}{\draw (0.08,\y)--(-0.08,\y) node[left]{\scriptsize$\y$};}
+  \draw[thick] plot[domain=0.12:7,samples=90] (\x,{max(-5.4,\x-\x*ln(\x)+ln(\x))});
+  \draw[thick] plot[domain=0.12:7,samples=90] (\x,{min(5.4,-(\x-\x*ln(\x)+ln(\x)))});
+  \node at (5,-3.3){$(\mathcal{C})$}; \node at (5,3.3){$(\mathcal{C}')$};
+\end{tikzpicture}
+\end{center}
+
+\exo{4}{}
+\textbf{1.} $X = \{2, 3, 4, 5, 6\}$.
+
+\textbf{2.} À partir des probabilités cumulées : $P_1 = \dfrac{1}{6}$ ; $P_2 = \dfrac{5}{24} - \dfrac{1}{6} = \dfrac{1}{24}$ ; $P_3 = \dfrac{7}{24} - \dfrac{5}{24} = \dfrac{1}{12}$ ; $P_4 = \dfrac{1}{3} - \dfrac{7}{24} = \dfrac{1}{24}$ ; $P_5 = 1 - \dfrac{1}{3} = \dfrac{2}{3}$.
+\begin{center}\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline $x_i$ & 2 & 3 & 4 & 5 & 6 \\\hline $P_i$ & $\frac{1}{6}$ & $\frac{1}{24}$ & $\frac{1}{12}$ & $\frac{1}{24}$ & $\frac{2}{3}$ \\\hline
+\end{tabular}
+\end{center}
+
+\textbf{3.} $E(X) = \displaystyle\sum_{i=1}^5 x_i P_i = 2\cdot\tfrac{1}{6} + 3\cdot\tfrac{1}{24} + 4\cdot\tfrac{1}{12} + 5\cdot\tfrac{1}{24} + 6\cdot\tfrac{2}{3} = 5$.
+
+\end{document}

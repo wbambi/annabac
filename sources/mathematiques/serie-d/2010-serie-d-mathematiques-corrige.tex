@@ -1,0 +1,199 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+\usepackage{array}
+\usepackage{mathrsfs}
+
+\begin{document}
+
+\entetesujet{Correction bac 2010 -- Série D}
+
+% ================= EXERCICE 1 =================
+\exo{1}{}
+
+\textbf{1.} Loi de probabilité de $X$ :
+\begin{center}\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$X$ & $-1$ & $0$ & $1$ \\
+\hline
+$p$ & $\dfrac{C_2^2 C_3^0}{C_5^2} = \dfrac{1}{10}$ & $\dfrac{C_2^1 C_3^1}{C_5^2} = \dfrac{6}{10}$ & $\dfrac{C_2^0 C_3^2}{C_5^2} = \dfrac{3}{10}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{2.} $E(X) = \displaystyle\sum_{i=1}^{3} x_i p_i = -1 \times \dfrac{1}{10} + 0 \times \dfrac{6}{10} + 1 \times \dfrac{3}{10} = \dfrac{2}{10}$.
+
+\textbf{3. a.} La fonction de répartition de la variable aléatoire $X$ est :
+\begin{center}\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$X$ & $]-\infty\,;-1[$ & $[-1\,;0[$ & $[0\,;1[$ & $[1\,;+\infty[$ \\
+\hline
+$F_X(x)$ & $0$ & $\dfrac{1}{10}$ & $\dfrac{7}{10}$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{b.}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[->] (-3.4,0)--(3.4,0) node[right]{$x$};
+  \draw[->] (0,-0.3)--(0,4) node[above]{$F_X$};
+  \foreach \x in {-3,-2,-1,1,2,3}{\draw (\x,0.05)--(\x,-0.05) node[below]{\scriptsize$\x$};}
+  \foreach \yv/\lab in {1/{\frac{1}{10}},7/{\frac{7}{10}},10/{1}}{\draw (0.05,{0.3*\yv})--(-0.05,{0.3*\yv}) node[left]{\scriptsize$\lab$};}
+  % paliers
+  \draw[thick] (-3.4,0)--(-1,0);
+  \draw[thick] (-1,0.3)--(0,0.3);
+  \draw[thick] (0,2.1)--(1,2.1);
+  \draw[thick] (1,3)--(3.2,3);
+  \fill (-1,0.3) circle (1.6pt); \draw (-1,0) circle (1.6pt);
+  \fill (0,2.1) circle (1.6pt); \draw (0,0.3) circle (1.6pt);
+  \fill (1,3) circle (1.6pt); \draw (1,2.1) circle (1.6pt);
+\end{tikzpicture}
+\end{center}
+
+% ================= EXERCICE 2 =================
+\exo{2}{}
+
+\textbf{1.} On peut prendre pour polynôme de degré 3 le polynôme $(z - z_1)(z - z_2)(z - z_3)$. En remarquant que $\overline{z_2} = -z_1$ :
+\begin{align*}
+(z - z_1)(z - z_2)(z - z_3) &= (z - z_1)(z + \overline{z_1})(z - z_3) \\
+&= \big(z^2 + (\overline{z_1} - z_1)z - |z_1|^2\big)(z - z_3) \\
+&= (z^2 - 2iz - 4)(z - z_3) \\
+&= z^3 + (-z_3 - 2i)z^2 + (2iz_3 - 4)z + 4z_3 \\
+&= z^3 - 8i
+\end{align*}
+On en déduit $z_1 = \sqrt{3} + i$, $z_2 = -\sqrt{3} + i$ et $z_3 = -2i$.
+
+\textbf{2.} $\sqrt{3} + i = 2\left(\dfrac{\sqrt{3}}{2} + \dfrac{1}{2}i\right) = 2\left(\cos\tfrac{\pi}{6} + i\sin\tfrac{\pi}{6}\right)$.
+
+$-\sqrt{3} + i = 2\left(-\dfrac{\sqrt{3}}{2} + \dfrac{1}{2}i\right) = 2\left(\cos\tfrac{5\pi}{6} + i\sin\tfrac{5\pi}{6}\right)$.
+
+$-2i = 2 \times (-i) = 2\left(\cos\left(-\tfrac{\pi}{2}\right) + i\sin\left(-\tfrac{\pi}{2}\right)\right)$.
+
+\textbf{3. a.}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.95,every node/.style={font=\footnotesize}]
+  \draw[->] (-3,0)--(3.4,0) node[right]{$\vec{u}$};
+  \draw[->] (0,-2.7)--(0,3.4) node[above]{$\vec{v}$};
+  \foreach \x in {-2,-1,1,2,3}{\draw (\x,0.05)--(\x,-0.05) node[below]{\scriptsize$\x$};}
+  \foreach \y in {-2,-1,1,2,3}{\draw (0.05,\y)--(-0.05,\y) node[left]{\scriptsize$\y$};}
+  \draw (0,0) circle (2);
+  \coordinate (A) at (1.732,1); \coordinate (B) at (-1.732,1); \coordinate (C) at (0,-2);
+  \draw (A)--(B)--(C)--cycle;
+  \fill (A) circle (1.8pt) node[right]{$A$};
+  \fill (B) circle (1.8pt) node[left]{$B$};
+  \fill (C) circle (1.8pt) node[below]{$C$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{b.}
+\[ (\vv{AB}, \vv{AC}) \equiv \arg\left(\frac{z_C - z_A}{z_B - z_A}\right) \equiv \arg\left(\frac{-\sqrt{3} - 3i}{-2\sqrt{3}}\right) \equiv \arg\left(\frac{1}{2} + \frac{\sqrt{3}}{2}i\right) \equiv \frac{\pi}{3}\ [2\pi]. \]
+\[ (\vv{CA}, \vv{CB}) \equiv \arg\left(\frac{z_B - z_C}{z_A - z_C}\right) \equiv \arg\left(\frac{-\sqrt{3} + 3i}{\sqrt{3} + 3i}\right) \equiv \arg\left(\frac{1}{2} + \frac{\sqrt{3}}{2}i\right) \equiv \frac{\pi}{3}\ [2\pi]. \]
+La somme des angles d'un triangle étant égale à $180^\circ$, on en déduit $(\vv{BC}, \vv{BA}) \equiv \dfrac{\pi}{3}\ [2\pi]$.
+
+\textbf{c.} Le triangle $ABC$ est équilatéral.
+
+% ================= PROBLÈME =================
+\prob{}
+
+\partieT{A}
+\textbf{1.} La fonction $g$ est dérivable sur $]-\infty\,;0[$ et $g'(x) = \dfrac{2}{x}$. $\forall x \in ]-\infty\,;0[$, $g'(x) < 0$ : $g$ est strictement décroissante sur $]-\infty\,;0[$. D'où le tableau de variation :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $0$ \\
+\hline
+$g'(x)$ & & $-$ & & $-$ & \\
+\hline
+$g(x)$ & $+\infty$ & $\searrow$ & $0$ & $\searrow$ & $-\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{2.} $g(-1) = 2\ln(1) = 0$.
+
+\underline{Signes de $g$ :} $g$ est strictement décroissante sur $]-\infty\,;0[$ et $g(-1) = 0$. On en déduit que $g(x) > 0$ pour tout $x \in ]-\infty\,;-1[$ et $g(x) < 0$ pour tout $x \in ]-1\,;0[$.
+
+\partieT{B}
+\textbf{1.} La fonction $x \mapsto -2x + 1 + 2x\ln|x|$ existe pour tout $x < 0$ ; la fonction $x \mapsto (x + 2)e^{-x} - 1$ existe pour tout $x \ge 0$. Donc l'ensemble de définition de $f$ est $\R$.
+
+\textbf{2. a.} \underline{Continuité en 0.} $\lim\limits_{x\to 0^-} f(x) = \lim\limits_{x\to 0^-}(-2x + 1 + 2x\ln|x|) = 1$ ; $\lim\limits_{x\to 0^+} f(x) = \lim\limits_{x\to 0^+}((x+2)e^{-x} - 1) = 1 = f(0)$. Comme $\lim\limits_{x\to 0^-} f(x) = \lim\limits_{x\to 0^+} f(x) = f(0)$, la fonction $f$ est continue en 0.
+
+\underline{Dérivabilité en 0.} $\lim\limits_{x\to 0^-}\dfrac{f(x) - f(0)}{x} = \lim\limits_{x\to 0^-}(-2 + 2\ln|x|) = -\infty$ ; $\lim\limits_{x\to 0^+}\dfrac{f(x) - f(0)}{x} = \lim\limits_{x\to 0^+}\left(e^{-x} + 2\dfrac{e^{-x} - 1}{x}\right) = -1$. Comme $\lim\limits_{x\to 0^-}\dfrac{f(x) - f(0)}{x}$ n'est pas une valeur finie, $f$ n'est pas dérivable en 0.
+
+\textbf{b.} $|x| = -x$ si $x < 0$. La fonction $f$ s'écrit $f(x) = -2x + 1 + 2x\ln(-x)$ si $x < 0$. D'où $\forall x \in ]-\infty\,;0[$, $f'(x) = -2 + 2\ln(-x) + 2x \times \dfrac{-1}{-x} = 2\ln(-x) = g(x)$.
+
+\textbf{3.} $f$ est dérivable sur $]-\infty\,;0[\,\cup\,]0\,;+\infty[$ et $f'(x) = \begin{cases} g(x) & \text{si } x < 0 \\ -(x+1)e^{-x} & \text{si } x > 0 \end{cases}$. On en déduit que :
+\begin{itemize}
+  \item pour tout $x \in ]-\infty\,;-1[$, $f'(x) > 0$ : $f$ est strictement croissante sur $]-\infty\,;-1[$ ;
+  \item pour tout $x \in ]-1\,;0[$, $f'(x) < 0$ : $f$ est strictement décroissante sur $]-1\,;0[$ ;
+  \item pour tout $x > 0$, $f'(x) = -(x+1)e^{-x} < 0$ : $f$ est strictement décroissante sur $]0\,;+\infty[$.
+\end{itemize}
+
+\underline{Tableau de variation} ($\lim\limits_{x\to-\infty} f(x) = \lim\limits_{x\to-\infty} x\ln|x|\left(\dfrac{-2}{\ln|x|} + \dfrac{1}{x\ln|x|} + 2\right) = -\infty$ ; $\lim\limits_{x\to+\infty} f(x) = -1$) :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|cccccccc|}
+\hline
+$x$ & $-\infty$ & & $\beta$ & & $-1$ & & $0$ \quad $\alpha$ & $+\infty$ \\
+\hline
+$f'(x)$ & & $+$ & & $+$ & $0$ & $-$ & $\|$ \quad\; $-$ & \\
+\hline
+$f(x)$ & $-\infty$ & $\nearrow$ & $0$ & $\nearrow$ & $3$ & $\searrow$ & $1$ \quad $0$ & $-1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{4.} \underline{Existence de $\alpha$ ($1 < \alpha < \frac{3}{2}$).} $f(1) \approx 0{,}10$ et $f\left(\frac{3}{2}\right) \approx -0{,}22$. $f$ est continue, strictement décroissante sur $]1\,;\frac{3}{2}[$ et $f(1) \times f\left(\frac{3}{2}\right) < 0$. D'après le théorème des valeurs intermédiaires, il existe un unique réel $\alpha \in ]1\,;\frac{3}{2}[$ tel que $f(\alpha) = 0$.
+
+\underline{Existence de $\beta$ ($-4 < \beta < -3$).} $f(-4) \approx -2{,}09$ et $f(-3) \approx 0{,}41$. $f$ est continue, strictement croissante sur $]-4\,;-3[$ et $f(-4) \times f(-3) < 0$. D'après le théorème des valeurs intermédiaires, il existe un unique réel $\beta \in ]-4\,;-3[$ tel que $f(\beta) = 0$.
+
+\textbf{5.} $\lim\limits_{x\to-\infty}\dfrac{f(x)}{x} = \lim\limits_{x\to-\infty}\left(-2 + \dfrac{1}{x} + 2\ln|x|\right) = +\infty$ : la courbe $(\mathscr{C})$ admet une branche parabolique de direction $(Oy)$ en $-\infty$. $\lim\limits_{x\to+\infty} f(x) = -1$ : la courbe $(\mathscr{C})$ admet une asymptote horizontale d'équation $y = -1$.
+
+\textbf{6.}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.5,every node/.style={font=\footnotesize}]
+  \draw[->] (-6.5,0)--(5.5,0) node[right]{$x$};
+  \draw[->] (0,-7)--(0,4.5) node[above]{$y$};
+  \foreach \x in {-6,-5,-4,-3,-2,-1,1,2,3,4,5}{\draw (\x,0.08)--(\x,-0.08) node[below]{\tiny$\x$};}
+  \foreach \y in {-6,-5,-4,-3,-2,-1,1,2,3,4}{\draw (0.08,\y)--(-0.08,\y) node[left]{\tiny$\y$};}
+  % asymptote y=-1
+  \draw[densely dashed] (-6.5,-1)--(5.3,-1);
+  % droite y=x
+  \draw[densely dotted] (-6.3,-6.3)--(4.3,4.3);
+  % C branche x<0
+  \draw[very thick] plot[domain=-5.5:-0.06,samples=120] (\x,{-2*\x+1+2*\x*ln(-\x)});
+  % C branche x>=0
+  \draw[very thick] plot[domain=0:5,samples=80] (\x,{(\x+2)*exp(-\x)-1});
+  \node at (-4.3,1.4){$(\mathscr{C})$};
+  % C' = symetrique de la branche x<=-1 par rapport a y=x
+  \draw[very thick,densely dashed] plot[domain=-5.5:-1,samples=80] ({-2*\x+1+2*\x*ln(-\x)},{\x});
+  \node at (2.6,-3.4){$(\mathscr{C}')$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{7. a.} $\mathscr{A}(\alpha) = \displaystyle\int_0^\alpha [f(x) - 0]\,dx = \int_0^\alpha \big[(x+2)e^{-x} - 1\big]\,dx = -\alpha + \int_0^\alpha (x+2)e^{-x}\,dx$.
+
+Intégrons $\displaystyle\int_0^\alpha (x+2)e^{-x}\,dx$. En posant $u(x) = x + 2$, $v'(x) = e^{-x}$, donc $u'(x) = 1$, $v(x) = -e^{-x}$ :
+\[ \int_0^\alpha (x+2)e^{-x}\,dx = \Big[-(x+2)e^{-x}\Big]_0^\alpha + \int_0^\alpha e^{-x}\,dx. \]
+D'où $\mathscr{A}(\alpha) = \Big[-(\alpha+3)e^{-\alpha} - \alpha + 3\Big]$ cm$^2$.
+
+\textbf{b.} $\lim\limits_{\alpha\to 0}\mathscr{A}(\alpha) = \lim\limits_{\alpha\to 0}\big[-(\alpha+3)e^{-\alpha} - \alpha + 3\big] = 0$.
+
+\partieT{C}
+\textbf{1.} $h$ est une fonction continue, strictement croissante sur $]-\infty\,;-1]$. Donc $h$ réalise une bijection de $]-\infty\,;-1]$ sur $]\lim\limits_{x\to-\infty} h(x)\,;h(-1)] = ]-\infty\,;3]$. $J$ est l'intervalle $]-\infty\,;3]$.
+
+\textbf{2.} Comme $h$ et $h^{-1}$ ont le même sens de variation, on en déduit le tableau de variation de $h^{-1}$ :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccc|}
+\hline
+$x$ & $-\infty$ & & $3$ \\
+\hline
+$(h^{-1})'(x)$ & & $+$ & \\
+\hline
+$h^{-1}(x)$ & $-\infty$ & $\nearrow$ & $-1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}

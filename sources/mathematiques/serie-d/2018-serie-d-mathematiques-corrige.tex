@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+
+\begin{document}
+
+\entetesujet{Correction bac 2018 -- Série D}
+
+\exo{1}{}
+\textbf{1. a.} $Z_{\vv{BC}} = Z_C - Z_B = 2 - 3i$.
+
+\textbf{b.} Translation de vecteur $\vv{BC}$ : $Z' = Z + 2 - 3i$, d'où $\begin{cases} x' = x + 2 \\ y' = y - 3 \end{cases}$.
+
+\textbf{c.} $Z_{A'} = Z_A + 2 - 3i = 3 - i$.
+
+\textbf{2. a.} $(\vv{AD}, \vv{AB}) \equiv \arg\left(\dfrac{Z_B - Z_A}{Z_D - Z_A}\right) = \arg(-i) = -\dfrac{\pi}{2}\ [2\pi]$.
+
+\textbf{b.} Rotation $R$ de centre $A$, d'angle $-\dfrac{\pi}{2}$ : $Z' = e^{-i\frac{\pi}{2}}(Z - Z_A) + Z_A$, d'où $\begin{cases} x' = y - 1 \\ y' = -x + 3 \end{cases}$.
+
+\textbf{c.} $\begin{cases} x_{C'} = y_C - 1 = -2 \\ y_{C'} = -x_C + 3 = 2 \end{cases}$, donc $Z_{C'} = -2 + 2i$.
+
+\textbf{3.} Soit $Z' = aZ + b$ l'expression de $S$. $\begin{cases} S(A) = A \\ S(B) = A \end{cases} \Rightarrow$ en soustrayant, $a(Z_A - Z_B) = 0$, donc $a = 0$. Il n'existe donc pas de similitude directe $S$ telle que $S(A) = A$ et $S(B) = A$.
+
+\exo{2}{}
+\textbf{1.} \underline{$(\mathcal{D}_1)$ :} $(x,y) \in (\mathcal{D}_1) \Leftrightarrow x = 2y$, d'où $(x,y) = y(2,1)$ : $(\mathcal{D}_1)$ est engendrée par $\vec{e_1} = (2,1) = 2\vi + \vj$. \underline{$(\mathcal{D}_2)$ :} $x = -y$, d'où $(x,y) = y(-1,1)$ : $(\mathcal{D}_2)$ est engendrée par $\vec{e_2} = (-1,1) = -\vi + \vj$.
+
+\textbf{2.} $\det_{(\vi,\vj)}(\vec{e_1}, \vec{e_2}) = \begin{vmatrix} 2 & -1 \\ 1 & 1 \end{vmatrix} = 3 \ne 0$, donc $(\vec{e_1}, \vec{e_2})$ est une base de $\mathscr{E}$.
+
+\textbf{3.} (i) $\vec{e_1} \in (\mathcal{D}_1)$, $\vec{e_2} \in (\mathcal{D}_2)$, et $(\vec{e_1}, \vec{e_2})$ est une base, donc $(\mathcal{D}_1) + (\mathcal{D}_2) = \mathscr{E}$. (ii) Si $x \in (\mathcal{D}_1)\cap(\mathcal{D}_2)$ : $x_1 = 2x_2$ et $x_1 = -x_2$, d'où $x_1 = x_2 = 0$, soit $(\mathcal{D}_1)\cap(\mathcal{D}_2) = \{0\}$. Les sous-espaces $(\mathcal{D}_1)$ et $(\mathcal{D}_2)$ sont supplémentaires dans $\mathscr{E}$.
+
+\textbf{4.} $\begin{cases} f(\vec{e_1}) = \vec{e_1} \\ f(\vec{e_2}) = -\vec{e_2} \end{cases} \Leftrightarrow \begin{cases} 2f(\vi) + f(\vj) = 2\vi + \vj \\ -f(\vi) + f(\vj) = \vi - \vj \end{cases}$, d'où $f(\vi) = \dfrac{1}{3}\vi + \dfrac{2}{3}\vj$ et $f(\vj) = \dfrac{4}{3}\vi - \dfrac{1}{3}\vj$.
+
+\exo{3}{}
+\textbf{1.} Pour $x > 0$, $\dfrac{\ln x}{-1 + \ln x}$ existe ssi $\ln x \ne 1$, soit $x \ne e$ ; pour $x \le 0$, $e^{-2x}$ existe. Donc $E_f = ]-\infty;e[\,\cup\,]e;+\infty[$.
+
+\textbf{2.} $\lim\limits_{x\to 0^-} f(x) = f(0) = 1$ et $\lim\limits_{x\to 0^+} f(x) = \lim\limits_{x\to 0^+}\left(1 + \dfrac{1}{-1+\ln x}\right) = 1$. Donc $f$ est continue en 0.
+
+\textbf{3.} $\lim\limits_{x\to 0^-}\dfrac{f(x)-f(0)}{x} = -2$ ; $\lim\limits_{x\to 0^+}\dfrac{f(x)-f(0)}{x} = \lim\limits_{x\to 0^+}\dfrac{1}{x(-1+\ln x)} = -\infty$. Les limites diffèrent : $f$ n'est pas dérivable en 0.
+
+\textbf{4. a.} $f$ est dérivable sur $]-\infty;0[\,\cup\,]0;e[\,\cup\,]e;+\infty[$ : $f'(x) = \dfrac{-1}{x(-1+\ln x)^2}$ sur $]0;e[\cup]e;+\infty[$ ; $f'(x) = -2e^{-2x}$ sur $]-\infty;0[$.
+
+\textbf{b.} $f'(x) < 0$ partout. Avec $\lim\limits_{-\infty} f = +\infty$, $\lim\limits_{e^-} f = -\infty$, $\lim\limits_{e^+} f = +\infty$, $\lim\limits_{+\infty} f = 1$ :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccccc|}
+\hline $x$ & $-\infty$ & & $0$ & & $e$ & & $+\infty$ \\\hline $f'(x)$ & & $-$ & & $-$ & $\|$ & $-$ & \\\hline
+$f$ & $+\infty$ & $\searrow$ & $1$ & $\searrow$ & $-\infty\ \|\ +\infty$ & $\searrow$ & $1$ \\\hline
+\end{tabular}
+\end{center}
+
+\textbf{5. a.} $\lim\limits_{x\to-\infty}\dfrac{f(x)}{x} = -\infty$ : branche parabolique de direction $(Oy)$ en $-\infty$. Asymptote horizontale $y = 1$ en $+\infty$ ; asymptote verticale $x = e$.
+
+\textbf{b.}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.55,every node/.style={font=\footnotesize}]
+  \draw[->] (-2.3,0)--(9.3,0) node[right]{$x$};
+  \draw[->] (0,-5.3)--(0,8.7) node[above]{$y$};
+  \foreach \x in {-2,-1,1,2,3,4,5,6,7,8,9}{\draw (\x,0.08)--(\x,-0.08) node[below]{\scriptsize$\x$};}
+  \foreach \y in {-4,-2,2,4,6,8}{\draw (0.08,\y)--(-0.08,\y) node[left]{\scriptsize$\y$};}
+  \draw[densely dashed] (2.718,-5.2)--(2.718,8.6);
+  \draw[densely dashed] (0,1)--(9,1);
+  \draw[thick] plot[domain=-1.05:0,samples=40] (\x,{min(8.6,exp(-2*\x))});
+  \draw[thick] plot[domain=0.04:2.55,samples=70] (\x,{max(-5.2,ln(\x)/(ln(\x)-1))});
+  \draw[thick] plot[domain=2.9:9,samples=70] (\x,{min(8.6,ln(\x)/(ln(\x)-1))});
+  \node at (7.5,1.5){$(\mathcal{C})$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{6.} $\displaystyle\int_{-1}^0 f(x)\,dx = \int_{-1}^0 e^{-2x}\,dx = \left[-\tfrac{1}{2}e^{-2x}\right]_{-1}^0 = \dfrac{e^2 - 1}{2}\ \text{u.a} = 2(e^2 - 1)\ \text{cm}^2$.
+
+\exo{4}{}
+\textbf{1.} $\overline{x} = \dfrac{1+2+3+4+5+6}{6} = 3{,}5$ ; \quad $\overline{y} = \dfrac{0{,}2 + 1{,}4 + 1{,}8 + 2 + 2{,}6 + 3}{6} = 1{,}833$.
+
+\textbf{2.} $y = ax + b$ avec $a = \dfrac{\mathrm{Cov}(x,y)}{V(x)}$, $b = \overline{y} - a\overline{x}$.
+\[ \mathrm{Cov}(x,y) = \frac{1}{6}(1\cdot 0{,}2 + 2\cdot 1{,}4 + 3\cdot 1{,}8 + 4\cdot 2 + 5\cdot 2{,}6 + 6\cdot 3) - 3{,}5\times 1{,}833 = 1{,}4845 \]
+\[ V(x) = \frac{1^2 + 2^2 + 3^2 + 4^2 + 5^2 + 6^2}{6} - 3{,}5^2 = 2{,}9166 \]
+D'où $a = 0{,}50$ et $b = 1{,}833 - 0{,}50\times 3{,}5 = 0{,}083$. La droite de régression est $y = 0{,}5x + 0{,}083$.
+
+\textbf{3.} Pour $x = 7$ : $y = 0{,}5\times 7 + 0{,}083 = 3{,}583$. Au 7\textsuperscript{e} jour, le poids de la larve est estimé à 3,58 mg.
+
+\end{document}

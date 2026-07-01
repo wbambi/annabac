@@ -1,0 +1,156 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+
+\begin{document}
+
+\entetesujet{Correction bac 2011 -- Série D}
+
+% ================= EXERCICE 1 =================
+\exo{1}{}
+
+\textbf{1.} La matrice de l'application $f$ est $\begin{pmatrix} -1 & a & 2 \\ 1 & 2 & 1 \\ 1 & 1 & 0 \end{pmatrix}$.
+
+\textbf{2.} L'endomorphisme $f$ est bijectif si le déterminant de sa matrice associée est non nul.
+\[ \begin{vmatrix} -1 & a & 2 \\ 1 & 2 & 1 \\ 1 & 1 & 0 \end{vmatrix} = a - 1. \]
+D'où $f$ est bijectif si $a \ne 1$. \emph{(Dans la suite, $a = 1$.)}
+
+\textbf{3. a.} $\mathscr{B} = \{\vv{u} \in \R^3\,;f(\vv{u}) = \vv{u}\}$. Soit $\vv{u}(x, y, z) \in \R^3$ un vecteur de $\mathscr{B}$. Alors $x, y, z$ vérifient le système $(S) : \begin{cases} x = -x + y + 2z \\ y = x + 2y + z \\ z = x + y \end{cases}$
+\[ (S) \Longleftrightarrow \begin{cases} -2x + y + 2z = 0 \\ x + y + z = 0 \\ x + y - z = 0 \end{cases} \Longleftrightarrow \begin{cases} -2x + y + 2z = 0 \\ 3y + 4z = 0 \\ 3y = 0 \end{cases} \Longleftrightarrow \begin{cases} x = 0 \\ z = 0 \\ y = 0 \end{cases} \]
+L'ensemble des vecteurs invariants par $f$ est $\{(0, 0, 0)\}$.
+
+\textbf{b.} $\ker f = \{\vv{u} \in \R^3\,;f(\vv{u}) = \vv{0}\}$. Soit $\vv{u}(x, y, z)$ un vecteur de $\ker f$. Alors :
+\[ \begin{cases} -x + y + 2z = 0 \\ x + 2y + z = 0 \\ x + y = 0 \end{cases} \Longleftrightarrow \begin{cases} -x + y + 2z = 0 \\ 3y + 3z = 0 \\ 2y + z = 0 \end{cases} \Longleftrightarrow \begin{cases} x = z \\ y = -z \end{cases} \]
+Le vecteur $\vv{u}$ de $\ker f$ se décompose en $\vv{u}(x, y, z) = (z, -z, z) = z(1, -1, 1)$. On en déduit que $\ker f$ est la droite vectorielle engendrée par le vecteur $(1, -1, 1)$, d'équation $\begin{cases} x = z \\ y = -z \end{cases}$.
+
+\textbf{c.} $\operatorname{Im} f = \{f(\vv{u})\,;\vv{u} \in \R^3\}$. Soit $\vv{u}'(x', y', z')$ un vecteur de $\operatorname{Im} f$. Alors :
+\[ \begin{cases} -x + y + 2z = x' \\ x + 2y + z = y' \\ x + y = z' \end{cases} \Longleftrightarrow \begin{cases} -x + y + 2z = x' \\ 3y + 3z = x' + y' \\ 2y + z = x' + z' \end{cases} \Longleftrightarrow \begin{cases} x = z - x' \\ 3y + 3z = x' + y' \\ x' - 2y' + 3z' = 0 \end{cases} \]
+Les coordonnées $(x', y', z')$ de $\operatorname{Im} f$ vérifient $x' - 2y' + 3z' = 0$. D'où $(x', y', z') = y'(2, 1, 0) + z'(-3, 0, 1)$. $\operatorname{Im} f$ est le plan vectoriel engendré par $\{(2, 1, 0), (-3, 0, 1)\}$, d'équation $x - 2y + 3z = 0$.
+
+\textbf{4.} $\vv{u} \in \ker f \Longleftrightarrow f(\vv{u}(\alpha, \beta)) = \vv{0} \Longleftrightarrow \begin{cases} -1 + \alpha + 2\beta = 0 \\ 1 + 2\alpha + \beta = 0 \\ 1 + \alpha = 0 \end{cases} \Longleftrightarrow \begin{cases} \alpha + 2\beta = 1 \\ 2\alpha + \beta = -1 \\ \alpha = -1 \end{cases}$. En remplaçant $\alpha$ par $-1$ dans l'une des deux premières équations, on obtient $\beta = 1$. Donc $\vv{u} \in \ker f$ si $\alpha = -1$ et $\beta = 1$.
+
+% ================= EXERCICE 2 =================
+\exo{2}{}
+
+\textbf{1.} L'équation $(E)$ a pour discriminant $\Delta = (1 + 3i)^2 - 4(4 + 4i) = -24 - 10i$.
+
+Cherchons un nombre complexe $z = x + iy$ tel que $z^2 = -24 - 10i$. $x^2 - y^2 + 2ixy = -24 - 10i$. Par identification des parties réelles et imaginaires, $x^2 - y^2 = -24$ et $xy = -5$. D'autre part, comme $|z|^2 = |-24 - 10i|$, alors $x^2 + y^2 = 26$. On obtient le système :
+\[ \begin{cases} x^2 - y^2 = -24 & (1) \\ x^2 + y^2 = 26 & (2) \\ xy = -5 & (3) \end{cases} \]
+En additionnant (1) et (2), $x = 1$ ou $x = -1$ ; de même $y = 5$ ou $y = -5$. L'équation (3) indique que $x$ et $y$ sont de signes contraires. D'où $\Delta = (1 - 5i)^2$. Les solutions de $(E)$ sont :
+\[ Z_1 = \frac{(1 + 3i) + (1 - 5i)}{2} = 1 - i \quad \text{et} \quad Z_2 = \frac{(1 + 3i) - (1 - 5i)}{2} = 4i. \]
+
+\textbf{2. a.} On considère les points $A$, $B$, $C$, $D$ d'affixes respectives $Z_A = 3$, $Z_B = 4i$, $Z_C = -2 + 3i$ et $Z_D = 1 - i$.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.85,every node/.style={font=\footnotesize}]
+  \draw[->] (-2.6,0)--(4.4,0) node[right]{$\vec{u}$};
+  \draw[->] (0,-2.2)--(0,5) node[above]{$\vec{v}$};
+  \foreach \x in {-2,-1,1,2,3,4}{\draw (\x,0.05)--(\x,-0.05) node[below]{\scriptsize$\x$};}
+  \foreach \y in {-1,1,2,3,4,5}{\draw (0.05,\y)--(-0.05,\y) node[left]{\scriptsize$\y$};}
+  \coordinate (A) at (3,0); \coordinate (B) at (0,4); \coordinate (C) at (-2,3); \coordinate (D) at (1,-1);
+  \draw (A)--(B)--(C)--(D)--cycle;
+  \draw (B)--(D); \draw (A)--(C);
+  \fill (A) circle (1.8pt) node[above right]{$A$};
+  \fill (B) circle (1.8pt) node[above right]{$B$};
+  \fill (C) circle (1.8pt) node[left]{$C$};
+  \fill (D) circle (1.8pt) node[below]{$D$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{b.} $Z_{\vv{AB}} = Z_B - Z_A = -3 + 4i$ ; $Z_{\vv{DC}} = Z_C - Z_D = -3 + 4i$ ; $Z_{\vv{CB}} = Z_B - Z_C = 2 + i$ ; $Z_{\vv{DA}} = Z_A - Z_D = 2 + i$.
+
+\textbf{c.} Comme $Z_{\vv{AB}} = Z_{\vv{DC}}$, alors le quadrilatère $ABCD$ est un parallélogramme.
+
+% ================= PROBLÈME =================
+\prob{}
+
+\partieT{A}
+\textbf{1.} $a + \dfrac{b}{1 + t} = \dfrac{at + a + b}{1 + t}$. On cherche $a$ tel que $\dfrac{1 - t}{1 + t} = \dfrac{a + b + at}{1 + t}$. Par identification, $a + b = 1$ et $a = -1$. D'où $a = -1$ et $b = 2$.
+
+\textbf{2.} $\displaystyle\int_0^x \frac{1 - t}{1 + t}\,dt = \int_0^x \left(-1 + \frac{2}{1 + t}\right)dt = \Big[-t + 2\ln(1 + t)\Big]_0^x = -x + 2\ln(1 + x) = -x + \ln(1 + x)^2$.
+
+\partieT{B}
+\textbf{1.} La fonction $x \mapsto -x + \ln(x + 1)^2$ existe si et seulement si $x + 1 \ne 0$. Donc $E_f = \R \setminus \{-1\}$.
+
+\textbf{2.} La fonction $f$ est dérivable sur $E_f$ et $\forall x \in E_f$, $f'(x) = -1 + \dfrac{2(x + 1)}{(x + 1)^2} = \dfrac{-x + 1}{x + 1}$.
+
+\underline{Tableau de signes :}
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $1$ & & $+\infty$ \\
+\hline
+$-x + 1$ & & $+$ & & $+$ & $0$ & $-$ & \\
+\hline
+$x + 1$ & & $-$ & $0$ & $+$ & & $+$ & \\
+\hline
+$\dfrac{-x + 1}{x + 1}$ & & $-$ & $\|$ & $+$ & $0$ & $-$ & \\
+\hline
+\end{tabular}
+\end{center}
+$f'(x) < 0$ pour tout $x \in ]-\infty\,;-1[$ : $f$ strictement décroissante sur $]-\infty\,;-1[$. $f'(x) > 0$ pour tout $x \in ]-1\,;1[$ : $f$ strictement croissante sur $]-1\,;1[$. $f'(x) < 0$ pour tout $x \in ]1\,;+\infty[$ : $f$ strictement décroissante sur $]1\,;+\infty[$.
+
+\textbf{3.} \underline{Tableau de variation} ($\lim\limits_{x\to-\infty} f = +\infty$ ; $\lim\limits_{x\to+\infty} f = \lim\limits_{x\to+\infty} -x\left(1 - 2\dfrac{\ln(1 + x)}{x}\right) = -\infty$ ; $\lim\limits_{x\to-1^-} f = -\infty$ ; $\lim\limits_{x\to-1^+} f = -\infty$) :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $1$ & & $\alpha$ & & $+\infty$ \\
+\hline
+$f'(x)$ & & $-$ & $\|$ & $+$ & $0$ & $-$ & & $-$ & \\
+\hline
+$f(x)$ & $+\infty$ & $\searrow$ & $-\infty \;\|\; -\infty$ & $\nearrow$ & $-1 + \ln 4$ & $\searrow$ & $0$ & $\searrow$ & $-\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{4.} $f(2) \approx 0{,}197$ ; $f(3) \approx -0{,}227$. $f$ est continue, strictement décroissante sur $]2\,;3[$, et $f(2) \times f(3) < 0$. D'après le théorème des valeurs intermédiaires, il existe un unique réel $\alpha \in ]2\,;3[$ tel que $f(\alpha) = 0$.
+
+\textbf{5.} $f(-2) = 2$ ; $f'(-2) = -3$. \quad $f\left(-\tfrac{3}{2}\right) \approx 0{,}11$ ; $f'\left(-\tfrac{3}{2}\right) = -5$. \quad $f(0) = 0$ ; $f'(0) = 1$. \quad $f(5) \approx -1{,}4$ ; $f'(5) \approx -0{,}67$.
+
+\textbf{6.}
+\begin{itemize}
+  \item $\lim\limits_{x\to-\infty}\dfrac{f(x)}{x} = \lim\limits_{x\to-\infty}\left(-1 + 2\dfrac{\ln|x + 1|}{x}\right) = -1$ et $\lim\limits_{x\to-\infty}[f(x) - (-x)] = \lim\limits_{x\to-\infty}\ln(x + 1)^2 = +\infty$. La courbe $(\mathscr{C})$ admet une direction asymptotique (branche parabolique) de direction la droite d'équation $y = -x$ en $-\infty$.
+  \item De même $\lim\limits_{x\to+\infty}\dfrac{f(x)}{x} = -1$ et $\lim\limits_{x\to+\infty}[f(x) - (-x)] = +\infty$ : direction asymptotique $y = -x$ en $+\infty$.
+  \item $\lim\limits_{x\to-1^-} f(x) = -\infty$ ; $\lim\limits_{x\to-1^+} f(x) = -\infty$. La courbe $(\mathscr{C})$ admet une asymptote verticale d'équation $x = -1$.
+\end{itemize}
+
+\textbf{7.} \underline{Tangente en $x = -2$ :} $y = f'(-2)(x + 2) + f(-2)$. D'où $y = -3x - 4$.
+
+\underline{Tangente en $x = 0$ :} $y = f'(0)(x - 0) + f(0)$. D'où $y = x$.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.5,every node/.style={font=\footnotesize}]
+  \draw[->] (-5.5,0)--(8,0) node[right]{$x$};
+  \draw[->] (0,-4.5)--(0,9.5) node[above]{$y$};
+  \foreach \x in {-5,-4,-3,-2,-1,1,2,3,4,5,6,7}{\draw (\x,0.08)--(\x,-0.08) node[below]{\tiny$\x$};}
+  \foreach \y in {-4,-2,2,4,6,8}{\draw (0.08,\y)--(-0.08,\y) node[left]{\tiny$\y$};}
+  % asymptote x=-1
+  \draw[densely dashed] (-1,-4.5)--(-1,9.3);
+  % y=x et y=-x
+  \draw[densely dotted] (-5,-5)--(7.5,7.5);
+  \draw[densely dotted] (-5.3,5.3)--(7.5,-7.5);
+  % C branche gauche x<-1
+  \draw[very thick] plot[domain=-5.5:-1.06,samples=120] (\x,{-\x+2*ln(abs(\x+1))});
+  % C branche droite x>-1
+  \draw[very thick] plot[domain=-0.94:7,samples=160] (\x,{-\x+2*ln(abs(\x+1))});
+  \node at (6.2,-2){$(\mathscr{C})$};
+  % C' = symetrique de la branche droite par rapport a y=x
+  \draw[very thick,densely dashed] plot[domain=-0.6:7,samples=120] ({-\x+2*ln(abs(\x+1))},{\x});
+  \node at (5,3.4){$(\mathscr{C}')$};
+\end{tikzpicture}
+\end{center}
+
+\partieT{C}
+\textbf{1.} \underline{Tableau de variation de $h$ :}
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-1$ & & $1$ & & $\alpha$ & & $+\infty$ \\
+\hline
+$h'(x)$ & $\|$ & $-$ & $0$ & $+$ & & $+$ & \\
+\hline
+$h(x)$ & $+\infty$ & $\searrow$ & $1 - \ln 4$ & $\nearrow$ & $0$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{2.} Voir graphique.
+
+\end{document}
