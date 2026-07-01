@@ -1,0 +1,186 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Correction bac 2017 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{}
+
+\textbf{a.} Comme $\mathrm{PGCD}(48;35) = 1$, d'après le théorème de Bézout, l'équation $(E) : 48x + 35y = 1$ admet des solutions dans $\Z \times \Z$.
+
+\textbf{b.} $48 \times (-8) = -384 = 1 + 35 \times (-11) \equiv 1\ [35]$. D'où 48 et $-8$ sont inverses modulo 35.
+
+\textbf{c.}
+\begin{align*}
+48x + 35y = 1 &\Longleftrightarrow 48x - 1 = 35(-y),\ y \in \Z \\
+&\Longleftrightarrow 48x - 1 \text{ est un multiple de } 35 \Longleftrightarrow 48x - 1 \equiv 0\ [35] \Longleftrightarrow 48x \equiv 1\ [35]
+\end{align*}
+Les équations $(E) : 48x + 35y = 1$ et $48x \equiv 1\ [35]$ sont équivalentes.
+
+\underline{Solution particulière :} d'après b., $48 \times (-8) + 35 \times 11 = 1$. D'où $(-8\,;11)$ est une solution particulière de $(E)$.
+
+\textbf{d.} $-8$ est une solution particulière de $48x \equiv 1\ [35]$. Soit $x$ une solution :
+\[ \begin{cases} 48x \equiv 1\ [35] \\ 48 \times (-8) \equiv 1\ [35] \end{cases} \Longleftrightarrow 48x \equiv 48 \times (-8)\ [35] \Longleftrightarrow 48(x + 8) \equiv 0\ [35] \Longleftrightarrow 35 \mid 48(x + 8). \]
+Comme 35 est premier avec 48, d'après Gauss, 35 divise $x + 8$. Il existe donc $k \in \Z$ tel que $x + 8 = 35k$. D'où $x = -8 + 35k$. Les solutions de $48x \equiv 1\ [35]$ sont $\{-8 + 35k\,;k \in \Z\}$.
+
+En remplaçant $x$ par $-8 + 35k$ dans $(E)$, on obtient $y = 11 - 48k$. L'ensemble des solutions de $(E)$ est $\{(-8 + 35k\,;11 - 48k)\,;k \in \Z\}$.
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.8,every node/.style={font=\footnotesize}]
+  \draw[->] (-4,0)--(4,0) node[right]{$x$};
+  \draw[->] (0,-3.2)--(0,3.2) node[above]{$y$};
+  % asymptotes pente +-sqrt3
+  \draw[densely dashed] (-1.7,-2.94)--(1.7,2.94);
+  \draw[densely dashed] (-1.7,2.94)--(1.7,-2.94);
+  % hyperbole a=1 b=sqrt3
+  \draw[thick] plot[domain=1:3,samples=40] (\x,{1.732*sqrt(\x*\x-1)});
+  \draw[thick] plot[domain=1:3,samples=40] (\x,{-1.732*sqrt(\x*\x-1)});
+  \draw[thick] plot[domain=-3:-1,samples=40] (\x,{1.732*sqrt(\x*\x-1)});
+  \draw[thick] plot[domain=-3:-1,samples=40] (\x,{-1.732*sqrt(\x*\x-1)});
+  \node at (3,2.6){$(\Gamma)$};
+  % cercle principal rayon a=1
+  \draw[densely dotted] (0,0) circle (1);
+  \fill (1,0) circle (1.6pt) node[below right]{$A$};
+  \fill (-1,0) circle (1.6pt) node[below left]{$A'$};
+  \fill (2,0) circle (1.4pt) node[below]{$F$};
+  \fill (-2,0) circle (1.4pt) node[below]{$F'$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{4.} $EA = EC$ car $E$ est le centre de gravité du triangle $ABC$. $EA = EF$ car $F$ est le symétrique de $A$ par rapport à $E$. On en déduit que $[EC]$ est la médiane relative à $[AF]$ et a pour longueur la moitié de $[AF]$. Donc le triangle $ACF$ est rectangle en $C$ et par conséquent les droites $(CF)$ et $(CA)$ sont perpendiculaires.
+
+\textbf{5.} \underline{Axe focal :} $A$ étant le centre de l'hyperbole, l'axe focal est la perpendiculaire à la directrice $(BC)$ passant par $A$, c'est-à-dire la droite $(AG)$.
+
+\underline{$F$ foyer de $(\Gamma)$ :} $C$ est un point d'intersection du cercle principal et de la directrice $(BC)$. On en déduit que la droite $(AC)$ est une asymptote de l'hyperbole $(\Gamma)$. Or $C$ est aussi le projeté orthogonal du point $F$ de l'axe focal $(AG)$ sur l'asymptote $(AC)$. Donc $F$ est un foyer de l'hyperbole $(\Gamma)$.
+
+\textbf{6. a.} Voir la figure.
+
+\textbf{b.} $\dfrac{AF}{AB} = \dfrac{c}{a}$ représente l'excentricité de l'hyperbole $(\Gamma)$. Dans le triangle $ABF$ rectangle en $B$ : $\cos(\widehat{FAB}) = \cos(30^\circ) = \dfrac{AB}{AF}$. D'où $\dfrac{AF}{AB} = \dfrac{1}{\cos 30^\circ} = \dfrac{2\sqrt{3}}{3}$.
+
+\textbf{7.} Soit $K$ le point d'intersection de la perpendiculaire à $(AH)$ passant par $H$ et de la parallèle à $(AC)$ passant par $G$. $\cos(\widehat{HGK}) = \cos(30^\circ) = \dfrac{GH}{GK}$, d'où $GK = \dfrac{2\sqrt{3}}{3}GH$. Le point $I$ est donc le point d'intersection du cercle de centre $G$ de rayon $GK$ et de la demi-droite $[GH)$.
+
+\textbf{8.} Comme $J \in (\Gamma)$, alors $\dfrac{JF}{JP} = \dfrac{2\sqrt{3}}{3}$ où $P$ est le projeté orthogonal de $J$ sur la directrice $(BC)$. Or $JP = GH$ et d'après 7., $\dfrac{2\sqrt{3}}{3}GH = GI$. On en déduit que $JF = \dfrac{2\sqrt{3}}{3}JP = \dfrac{2\sqrt{3}}{3}GH = GI$. $J$ est donc le point d'intersection de la droite $(d)$ et du cercle de centre $F$ de rayon $GI$.
+
+\textbf{9.} Voir figure.
+
+\textbf{10. a.} Notons $h = h_{(A,\frac{1}{2})}$ et $h_{(\Omega,k)}$ l'homothétie de centre $\Omega$ et de rapport $k$.
+
+\underline{Centre de la similitude $h_{(A,\frac{1}{2})} \circ S_{(BC)}$ :} $G$ est le projeté orthogonal de $A$ sur $(BC)$. Soit $\Omega$ le centre de la similitude $s$ et $(\Delta)$ son axe. Alors $s = h_{(\Omega,\frac{1}{2})} \circ S_{(\Delta)} = S_{(\Delta)} \circ h_{(\Omega,\frac{1}{2})}$, d'où $s \circ s = h_{(\Omega,\frac{1}{4})}$. On a :
+\[ s(A) = h_{(A,\frac{1}{2})} \circ S_{(BC)}(A) = G, \qquad s \circ s(A) = h_{(A,\frac{1}{2})}(G) = G' \text{ (milieu de }[AG]). \]
+On en déduit que $h_{(\Omega,\frac{1}{4})}(A) = G'$, soit $\vv{\Omega G'} = \dfrac{1}{4}\vv{\Omega A}$. Par Chasles, $\vv{\Omega A} + \vv{AG'} = \dfrac{1}{4}\vv{\Omega A}$, d'où $\vv{A\Omega} = \dfrac{4}{3}\vv{AG'} = \dfrac{2}{3}\vv{AG}$. Donc $\Omega = E$.
+
+\underline{Axe de la similitude :} l'axe $(\Delta)$ est la perpendiculaire à $(AG)$ passant par $E$.
+
+\textbf{b.} \underline{Foyer de $(H')$ :} $s(F) = h_{(E,\frac{1}{2})} \circ S_{(\Delta)}(F) = h_{(E,\frac{1}{2})}(A) = F'$ (milieu de $[AE]$). Comme $F$ est le foyer de $(H)$, alors $F'$ est le foyer de $(H')$.
+
+\underline{Directrice de $(H')$ :} $s(B) = h_{(A,\frac{1}{2})}(B) = M$ (milieu de $[AB]$) ; $s(C) = h_{(A,\frac{1}{2})}(C) = N$ (milieu de $[AC]$). Comme $(BC)$ est la directrice de $(H)$ associée au foyer $F$, alors $(MN)$ est la directrice de $(H')$ associée à $F'$.
+
+\underline{Asymptote de $(H')$ :} $s(A) = G$ et $s(C) = N$. Comme $(AC)$ est l'asymptote de l'arc $(H)$, alors $(GN)$ est l'asymptote de l'arc $(H')$.
+
+\underline{Sommet de $(H')$ :} le cercle $(C)$ de centre $A$ de rayon $[AC]$ étant le cercle principal de $(H)$, le cercle $(C')$ de centre $G$ et de rayon $GN$ est le cercle principal de $(H')$. On en déduit que $S'$, point d'intersection de $(C')$ et de l'axe focal, est le sommet de $(H')$ associé à $F'$.
+
+\textbf{c.} Toute similitude conserve le rapport des distances. On en déduit que l'excentricité de $(\Gamma')$ est égale à celle de $(\Gamma)$ et vaut $\dfrac{2\sqrt{3}}{3}$.
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{}
+
+\textbf{1. a.} La fonction $f : I \mapsto \R$ est continue et $1 \in I$. Alors la fonction $x \mapsto F(x) = \displaystyle\int_1^x f(t)\,dt$ est dérivable sur $I$ et $\forall x \in I$, $F'(x) = f(x)$.
+
+\textbf{b.}
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $0$ & & $1$ & & $+\infty$ \\
+\hline
+$\ln(x+1)$ & $0$ & $+$ & & $+$ & \\
+\hline
+$x - 1$ & & $-$ & $0$ & $+$ & \\
+\hline
+$F'(x) = f(x)$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+$\bullet$ $\forall x \in ]0\,;1[$, $f(x) < 0$ et $F$ est strictement décroissante. $\bullet$ $\forall x \in ]1\,;+\infty[$, $f(x) > 0$ et $F$ est strictement croissante.
+
+\textbf{2.}
+\note{L'inégalité $F(x) \ge \dfrac{1}{2}(x-1)^2$ pour $x \ge 2$ est fausse. En effet, en intégrant par parties, $F(x) = \left(\dfrac{x^2}{2} - x - \dfrac{3}{2}\right)\ln(x+1) - \dfrac{x^2}{4} + \dfrac{3}{2}x + \dfrac{5}{4} - 2\ln 2$, et un tableau de valeurs montre que $F(x) - \dfrac{1}{2}(x-1)^2 < 0$ pour les valeurs de $x$ comprises entre 2 et 2,8 environ. On peut cependant établir que $F(x) \ge F(2) + \dfrac{x^2}{2} - x$, ce qui permet de répondre aux questions suivantes.}
+
+\textbf{a.} \underline{Montrons que $\forall x \ge 2$, $F(x) \ge F(2) + \dfrac{x^2}{2} - x$.} Soit $x \ge 2$. Comme $f(t) \ge t - 1$ pour tout $t \ge 2$, par passage à l'intégrale : $\displaystyle\int_2^x f(t)\,dt \ge \int_2^x (t - 1)\,dt$. En ajoutant $\displaystyle\int_1^2 f(t)\,dt$ aux deux membres :
+\[ \int_1^2 f(t)\,dt + \int_2^x f(t)\,dt \ge \int_1^2 f(t)\,dt + \int_2^x (t - 1)\,dt. \]
+Il en résulte que $F(x) \ge F(2) + \dfrac{x^2}{2} - x$ pour tout $x \ge 2$.
+
+\textbf{b.} \underline{Calcul de $\lim\limits_{x\to+\infty} F(x)$ :} comme $F(x) \ge F(2) + \dfrac{x^2}{2} - x$ et $\lim\limits_{x\to+\infty}\left(F(2) + \dfrac{x^2}{2} - x\right) = +\infty$, on en déduit $\lim\limits_{x\to+\infty} F(x) = +\infty$.
+
+\underline{Calcul de $\lim\limits_{x\to+\infty}\dfrac{F(x)}{x}$ :} de même, $\dfrac{F(x)}{x} \ge \dfrac{1}{x}\left(F(2) + \dfrac{x^2}{2} - x\right)$ dont la limite est $+\infty$. D'où $\lim\limits_{x\to+\infty}\dfrac{F(x)}{x} = +\infty$. La courbe $(C)$ admet une branche parabolique de direction $(Oy)$ en $+\infty$.
+
+\textbf{c.} \underline{Tableau de variation de $F$ :}
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $0$ & & $1$ & & $+\infty$ \\
+\hline
+$F'(x)$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+$F$ & $F(0)$ & $\searrow$ & $0$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{d.} \begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[->] (-0.3,0)--(5,0) node[right]{$x$};
+  \draw[->] (0,-0.2)--(0,2) node[above]{$y$};
+  \foreach \x in {1,2,3,4}{\draw (\x,0.04)--(\x,-0.04) node[below]{\scriptsize$\x$};}
+  \draw (0.04,1)--(-0.04,1) node[left]{\scriptsize$0{,}5$};
+  \draw[thick] plot[domain=0:4.6,samples=60] (\x,{0.26+1.45*(1-exp(-0.42*\x))-0.0*\x});
+  \fill (0,0.26) circle (1.3pt) node[left]{\scriptsize$0{,}13$};
+  \fill (2,1) circle (1.3pt);
+  \node at (4,1.8){$(C)$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{3. a.} $F(n+1) - F(n) = \displaystyle\int_1^{n+1} f(t)\,dt - \int_1^n f(t)\,dt = \int_n^{n+1} f(t)\,dt$. D'où $u_n = F(n+1) - F(n)$.
+
+\textbf{b.}
+\note{Erreur dans l'énoncé : l'encadrement $f(n) \le u_n \le f(n+1)$ n'est pas vérifié pour tout $n \in \N$ mais pour tout $n \in \N^*$. En effet, on n'a pas $f(0) \le u_0 \le f(1)$ puisque $f(0) = 0$ ; $f(1) = 0$ et $u_0 = \int_0^1 f(t)\,dt = -F(0) \ne 0$.}
+
+\underline{Montrons d'abord que $f$ est croissante sur $[n, n+1]$ pour $n \in \N^*$.} Soit $n \in \N^*$. $\forall x \in [n, n+1]$, $f'(x) = \ln(x+1) + \dfrac{x-1}{x+1} > 0$. On en déduit que $f$ est strictement croissante sur $[n, n+1]$.
+
+\underline{Montrons que $f(n) \le u_n \le f(n+1)$ pour $n \in \N^*$.} $F$ est continue et dérivable sur $[n, n+1]$, et $F'(n) \le F'(x) \le F'(n+1)$ pour tout $x \in [n;n+1]$ car $F' = f$ est croissante. D'après le théorème de l'inégalité des accroissements finis, en prenant $x = n$ et $y = n+1$ :
+\[ f(n)\big((n+1) - n\big) \le F(n+1) - F(n) \le f(n+1)\big((n+1) - n\big). \]
+D'où $f(n) \le u_n \le f(n+1)$.
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{}
+
+\textbf{1.} \begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \node (R) at (0,0) {};
+  \node (A) at (3,1.6) {$R_1$};
+  \node (B) at (3,-1.6) {$\overline{R_1}$};
+  \node (T1) at (6,2.4) {$R_2$};
+  \node (T2) at (6,0.8) {$\overline{R_2}$};
+  \node (T3) at (6,-0.8) {$R_2$};
+  \node (T4) at (6,-2.4) {$\overline{R_2}$};
+  \draw (R)--(A) node[midway,above]{$0{,}7$};
+  \draw (R)--(B) node[midway,below]{$0{,}3$};
+  \draw (A)--(T1) node[midway,above]{$0{,}8$};
+  \draw (A)--(T2) node[midway,above]{$0{,}2$};
+  \draw (B)--(T3) node[midway,below]{$0{,}4$};
+  \draw (B)--(T4) node[midway,below]{$0{,}6$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{2.} $p(R_1 \cap R_2) = 0{,}7 \times 0{,}8 = 0{,}56$.
+
+\textbf{3.} $p(R_2) = 0{,}7 \times 0{,}8 + 0{,}3 \times 0{,}4 = 0{,}68$.
+
+\textbf{4.} $p(A) = 0{,}7 \times 0{,}2 + 0{,}3 \times 0{,}4 = 0{,}26$.
+
+\end{document}

@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Correction bac 2020 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{}
+
+\textbf{1.}
+\begin{align*}
+2x - 7y = 3 &\Longleftrightarrow 2x - 3 = 7y,\ y \in \Z \\
+&\Longleftrightarrow 2x - 3 \text{ est un multiple de } 7 \Longleftrightarrow 2x - 3 \equiv 0\ [7] \Longleftrightarrow 2x \equiv 3\ [7]
+\end{align*}
+D'où les équations $(E_0)$ et $(E_1)$ sont équivalentes.
+
+\textbf{2.} \underline{Solution particulière de $2x \equiv 3\ [7]$ :} 2 et $-7$ étant premiers entre eux, de l'égalité $7 = 2 \times 3 + 1$ on déduit $2 \times (-3) - 7 \times (-1) = 1$. En multipliant par 3 : $2 \times (-9) - 7 \times (-3) = 3$. On en déduit que $(-9, -3)$ est une solution particulière de $(E_1)$ et $2 \times (-9) \equiv 3\ [7]$.
+
+\underline{Ensemble des solutions de $(E_1)$ :}
+\[ \begin{cases} 2x \equiv 3\ [7] \\ 2 \times (-9) \equiv 3\ [7] \end{cases} \Longleftrightarrow 2x \equiv 2 \times (-9)\ [7] \Longleftrightarrow 2(x + 9) \equiv 0\ [7] \Longleftrightarrow 7 \mid 2(x + 9). \]
+Comme 7 est premier avec 2, d'après Gauss, 7 divise $x + 9$. Il existe donc $k \in \Z$ tel que $x + 9 = 7k$. D'où $x = -9 + 7k$. Les solutions de $(E_1)$ sont $\{-9 + 7k\,;k \in \Z\}$.
+
+\textbf{3.} En remplaçant $x$ par $-9 + 7k$ dans $(E_0) : 2x - 7y = 3$, on obtient $y = -3 + 2k$. L'ensemble des solutions de $(E_0)$ est $\{(-9 + 7k\,,\,-3 + 2k)\,;k \in \Z\}$.
+
+\textbf{4. a.} $A = \{1\,;5\,;19\,;95\}$.
+
+\textbf{b.} Soit $(x, y) \in \Z \times \Z$ vérifiant le système $\begin{cases} 2x - 7y = 3 \\ xy = 95 \end{cases}$. Comme $2x - 7y = 3 > 0$, alors $x > y$. En utilisant 4.a., les solutions $(x, y)$ de $xy = 95$ vérifiant $x > y$ appartiennent à $I = \{(95, 1), (-1, -95), (-5, -19), (19, 5)\}$.
+
+\underline{Couple $(x, y) \in I$ solution de $2x - 7y = 3$ :}
+\begin{itemize}
+  \item $2 \times 95 - 7 \times 1 \ne 3$ : $(95, 1)$ n'est pas solution.
+  \item $2(-1) - 7(-95) \ne 3$ : $(-1, -95)$ n'est pas solution.
+  \item $2(-5) - 7(-19) \ne 3$ : $(-5, -19)$ n'est pas solution.
+  \item $2 \times 19 - 7 \times 5 = 3$ : $(19, 5)$ est solution.
+\end{itemize}
+D'où $(19, 5)$ est le seul couple solution du système.
+
+\underline{Autre méthode :} $(x, y)$ vérifie $2x - 7y = 3$, donc d'après 3., $(x, y) = (-9 + 7k\,,\,-3 + 2k)$, $k \in \Z$. Ce couple vérifie $xy = 95$ si $(-9 + 7k)(-3 + 2k) = 95$, soit $14k^2 - 39k - 68 = 0$, qui admet dans $\Z$ une seule solution $k = 4$. En remplaçant : $(-9 + 28\,,\,-3 + 8) = (19, 5)$. Donc $(19, 5)$ est le seul couple solution.
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.8,every node/.style={font=\footnotesize}]
+  \draw[->] (-4.2,0)--(4.2,0) node[right]{$x$};
+  \draw[->] (0,-3)--(0,3) node[above]{$y$};
+  \draw[densely dashed] (-2.4,-2.4)--(2.4,2.4);
+  \draw[densely dashed] (-2.4,2.4)--(2.4,-2.4);
+  \draw[thick] plot[domain=1.42:3.4,samples=40] (\x,{sqrt(\x*\x-1.96)});
+  \draw[thick] plot[domain=1.42:3.4,samples=40] (\x,{-sqrt(\x*\x-1.96)});
+  \draw[thick] plot[domain=-3.4:-1.42,samples=40] (\x,{sqrt(\x*\x-1.96)});
+  \draw[thick] plot[domain=-3.4:-1.42,samples=40] (\x,{-sqrt(\x*\x-1.96)});
+  \node at (3.2,2.4){$(H)$};
+  % directrices x=+-a^2/c =1.96/1.98 approx 0.99
+  \draw[densely dotted] (1,-2.8)--(1,2.8) node[above]{$(D_1)$};
+  \draw[densely dotted] (-1,-2.8)--(-1,2.8) node[above]{$(D_2)$};
+  % cercle directeur centre F' rayon 2a
+  \draw[densely dashdotted] (-2,0) circle (2.83);
+  \node at (0.9,-2.6){$(C_d)$};
+  \fill (1.4,0) circle (1.5pt) node[below right]{$A$};
+  \fill (-1.4,0) circle (1.5pt) node[below left]{$A'$};
+  \fill (2,0) circle (1.3pt) node[below]{$F$};
+  \fill (-2,0) circle (1.3pt) node[below]{$F'$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{2. a.} \underline{Vecteur $\vec{u}$ :} $f(D) = I$. $f(D) = t_{\vec{u}} \circ S_{(OL)}(D) = t_{\vec{u}}(A)$. On en déduit que $t_{\vec{u}}(A) = I$, d'où $\vec{u} = \vv{AI}$.
+
+\textbf{b.} \underline{$f(K)$ :} $f(K) = t_{\vv{AI}} \circ S_{(OL)}(K) = t_{\vv{AI}}(I) = B$.
+
+\textbf{3. a.} Les asymptotes de $(H)$ sont les droites $(AJ)$ et $(BL)$.
+
+\textbf{b.} Les foyers sont les points d'intersection du cercle fondamental (centre $O'$, rayon $O'J$) et de l'axe focal $(PQ)$.
+
+\textbf{c.} $P$ et $Q$ sont les sommets de l'hyperbole $(H)$.
+
+\textbf{d.} Le projeté orthogonal $H_1$ du foyer $F$ sur la diagonale $[AJ]$ du rectangle fondamental $ABJL$ est un point de la directrice associée à $F$. D'où $(D_1)$ est la perpendiculaire à $(PQ)$ passant par $H_1$. De même, le projeté orthogonal $H_2$ de $F'$ sur la diagonale $[LB]$ donne $(D_2)$, perpendiculaire à $(PQ)$ passant par $H_2$.
+
+\textbf{e.} Soit $M_1$ le point d'intersection de la demi-droite $[JF)$ et du cercle directeur $(C_d)$ associé à $F$ (centre $F$, rayon $2 \times O'P$). Alors $M_0$ est le point d'intersection de la médiatrice de $[F'M_1]$ et du segment $[FJ]$. En effet, $M_0F' - M_0F = M_0M_1 - M_0F = FM_1 = 2 \times O'P$, ce qui prouve que $M_0 \in (H)$.
+
+\textbf{f.} $O'P = 3$ et $O'J = \sqrt{OP^2 + PJ^2} = \sqrt{3^2 + \left(\tfrac{3}{2}\right)^2} = \dfrac{3}{2}\sqrt{5}$. D'où l'excentricité $e = \dfrac{O'J}{O'P} = \dfrac{\frac{3}{2}\sqrt{5}}{3} = \dfrac{\sqrt{5}}{2}$.
+
+\textbf{g.} Voir figure.
+
+\textbf{4. a.} $(O',\vj)$ et $(O',\vi)$ étant respectivement l'axe focal et l'axe non focal de $(H)$, l'équation cartésienne de $(H)$ est $-\dfrac{x^2}{O'O^2} + \dfrac{y^2}{O'Q^2} = 1$. Or $O'O = \|\vi\| = 1$ et $O'Q = 2\|\vj\| = 2$. D'où $-\dfrac{x^2}{1^2} + \dfrac{y^2}{2^2} = 1$, ou encore $x^2 - \dfrac{y^2}{4} = -1$.
+
+\textbf{b.} Soit $M(x, y)$ un point de $(H)$ et $H$ le projeté orthogonal de $M$ sur la directrice $(D_1)$ associée à $F$. De l'équation, $(H)$ a pour sommets $Q(0, 2)$, $P(0, -2)$ ; pour foyers $F'(0, \sqrt{5})$, $F(0, -\sqrt{5})$ ; pour directrices $y = -\dfrac{4}{\sqrt{5}}$ et $y = \dfrac{4}{\sqrt{5}}$. $H$ a pour coordonnées $H\!\left(x, -\dfrac{4}{\sqrt{5}}\right)$.
+\begin{align*}
+MF^2 - \left(\tfrac{\sqrt{5}}{2}\right)^2 MH^2 &= x^2 + (y + \sqrt{5})^2 - \frac{5}{4}\left(y + \frac{4}{\sqrt{5}}\right)^2 \\
+&= x^2 + y^2 + 2\sqrt{5}y + 5 - \frac{5}{4}\left(y^2 + \frac{8}{\sqrt{5}}y + \frac{16}{5}\right) = x^2 - \frac{y^2}{4} + 1 = 0
+\end{align*}
+On en déduit que $\dfrac{MF}{MH} = \dfrac{\sqrt{5}}{2}$. Donc l'excentricité $e = \dfrac{\sqrt{5}}{2}$.
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{}
+
+\textbf{1. a.} $f$ est dérivable sur $]0\,;+\infty[$. $\forall x \in ]0\,;+\infty[$, $f'(x) = \dfrac{x^2 - 4}{2x} = \dfrac{(x - 2)(x + 2)}{2x}$.
+
+\textbf{b.} $f'$ est du signe de $x \mapsto x - 2$ sur $]0\,;+\infty[$.
+
+\underline{Limites :} $\lim\limits_{x\to 0^+} f(x) = -\dfrac{1}{4} - 2\lim\limits_{x\to 0^+}\ln x = +\infty$. $\lim\limits_{x\to+\infty} f(x) = \lim\limits_{x\to+\infty} x^2\left(\dfrac{1}{4} - \dfrac{1}{4x^2} - \dfrac{2\ln x}{x^2}\right) = +\infty$.
+
+\underline{Tableau de variation :}
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $0$ & & $2$ & & $+\infty$ \\
+\hline
+$f'(x)$ & $\|$ & $-$ & $0$ & $+$ & \\
+\hline
+$f$ & $+\infty$ & $\searrow$ & $\frac{3}{4} - 2\ln 2$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{c.} $f(3) \approx -0{,}197$ et $f(4) \approx 0{,}977$. La fonction $f$ est continue et strictement croissante sur $]3\,;4[$, et $f(3) \cdot f(4) < 0$. D'après le théorème des valeurs intermédiaires, il existe un unique réel $\alpha \in [3\,;4]$ tel que $f(\alpha) = 0$.
+
+\textbf{2. a.} Remarquons d'abord que si $x \ge 3$, $8\ln x + 1 > 0$.
+\begin{align*}
+f(x) = 0 &\Longleftrightarrow \frac{x^2 - 1}{4} = 2\ln x \Longleftrightarrow x^2 = 8\ln x + 1 \\
+&\Longleftrightarrow x = \sqrt{8\ln x + 1} \quad (\text{le cas } x = -\sqrt{8\ln x + 1} \text{ est impossible car } x \ge 3)
+\end{align*}
+D'où les équations $f(x) = 0$ et $g(x) = x$ sont équivalentes sur $[3\,;+\infty[$.
+
+\textbf{b.} $g$ est continue et dérivable sur $[3\,;4]$, et $|g'(x)| \le \dfrac{4}{9}$ pour tout $x \in [3\,;4]$. D'après le théorème de l'inégalité des accroissements finis, $\forall x, y \in [3\,;4]$, $|g(x) - g(y)| \le \dfrac{4}{9}|x - y|$. En prenant $y = \alpha$ et puisque $g(\alpha) = \alpha$ : $\forall x \in [3\,;4]$, $|g(x) - \alpha| \le \dfrac{4}{9}|x - \alpha|$.
+
+\textbf{3. a.} Soit $\mathcal{P}_n$ : $u_n \in [3\,;4]$. \underline{Initialisation :} $u_0 = 3 \in [3\,;4]$, et d'après 2.b. $u_1 = g(u_0) \in [3\,;4]$. \underline{Hérédité :} si $u_n \in [3\,;4]$, alors d'après 2.b. $g(u_n) = u_{n+1} \in [3\,;4]$. Donc $\mathcal{P}_n$ est vraie pour tout $n \in \N$.
+
+\textbf{b.} Soit $n \in \N$. En appliquant l'inégalité de 2.b. en $x = u_n$ : $|g(u_n) - \alpha| \le \dfrac{4}{9}|u_n - \alpha|$. Or $g(u_n) = u_{n+1}$, d'où $|u_{n+1} - \alpha| \le \dfrac{4}{9}|u_n - \alpha|$ pour tout $n \in \N$.
+
+\textbf{c.} Soit $\mathcal{P}_n$ : $|u_n - \alpha| \le \left(\dfrac{4}{9}\right)^n$. \underline{Initialisation :} comme $3 \le \alpha \le 4$, $-1 \le u_0 - \alpha \le 0$ donc $|u_0 - \alpha| \le 1 = \left(\dfrac{4}{9}\right)^0$. \underline{Hérédité :} d'après 3.b. et l'hypothèse, $|u_{n+1} - \alpha| \le \dfrac{4}{9}|u_n - \alpha| \le \dfrac{4}{9}\left(\dfrac{4}{9}\right)^n = \left(\dfrac{4}{9}\right)^{n+1}$. Donc $\mathcal{P}_n$ est vraie pour tout $n \in \N$.
+
+\textbf{d.} $\forall n \in \N$, $0 \le |u_n - \alpha| \le \left(\dfrac{4}{9}\right)^n$. Par passage à la limite, $\lim\limits_{n\to+\infty}|u_n - \alpha| = 0$, donc $\lim\limits_{n\to+\infty} u_n = \alpha$.
+
+\textbf{e.} Soit $n \in \N$ tel que $\left(\dfrac{4}{9}\right)^n \le 10^{-2}$. Par croissance du logarithme, $n\ln\dfrac{4}{9} \le -2\ln 10$, d'où $n \ge \dfrac{2\ln 10}{\ln 9 - \ln 4} \approx 5{,}67$. Donc $n_0 = 6$.
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{}
+
+\textbf{1.} $P(G) = \dfrac{26}{40}$ ; $P(F) = \dfrac{14}{40}$.
+
+\textbf{2.} \begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \node (R) at (0,0) {};
+  \node (A) at (3,1.6) {$G$};
+  \node (B) at (3,-1.6) {$F$};
+  \node (T1) at (6,2.4) {$L$};
+  \node (T2) at (6,0.8) {$\overline{L}$};
+  \node (T3) at (6,-0.8) {$L$};
+  \node (T4) at (6,-2.4) {$\overline{L}$};
+  \draw (R)--(A) node[midway,above]{$\frac{26}{40}$};
+  \draw (R)--(B) node[midway,below]{$\frac{14}{40}$};
+  \draw (A)--(T1) node[midway,above]{$\frac{1}{2}$};
+  \draw (A)--(T2) node[midway,above]{$\frac{1}{2}$};
+  \draw (B)--(T3) node[midway,below]{$\frac{n}{14}$};
+  \draw (B)--(T4) node[midway,below]{$\frac{14-n}{14}$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{3.} \underline{Première solution :} 13 garçons et $n$ filles sur 40 élèves sont inscrits ; donc la probabilité $P(L)$ qu'une personne choisie soit inscrite est $\dfrac{13 + n}{40}$.
+
+\underline{Seconde solution :} d'après l'arbre, $P(L) = \dfrac{26}{40} \times \dfrac{1}{2} + \dfrac{14}{40} \times \dfrac{n}{14} = \dfrac{13 + n}{40}$.
+
+\textbf{4.}
+\[ L \text{ et } G \text{ indépendants} \Longleftrightarrow P_G(L) = P(L) \Longleftrightarrow \frac{1}{2} = \frac{13 + n}{40} \Longleftrightarrow n = 7. \]
+
+\end{document}

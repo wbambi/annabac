@@ -1,0 +1,180 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Correction bac 2019 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{}
+
+\textbf{1.} L'algorithme d'Euclide appliqué à 109 et 226 donne :
+\[ 226 = 109 \times 2 + 8,\qquad 109 = 8 \times 13 + 5, \]
+\[ 8 = 5 \times 1 + 3,\qquad 5 = 3 \times 1 + 2, \]
+\[ 3 = 2 \times 1 + 1,\qquad 2 = 1 \times 2 + 0. \]
+Le PGCD, dernier reste non nul, est donc égal à 1.
+
+\textbf{2.} $\mathrm{PGCD}(109;226) = 1$. D'après le théorème de Bézout, l'équation $109x - 226y = 1$ admet des solutions dans $\Z \times \Z$.
+
+\textbf{3.} $109 \times 141 = 15369 = 1 + 226 \times 68 \equiv 1\ [226]$. D'où 141 est l'inverse de 109 modulo 226.
+
+\textbf{4. a.}
+\begin{align*}
+109x - 226y = 1 &\Longleftrightarrow 109x - 1 = 226y,\ y \in \Z \\
+&\Longleftrightarrow 109x - 1 \text{ est un multiple de } 226 \Longleftrightarrow 109x - 1 \equiv 0\ [226] \Longleftrightarrow 109x \equiv 1\ [226]
+\end{align*}
+Les équations $(E)$ et $(E')$ sont équivalentes.
+
+\textbf{b.} 141 est une solution particulière de $109x \equiv 1\ [226]$. Soit $x$ une solution :
+\[ \begin{cases} 109x \equiv 1\ [226] \\ 109 \times 141 \equiv 1\ [226] \end{cases} \Longleftrightarrow 109x \equiv 109 \times 141\ [226] \Longleftrightarrow 109(x - 141) \equiv 0\ [226] \Longleftrightarrow 226 \mid 109(x - 141). \]
+Comme 226 est premier avec 109, d'après Gauss, 226 divise $x - 141$. Il existe donc $k \in \Z$ tel que $x - 141 = 226k$. D'où $x = 141 + 226k$. Les solutions de $(E')$ sont $\{141 + 226k\,;k \in \Z\}$.
+
+\textbf{c.} En remplaçant $x$ par $141 + 226k$ dans $(E)$, on obtient $y = 68 + 109k$. L'ensemble des solutions de $(E)$ est $\{(141 + 226k\,,\,68 + 109k)\,;k \in \Z\}$.
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.8,every node/.style={font=\footnotesize}]
+  \draw[->] (-4,0)--(4,0) node[right]{$x$};
+  \draw[->] (0,-3)--(0,3) node[above]{$y$};
+  \draw[densely dashed] (-2.6,-2.6)--(2.6,2.6) node[right]{$(\Delta_1)$};
+  \draw[densely dashed] (-2.6,2.6)--(2.6,-2.6) node[right]{$(\Delta_2)$};
+  \draw[thick] plot[domain=1.3:3.2,samples=40] (\x,{sqrt(\x*\x-1.69)});
+  \draw[thick] plot[domain=1.3:3.2,samples=40] (\x,{-sqrt(\x*\x-1.69)});
+  \draw[thick] plot[domain=-3.2:-1.3,samples=40] (\x,{sqrt(\x*\x-1.69)});
+  \draw[thick] plot[domain=-3.2:-1.3,samples=40] (\x,{-sqrt(\x*\x-1.69)});
+  \node at (3,2.3){$(H_0)$};
+  \draw (1.3,0)--(1.3,1.3)--(0,1.3);
+  \fill (1.3,0) circle (1.5pt) node[below right]{$A$};
+  \fill (-1.3,0) circle (1.5pt) node[below left]{$A'$};
+  \fill (0,0) circle (1.3pt) node[below left]{$\Omega$};
+  \fill (1.84,0) circle (1.2pt) node[above right]{$F$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{2. a.} Le centre de rotation de $f$ est le point d'intersection des médiatrices des segments $[OD]$ et $[AC]$. C'est le point $B$.
+
+\textbf{b.} Comme $f(B) = B$ et $f(A) = C$, alors $\theta = (\vv{BA}, \vv{BC}) \equiv -\dfrac{\pi}{2}\ [2\pi]$.
+
+\textbf{c.} $S_{(BA)} \circ S_{(BO)}$ est la rotation de centre $B$ et d'angle $2 \times \big((BO),(BA)\big) \equiv \dfrac{\pi}{2}\ [2\pi]$. D'où $S_{(BA)} \circ S_{(BO)}$ est la réciproque de $f$.
+
+\textbf{3. a.} Comme $g$ est la composée d'une symétrie axiale et d'une rotation dont le centre n'appartient pas à l'axe, alors $g$ est une symétrie glissée.
+
+\textbf{b.} $g(B) = S_{(OD)} \circ R_{(B,\frac{\pi}{2})}(B) = S_{(OD)}(B) = C$. $g(C) = S_{(OD)} \circ R_{(B,\frac{\pi}{2})}(C) = S_{(OD)}(A) = E$.
+
+\textbf{c.} $g \circ g(B) = g(C) = E$. $g$ étant une symétrie glissée telle que $g \circ g(B) = E$, on en déduit que le vecteur $\vec{u}$ de $g$ vérifie $\vec{u} = \dfrac{1}{2}\vv{BE} = \vv{BO}$.
+
+\textbf{d.} Comme $g(B) = C$, l'axe de $g$ est la droite dirigée par $\vv{BO}$ passant par le milieu $O'$ de $[BC]$, c'est-à-dire la droite $(KO')$.
+
+\textbf{e.}
+\begin{align*}
+M \in (\Gamma) &\Longleftrightarrow g(M) = f^{-1}(M) \\
+&\Longleftrightarrow S_{(OD)}\big(R_{(B,\frac{\pi}{2})}(M)\big) = R_{(B,\frac{\pi}{2})}(M) \quad \text{car } f^{-1} = R_{(B,\frac{\pi}{2})} \\
+&\Longleftrightarrow R_{(B,\frac{\pi}{2})}(M) \in (OD) \Longleftrightarrow M \in R_{(B,-\frac{\pi}{2})}((OD))
+\end{align*}
+$(\Gamma)$ est alors la droite $R_{(B,-\frac{\pi}{2})}((OD))$, perpendiculaire à $(OD)$. Comme $R_{(B,-\frac{\pi}{2})}(O) = D$, on en déduit que $(\Gamma)$ est la droite perpendiculaire à $(OD)$ passant par $D$.
+
+\textbf{4. a.} Soit $S$ un sommet de l'hyperbole $(H)$ d'excentricité 2 :
+\[ \frac{SC}{SB} = 2 \Longleftrightarrow SC^2 - 4SB^2 = 0 \Longleftrightarrow (\vv{SC} - 2\vv{SB}) \cdot (\vv{SC} + 2\vv{SB}) = 0. \]
+Comme $B$, $C$, $S$ sont alignés, alors $\vv{SC} - 2\vv{SB} = \vv{0}$ ou $\vv{SC} + 2\vv{SB} = \vv{0}$.
+
+\underline{$\vv{SC} - 2\vv{SB} = \vv{0}$ :} $\vv{SC} = 2\vv{SB} \Leftrightarrow \vv{SB} + \vv{BC} = 2\vv{SB} \Leftrightarrow \vv{SB} = \vv{BC}$. D'où $S = G$ : premier sommet.
+
+\underline{$\vv{SC} + 2\vv{SB} = \vv{0}$ :} $\vv{SC} = -2\vv{SB} \Leftrightarrow \vv{SB} + \vv{BC} = -2\vv{SB} \Leftrightarrow \vv{BS} = \dfrac{1}{3}\vv{BC}$. D'où $S = J$ : second sommet.
+
+\textbf{b.} Le centre $\Omega$ est le milieu du segment $[GJ]$.
+
+\textbf{c.} Les asymptotes sont les droites $(\Omega P)$ et $(\Omega Q)$ où $P$ et $Q$ sont les points d'intersection du cercle principal et de la directrice $(BA)$.
+
+\textbf{d.} Voir figure.
+
+\textbf{e.} Soit $(x, y)$ les coordonnées d'un point $M$ de $(H)$ dans le repère $(B,\vv{BC},\vv{BA})$ et $H(0, y)$ le projeté orthogonal de $M$ sur la directrice $(BA)$. Le foyer $C$ a pour coordonnées $C(1, 0)$.
+\[ M \in (H) \Longleftrightarrow \frac{MC}{MH} = 2 \Longleftrightarrow MC^2 = 4MH^2 \Longleftrightarrow (1 - x)^2 + y^2 = 4x^2. \]
+D'où l'équation cartésienne de $(H)$ : $3x^2 + 2x - y^2 - 1 = 0$.
+
+% ====================== EXERCICE 3 ======================
+\exo{3}{}
+
+\textbf{1.} L'équation caractéristique associée à $y'' + 3y' + 2y = 0$ est $r^2 + 3r + 2 = 0$. Elle admet deux racines $r_1 = -2$ et $r_2 = -1$. La solution générale est $y(x) = c_1 e^{-2x} + c_2 e^{-x}$.
+
+\textbf{2.} $h$ est de la forme $h(x) = c_1 e^{-2x} + c_2 e^{-x}$ :
+\[ \begin{cases} h(0) = 1 \\ h'(0) = 0 \end{cases} \Longleftrightarrow \begin{cases} c_1 + c_2 = 1 \\ -2c_1 - c_2 = 0 \end{cases} \Longleftrightarrow \begin{cases} c_1 = -1 \\ c_2 = 2 \end{cases} \]
+$h$ est la fonction définie sur $\R$ par $h(x) = -e^{-2x} + 2e^{-x}$.
+
+\textbf{3. a.} $\lim\limits_{x\to-\infty} f(x) = \lim\limits_{x\to-\infty} -e^{-2x}(1 - 2e^x) = -\infty$. $\lim\limits_{x\to+\infty} f(x) = 0$.
+
+\textbf{b.} Pour tout $x \in \R$, $f'(x) = 2e^{-2x}(1 - e^x)$.
+
+\textbf{c.} $f'(x)$ est du signe de $1 - e^x$ et s'annule pour $x = 0$.
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $0$ & & $+\infty$ \\
+\hline
+$f'(x)$ & & $+$ & $0$ & $-$ & \\
+\hline
+\end{tabular}
+\end{center}
+La fonction $f$ est strictement croissante sur $]-\infty\,;0[$ et strictement décroissante sur $]0\,;+\infty[$.
+
+\textbf{d.} \underline{Tableau de variation :}
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $0$ & & $+\infty$ \\
+\hline
+$f'(x)$ & & $+$ & $0$ & $-$ & \\
+\hline
+$f$ & $-\infty$ & $\nearrow$ & $1$ & $\searrow$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{e.} $f(x) = 0 \Leftrightarrow e^{-2x}(-1 + 2e^x) = 0 \Leftrightarrow -1 + 2e^x = 0 \Leftrightarrow x = -\ln 2$. Le point d'intersection de $(C)$ avec l'axe des abscisses est le point $(-\ln 2, 0)$.
+
+\textbf{f.} $\lim\limits_{x\to-\infty}\dfrac{f(x)}{x} = \lim\limits_{x\to-\infty}\dfrac{-e^{-2x}}{x}(1 - 2e^x) = \lim\limits_{u\to+\infty}\dfrac{e^{2u}}{u}(1 - 2e^{-u}) = +\infty$ (en posant $u = -x$). La courbe $(C)$ admet une branche parabolique de direction $(Oy)$ en $-\infty$.
+
+\textbf{g.} \begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[->] (-1,0)--(3.4,0) node[right]{$x$};
+  \draw[->] (0,-0.6)--(0,1.6) node[above]{$y$};
+  \foreach \x in {-1,1,2,3}{\draw (\x,0.04)--(\x,-0.04) node[below]{\scriptsize$\x$};}
+  \draw (0.04,1)--(-0.04,1) node[left]{\scriptsize$1$};
+  \draw[thick] plot[domain=-0.55:3.2,samples=80] (\x,{-exp(-2*\x)+2*exp(-\x)});
+  \fill (0,1) circle (1.3pt);
+  \node at (2.6,0.7){$(C)$};
+\end{tikzpicture}
+\end{center}
+
+% ====================== EXERCICE 4 ======================
+\exo{4}{}
+
+\textbf{1. a.} $p(\mathcal{U}_1) = p(\text{« obtenir 1 ou 2 sur la face supérieure du dé »}) = \dfrac{2}{6} = \dfrac{1}{3}$.
+
+\textbf{b.} $p(\mathcal{U}_2) = 1 - p(\mathcal{U}_1) = \dfrac{2}{3}$.
+
+\textbf{2.} \begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \node (R) at (0,0) {};
+  \node (A) at (3,1.6) {$\mathcal{U}_1$};
+  \node (B) at (3,-1.6) {$\mathcal{U}_2$};
+  \node (T1) at (6,2.4) {$B$};
+  \node (T2) at (6,0.8) {$N$};
+  \node (T3) at (6,-0.8) {$B$};
+  \node (T4) at (6,-2.4) {$N$};
+  \draw (R)--(A) node[midway,above]{$\frac{1}{3}$};
+  \draw (R)--(B) node[midway,below]{$\frac{2}{3}$};
+  \draw (A)--(T1) node[midway,above]{$\frac{2}{5}$};
+  \draw (A)--(T2) node[midway,above]{$\frac{3}{5}$};
+  \draw (B)--(T3) node[midway,below]{$\frac{1}{2}$};
+  \draw (B)--(T4) node[midway,below]{$\frac{1}{2}$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{3.} $p(\mathcal{N}) = \dfrac{1}{3} \times \dfrac{3}{5} + \dfrac{2}{3} \times \dfrac{1}{2} = \dfrac{8}{15}$.
+
+\textbf{4.} $p(\mathcal{U}_1/\mathcal{N}) = \dfrac{p(\mathcal{U}_1 \cap \mathcal{N})}{p(\mathcal{N})} = \dfrac{\frac{1}{3} \times \frac{3}{5}}{\frac{8}{15}} = \dfrac{3}{8}$.
+
+\end{document}

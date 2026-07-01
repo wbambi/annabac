@@ -1,0 +1,162 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+\usepackage{array}
+
+\begin{document}
+
+\entetesujet{Correction bac 2010 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{}
+
+\textbf{1. a.}
+\begin{align*}
+x^2 \equiv -1\ [25] &\Longleftrightarrow x^2 + 1 \equiv 0\ [25] \\
+&\Longleftrightarrow x^2 + 1 \text{ est un multiple de } 25 \\
+&\Longleftrightarrow x^2 + 1 = 25k \text{ avec } k \in \Z \\
+&\Longleftrightarrow x^2 = -1 + 25k \text{ avec } k \in \Z
+\end{align*}
+Donc les équations $x^2 \equiv -1\ [25]$ et $x^2 = -1 + 25k$ où $k \in \Z$, sont équivalentes.
+
+\textbf{b.} Si $k = 2$ alors $x^2 = -1 + 25 \times 2 = 49$. D'où $x = 7$ ou $x = -7$.
+
+\textbf{2. a.} Pour les premières valeurs : $2^0 - 4 \equiv -3 \equiv 2\ [5]$ (reste 2) ; $2^1 - 4 \equiv -2 \equiv 3\ [5]$ (reste 3) ; $2^2 - 4 \equiv 0\ [5]$ (reste 0) ; $2^3 - 4 \equiv 4\ [5]$ (reste 4) ; $2^4 - 4 \equiv 12 \equiv 2\ [5]$ (reste 2).
+
+\underline{Déduisons les restes suivant les valeurs de $n$.} Tout entier $n$ s'écrit $n = 4k$, $4k+1$, $4k+2$ ou $4k+3$ avec $k \in \Z$. Comme $2^4 \equiv 1\ [5]$, alors $(2^4)^k \equiv 1\ [5]$. On en déduit que :
+\begin{itemize}
+  \item si $n = 4k$, $2^{4k} - 4 \equiv (2^4)^k - 4 \equiv -3 \equiv 2\ [5]$ : le reste est 2.
+  \item si $n = 4k+1$, $2^{4k+1} - 4 \equiv (2^4)^k \cdot 2 - 4 \equiv -2 \equiv 3\ [5]$ : le reste est 3.
+  \item si $n = 4k+2$, $2^{4k+2} - 4 \equiv (2^4)^k \cdot 2^2 - 4 \equiv 0\ [5]$ : le reste est 0.
+  \item si $n = 4k+3$, $2^{4k+3} - 4 \equiv (2^4)^k \cdot 2^3 - 4 \equiv 4\ [5]$ : le reste est 4.
+\end{itemize}
+
+\textbf{b.} $2010 = 4 \times 502 + 2$, on en déduit que le reste de la division euclidienne de $2^{2010} - 4$ par 5 est 0. Par conséquent $2^{2010} - 4$ est divisible par 5.
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \coordinate (A) at (0,0); \coordinate (B) at (3,0); \coordinate (C) at (3,3); \coordinate (D) at (0,3);
+  \draw (A)--(B)--(C)--(D)--cycle;
+  \coordinate (O) at (1.5,1.5);
+  \draw (A)--(C);
+  \coordinate (E) at (-0.23,3.23);
+  \draw (E)--(A); \draw (E)--(C);
+  \draw[dashed] (A) to[bend left=42] (C);
+  \node at (-1.15,1.3){$(\Gamma)$};
+  \coordinate (J) at (0,1.5); \coordinate (I) at (1.5,3);
+  \coordinate (H) at (0.42,2.08);
+  \draw[dashed] (-0.6,1.5)--(3,1.5);
+  \node[left] at (-0.6,1.5){$(\mathcal{D})$};
+  \fill (A) circle (1.3pt) node[below left]{$A$};
+  \fill (B) circle (1.3pt) node[below right]{$B$};
+  \fill (C) circle (1.3pt) node[above right]{$C$};
+  \fill (D) circle (1.3pt) node[above left]{$D$};
+  \fill (E) circle (1.3pt) node[above left]{$E$};
+  \fill (O) circle (1.3pt) node[below right]{$O$};
+  \fill (I) circle (1.1pt) node[above]{$I$};
+  \fill (J) circle (1.1pt) node[left]{$J$};
+  \fill (H) circle (1.1pt) node[right]{$H$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{1.} Soit $P_0$ un point tel que $(\vv{P_0 A}, \vv{P_0 C}) \equiv \dfrac{\pi}{3}\ [2\pi]$. Alors $P_0 \in (\Gamma)$.
+\begin{align*}
+M \in \Gamma &\Longleftrightarrow (\vv{MA}, \vv{MC}) \equiv (\vv{P_0 A}, \vv{P_0 C})\ [2\pi] \\
+&\Longleftrightarrow M \text{ est un point de l'arc de cercle } \overset{\frown}{AP_0C}
+\end{align*}
+D'où $\Gamma$ est l'arc de cercle $\overset{\frown}{AP_0C}$.
+
+\textbf{2. a.} $(\vv{EA}, \vv{EC}) \equiv \dfrac{\pi}{3}\ [2\pi]$ car $E$ est un point de $(\Gamma)$. De plus, $(\vv{AC}, \vv{AE}) \equiv \dfrac{\pi}{3}\ [2\pi]$ car $\big((AC),(D)\big) \equiv \dfrac{\pi}{3}\ [\pi]$ et $E \in (D)$. On en déduit que le triangle $EAC$ admet deux angles de mesure $\dfrac{\pi}{3}$. C'est par conséquent un triangle équilatéral.
+
+\textbf{b.} Comme $EA = EC$ et $\vv{EA} \ne \vv{EC}$, alors il existe une rotation $r$ d'angle $(\vv{EA}, \vv{EC}) \equiv \dfrac{\pi}{3}\ [2\pi]$, de centre $E$, qui transforme $A$ en $C$.
+
+\textbf{3. a.} Dans le triangle $EAC$ : $(GF) \parallel (AC)$ et $(AG) \cap (CF) = \{E\}$ ; d'après le théorème de Thalès, $\dfrac{EG}{EA} = \dfrac{EF}{EC}$.
+
+Dans le triangle $EOA$ : $(GH) \parallel (AO)$ et $(AG) \cap (OH) = \{E\}$ ; d'après le théorème de Thalès, $\dfrac{EG}{EA} = \dfrac{EH}{EO}$.
+
+On en déduit que $\dfrac{EG}{EA} = \dfrac{EF}{EC} = \dfrac{EH}{EO}$. Or $\dfrac{EH}{EO} = \dfrac{2}{3}$ car $H$ est le centre de gravité du triangle $EAC$. D'où $\dfrac{EG}{EA} = \dfrac{EF}{EC} = \dfrac{2}{3}$.
+
+\textbf{b.} Les points $E, G, A$ ainsi que $E, F, C$ étant alignés dans le même ordre, on en déduit les égalités vectorielles : $\vv{EG} = \dfrac{2}{3}\vv{EA}$ et $\vv{EF} = \dfrac{2}{3}\vv{EC}$. Ce qui montre que $G$ et $F$ sont respectivement les transformés de $A$ et $C$ par l'homothétie de centre $E$ et de rapport $\dfrac{2}{3}$.
+
+\textbf{c.} Soit $h$ l'homothétie de centre $E$ et de rapport $\dfrac{2}{3}$ qui transforme $A$ en $G$ et $C$ en $F$. Posons $S = h \circ r$. $S$ est une similitude plane directe de centre $E$, de rapport $\dfrac{2}{3}$ et d'angle $\dfrac{\pi}{3}$ qui transforme $A$ en $F$. En effet, $S(E) = h \circ r(E) = h(E) = E$ et $S(A) = h \circ r(A) = h(C) = F$.
+
+% ====================== PROBLÈME ======================
+\prob{}
+
+\partieT{A}
+\textbf{1.} L'équation caractéristique associée à $y'' + \pi^2 y = 0$ est : $r^2 + \pi^2 = 0$. Elle admet deux racines : $r_1 = i\pi$ et $r_2 = -i\pi$. Donc la solution générale est : $y(x) = c_1\cos(\pi x) + c_2\sin(\pi x)$ où $c_1, c_2$ sont des constantes réelles quelconques.
+
+\textbf{2.} $g$ est de la forme $g(x) = c_1\cos(\pi x) + c_2\sin(\pi x)$ avec $g(0) = 0$ et $g'(0) = 2\pi$.
+\[ \begin{cases} g(0) = 0 \\ g'(0) = 2\pi \end{cases} \Longleftrightarrow \begin{cases} c_1 = 0 \\ c_2\pi = 2\pi \end{cases} \Longleftrightarrow \begin{cases} c_1 = 0 \\ c_2 = 2 \end{cases} \]
+$g$ est la fonction définie sur $\R$ par : $g(x) = 2\sin(\pi x)$.
+
+\partieT{B}
+\textbf{3. a.} La fonction $x \mapsto 2\sin\pi x$ existe pour tout $x \in [-4\,;0]$ ; la fonction $x \mapsto x^2\left(\dfrac{1}{2} - \ln x\right)$ existe pour tout $x \in ]0\,;+\infty[$. Donc $E_f = [-4\,;+\infty[$.
+
+\textbf{b.} \underline{Continuité en 0.} $\lim\limits_{x\to 0^-} f(x) = f(0) = 2\sin 0 = 0$ et $\lim\limits_{x\to 0^+} f(x) = \lim\limits_{x\to 0^+}\left(\tfrac{1}{2}x^2 - x^2\ln x\right) = 0$. Comme $\lim\limits_{x\to 0^-} f(x) = \lim\limits_{x\to 0^+} f(x) = f(0)$, alors $f$ est continue en 0.
+
+\underline{Dérivabilité en 0.} $\lim\limits_{x\to 0^-}\dfrac{f(x) - f(0)}{x} = \lim\limits_{x\to 0^-}\dfrac{2\sin\pi x}{x} = 2\pi\lim\limits_{u\to 0^-}\dfrac{\sin u}{u} = 2\pi$ (en posant $u = \pi x$). $\lim\limits_{x\to 0^+}\dfrac{f(x) - f(0)}{x} = \lim\limits_{x\to 0^+}\left(\tfrac{1}{2}x - x\ln x\right) = 0$. Comme les deux limites diffèrent, $f$ n'est pas dérivable en 0.
+
+\textbf{c.} $\forall x \in [-4\,;-2]$, $2\sin\pi(x+2) = 2\sin(\pi x + 2\pi) = 2\sin\pi x$. La fonction $x \mapsto 2\sin\pi x$, définie sur $[-4\,;0]$, est périodique de période 2. On peut restreindre son étude à $[-2\,;0]$, puis reporter le tracé sur $[-4\,;-2]$ par la translation de vecteur $-2\vi$. D'où l'étude de $f$ peut être réduite à l'intervalle $I = [-2\,;+\infty[$.
+
+\textbf{4. a.} La fonction $f$ est dérivable sur $]-2\,;0[\,\cup\,]0\,;+\infty[$. $\forall x \in ]-2\,;0[$, $f'(x) = 2\pi\cos\pi x$ ; $\forall x \in ]0\,;+\infty[$, $f'(x) = -2x\ln x$.
+
+\underline{Signes de $f'$.} Sur $]-2\,;0[$, $f'(x)$ est du signe de $\cos\pi x$ :
+\begin{align*}
+\cos\pi x \ge 0 &\Longleftrightarrow -\tfrac{\pi}{2} + 2k\pi \le \pi x \le \tfrac{\pi}{2} + 2k\pi\ ;\ k \in \Z \\
+&\Longleftrightarrow -\tfrac{1}{2} + 2k \le x \le \tfrac{1}{2} + 2k\ ;\ k \in \Z \\
+&\Longleftrightarrow x \in ]{-2}\,;-\tfrac{3}{2}] \text{ ou } x \in [-\tfrac{1}{2}\,;0[
+\end{align*}
+Sur $]0\,;+\infty[$ : $f'(x) = -2x\ln x \ge 0 \Leftrightarrow x \in ]0\,;1]$ ; $f'(x) \le 0 \Leftrightarrow x \in [1\,;+\infty[$.
+
+\underline{Tableau de variation de $f$} ($\lim\limits_{x\to+\infty} f(x) = -\infty$) :
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|ccccccccc|}
+\hline
+$x$ & $-2$ & & $-\frac{3}{2}$ & & $-\frac{1}{2}$ & $0$ & & $1$ & $+\infty$ \\
+\hline
+$f'(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ \;$\|$\; $+$ & & $0$ & $-$ \\
+\hline
+$f$ & $0$ & $\nearrow$ & $2$ & $\searrow$ & $-2$ & $\nearrow\ 0$ & $\nearrow$ & $\frac{1}{2}$ & $\searrow\ -\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{b.} \underline{Branches infinies.} $\lim\limits_{x\to+\infty}\dfrac{f(x)}{x} = \lim\limits_{x\to+\infty} x\ln x\left(\dfrac{1}{2\ln x} - 1\right) = -\infty$. La courbe $(C)$ admet une branche parabolique de direction $(Oy)$ en $+\infty$.
+
+\underline{Points d'intersection avec l'axe $(Ox)$.} Si $-2 \le x \le 0$ : $f(x) = 0 \Leftrightarrow \sin\pi x = 0 \Leftrightarrow x = -2$ ou $x = -1$ ou $x = 0$. Si $x > 0$ : $f(x) = 0 \Leftrightarrow x^2\left(\tfrac{1}{2} - \ln x\right) = 0 \Leftrightarrow \ln x = \tfrac{1}{2} \Leftrightarrow x = \sqrt{e}$. Sur $[-2\,;+\infty[$, les points d'intersection sont : $(-2, 0)$ ; $(-1, 0)$ ; $(0, 0)$ et $(\sqrt{e}, 0)$.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.85,every node/.style={font=\footnotesize}]
+  \draw[->] (-4.4,0)--(2.6,0) node[right]{$x$};
+  \draw[->] (0,-2.4)--(0,2.6) node[above]{$y$};
+  \foreach \x in {-4,-3,-2,-1,1,2}{\draw (\x,0.06)--(\x,-0.06) node[below]{\scriptsize$\x$};}
+  % C : f
+  \draw[thick] plot[domain=-4:0,samples=120] (\x,{2*sin(deg(pi*\x))});
+  \draw[thick] plot[domain=0.05:1.648,samples=60] (\x,{(\x)^2*(0.5-ln(\x))});
+  \node at (1.9,1){$(C)$};
+  % C' : image (sketch)
+  \draw[thick,densely dashed] plot[domain=0.05:1.4,samples=40] ({-(\x)^2*(0.35-0.7*ln(\x))},{-0.9*\x});
+  \node at (-1.6,-1.5){$(C')$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{5.}
+\[ A_0 = \int_1^{\sqrt{e}} f(x)\,dx = \int_1^{\sqrt{e}}\left(\tfrac{1}{2}x^2 - x^2\ln x\right)dx = \left[\frac{x^3}{6}\right]_1^{\sqrt{e}} - \int_1^{\sqrt{e}} x^2\ln x\,dx. \]
+\underline{Intégrons par parties $\displaystyle\int_1^{\sqrt{e}} x^2\ln x\,dx$.} En posant $u(x) = \ln x$, $v'(x) = x^2$, donc $u'(x) = \dfrac{1}{x}$, $v(x) = \dfrac{x^3}{3}$ :
+\[ \int_1^{\sqrt{e}} x^2\ln x\,dx = \left[\frac{x^3}{3}\ln x\right]_1^{\sqrt{e}} - \frac{1}{3}\int_1^{\sqrt{e}} x^2\,dx. \]
+D'où $A_0 = \left[\dfrac{5x^3}{18} - \dfrac{x^3}{3}\ln x\right]_1^{\sqrt{e}} = \dfrac{2e\sqrt{e} - 5}{18}$ u.a $= \dfrac{4e\sqrt{e} - 10}{9}$ cm$^2$.
+
+\textbf{6.} Voir figure.
+
+\textbf{7. a.} Comme toute similitude de rapport $k$ multiplie l'aire de la transformée par $k^2$, la similitude $S$ multiplie l'aire par $\left(\dfrac{\sqrt{2}}{2}\right)^2 = \dfrac{1}{2}$. D'où : $A_n = \dfrac{1}{2}A_{n-1} = \left(\dfrac{1}{2}\right)^2 A_{n-2} = \cdots = \left(\dfrac{1}{2}\right)^n A_0$.
+
+\textbf{b.} $(A_n)_n$ est une suite géométrique de raison $\dfrac{1}{2}$.
+\[ S_n = A_0 + \tfrac{1}{2}A_0 + \cdots + \left(\tfrac{1}{2}\right)^n A_0 = \frac{A_0\left(1 - (\tfrac{1}{2})^{n+1}\right)}{1 - \tfrac{1}{2}} = 2A_0\left(1 - (\tfrac{1}{2})^{n+1}\right) \]
+
+\textbf{c.} $\lim\limits_{n\to+\infty} S_n = 2A_0 = \dfrac{8e\sqrt{e} - 20}{9}$ cm$^2$.
+
+\end{document}

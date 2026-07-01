@@ -1,0 +1,136 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+
+\begin{document}
+
+\entetesujet{Correction bac 2012 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{}
+
+\textbf{1.} Soit $z = ib$ où $b \in \R$, une solution de l'équation $Z^4 - \sqrt{2}\,Z^3 - 4\sqrt{2}\,Z - 16 = 0$.
+\begin{align*}
+(ib)^4 - \sqrt{2}(ib)^3 - 4\sqrt{2}(ib) - 16 = 0 &\Longleftrightarrow b^4 - 16 + i\sqrt{2}\,b(b^2 - 4) = 0 \\
+&\Longleftrightarrow b^4 - 16 = 0 \text{ et } b(b^2 - 4) = 0 \\
+&\Longleftrightarrow b = 2 \text{ ou } b = -2
+\end{align*}
+Les solutions imaginaires pures sont $z_0 = 2i$ et $z_1 = -2i$. L'équation peut alors se mettre sous la forme :
+\[ Z^4 - \sqrt{2}\,Z^3 - 4\sqrt{2}\,Z - 16 = (Z - 2i)(Z + 2i)(Z^2 + cZ + d) = (Z^2 + 4)(Z^2 + cZ + d). \]
+Le terme de degré 0 du second membre est $4d$ : $4d = -16$, d'où $d = -4$. Le terme de degré 1 est $4c$ : $4c = -4\sqrt{2}$, d'où $c = -\sqrt{2}$. Il vient : $Z^4 - \sqrt{2}\,Z^3 - 4\sqrt{2}\,Z - 16 = (Z^2 + 4)(Z^2 - \sqrt{2}\,Z - 4)$.
+
+L'équation $Z^2 - \sqrt{2}\,Z - 4 = 0$, de discriminant $\Delta = (-\sqrt{2})^2 - 4(-4) = 18$, admet deux racines $z_2 = 2\sqrt{2}$ et $z_3 = -\sqrt{2}$. Donc les solutions sont : $z_0 = 2i$, $z_1 = -2i$, $z_2 = 2\sqrt{2}$ et $z_3 = -\sqrt{2}$.
+
+\textbf{2. a.} \begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.8,every node/.style={font=\footnotesize}]
+  \draw[->] (-2.6,0)--(3.6,0) node[right]{$\vec{u}$};
+  \draw[->] (0,-2.7)--(0,2.7) node[above]{$\vec{v}$};
+  % cercle centre (0.707,0) rayon 2.121
+  \draw (0.707,0) circle (2.121);
+  \fill (0,2) circle (2pt) node[above right]{$A$};
+  \fill (-1.414,0) circle (2pt) node[above left]{$B$};
+  \fill (0,-2) circle (2pt) node[below right]{$C$};
+  \fill (2.828,0) circle (2pt) node[above right]{$D$};
+  \fill (0.707,0) circle (1.3pt) node[below]{$\Omega$};
+  \node at (2.4,1.7){$(C)$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{b.}
+\begin{align*}
+\text{Les points } A, B, C, D \text{ cocycliques} &\Longleftrightarrow (\vv{AB}, \vv{AC}) \equiv (\vv{DB}, \vv{DC})\ [\pi] \\
+&\Longleftrightarrow \frac{z_C - z_A}{z_B - z_A} \div \frac{z_C - z_D}{z_B - z_D} \in \R
+\end{align*}
+\[ \frac{z_C - z_A}{z_B - z_A} \div \frac{z_C - z_D}{z_B - z_D} = \frac{-4i}{-\sqrt{2} - 2i} \div \frac{-2i - 2\sqrt{2}}{-3\sqrt{3}} = \sqrt{6} \in \R \]
+Donc les points $A$, $B$, $C$ et $D$ appartiennent à un même cercle $(C)$. Le cercle $(C)$ a pour centre le point d'affixe $\dfrac{z_B + z_D}{2} = \dfrac{\sqrt{2}}{2}$ et pour rayon $\dfrac{1}{2}|z_D - z_B| = \dfrac{3\sqrt{2}}{2}$.
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{}
+
+\textbf{1.} $\displaystyle I_1 = \int_0^1 x\,e^{-\frac{x^2}{2}}\,dx = \left[-e^{-\frac{x^2}{2}}\right]_0^1 = -e^{-\frac{1}{2}} + 1$.
+
+\textbf{2.} Soit $n \in \N^*$. La fonction $x \mapsto x^n e^{-\frac{x^2}{2}}$ est continue sur $[0\,;1]$. De plus, $\forall x \in [0\,;1]$, $x^n e^{-\frac{x^2}{2}} \ge 0$. Donc $I_n = \displaystyle\int_0^1 x^n e^{-\frac{x^2}{2}}\,dx \ge 0$ pour tout $n \in \N^*$.
+
+\textbf{3.} Soit $n \ge 3$. $I_n = \displaystyle\int_0^1 x^{n-1} \cdot x\,e^{-\frac{x^2}{2}}\,dx$. En posant $u = x^{n-1}$, $v' = x\,e^{-\frac{x^2}{2}}$, donc $u' = (n-1)x^{n-2}$, $v = -e^{-\frac{x^2}{2}}$ :
+\[ I_n = \left[-x^{n-1}e^{-\frac{x^2}{2}}\right]_0^1 + (n-1)\int_0^1 x^{n-2}e^{-\frac{x^2}{2}}\,dx = -e^{-\frac{1}{2}} + (n-1)I_{n-2}. \]
+D'où $I_n = -e^{-\frac{1}{2}} + (n-1)I_{n-2}$ pour tout entier $n \ge 3$.
+
+\textbf{4.} \underline{Décroissance de $(I_n)$.} Soit $n \in \N^*$.
+\[ I_{n+1} - I_n = \int_0^1 x^{n+1}e^{-\frac{x^2}{2}}\,dx - \int_0^1 x^n e^{-\frac{x^2}{2}}\,dx = \int_0^1 x^n(x - 1)e^{-\frac{x^2}{2}}\,dx. \]
+La fonction $x \mapsto x^n(x-1)e^{-\frac{x^2}{2}}$ est continue sur $[0\,;1]$ et $\le 0$ sur $[0\,;1]$. Donc $I_{n+1} - I_n \le 0$ : la suite $(I_n)$ est décroissante.
+
+\underline{Convergence.} La suite $(I_n)$ est décroissante (d'après 4.) et minorée par 0 (d'après 2.). Donc elle converge vers une limite $l$.
+
+\textbf{5.} Soit $n \in \N^*$. $\forall x \in [0\,;1]$, $-\dfrac{x^2}{2} \le 0$. Par croissance de l'exponentielle, $0 < e^{-\frac{x^2}{2}} \le 1$. On en déduit $0 \le x^n e^{-\frac{x^2}{2}} \le x^n$. Par passage à l'intégrale :
+\[ 0 \le \int_0^1 x^n e^{-\frac{x^2}{2}}\,dx \le \int_0^1 x^n\,dx = \left[\frac{x^{n+1}}{n+1}\right]_0^1 = \frac{1}{n+1}. \]
+D'où $0 \le I_n \le \dfrac{1}{n+1}$ pour tout $n \in \N^*$.
+
+\underline{Calcul de $l$.} Par passage à la limite, $0 \le \lim\limits_{n\to+\infty} I_n \le \lim\limits_{n\to+\infty}\dfrac{1}{n+1} = 0$. On en déduit que $l = 0$.
+
+% ====================== PROBLÈME ======================
+\prob{}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.95,every node/.style={font=\footnotesize}]
+  \coordinate (A) at (0,0); \coordinate (B) at (3,0); \coordinate (C) at (3,3); \coordinate (D) at (0,3);
+  \draw[thick] (A)--(B)--(C)--(D)--cycle;
+  \coordinate (O) at (1.5,1.5); \fill (O) circle (1.3pt) node[below right]{$O$};
+  \coordinate (I) at (0,1.5); \coordinate (Iq) at (1.5,0);
+  % E rectangle isocele en D
+  \coordinate (E) at (1.5,4.5);
+  \draw (D)--(E)--(C);
+  \draw (A)--(C);
+  % cercle (C) circonscrit a Omega E O Omega1 -- schematique
+  \draw[densely dashed] (1.5,2.25) circle (1.6);
+  % ellipse (C')
+  \draw[densely dashed] (O) ellipse (1.7 and 0.9);
+  \fill (A) circle (1.3pt) node[below left]{$A$};
+  \fill (B) circle (1.3pt) node[below right]{$B$};
+  \fill (C) circle (1.3pt) node[above right]{$C$};
+  \fill (D) circle (1.3pt) node[above left]{$D$};
+  \fill (E) circle (1.3pt) node[above]{$E$};
+  \fill (I) circle (1.1pt) node[left]{$I$};
+  \fill (0.9,1.9) circle (1.1pt) node[above left]{$\Omega$};
+  \fill (0.75,0.75) circle (1.1pt) node[below right]{$\Omega_1$};
+  \node at (3.2,2.3){$(C)$};
+  \node at (2.4,0.7){$(C')$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{1.} $IE^2 = ID^2 + DE^2 = AI^2 + IO^2 = AO^2$. Donc $IE = AO$.
+
+\textbf{2.} Comme $IE = AO$ et $\vv{IE} \ne \vv{AO}$, alors il existe une unique rotation $r$, d'angle $(\vv{IE}, \vv{AO})$ qui transforme $I$ en $A$ et $E$ en $O$. Cet angle vaut $(\vv{IE}, \vv{AO}) = (\vv{OD}, \vv{OC}) \equiv -\dfrac{\pi}{2}\ [2\pi]$.
+
+\textbf{3.} $\Omega$ est le point d'intersection des médiatrices des segments $[IA]$ et $[EO]$.
+
+\textbf{4.} Comme $r(E) = O$, alors $(\vv{\Omega O}, \vv{\Omega E}) \equiv \dfrac{\pi}{2}\ [2\pi]$. D'autre part, $(\vv{\Omega_1 O}, \vv{\Omega_1 E}) = (\vv{OC}, \vv{OD}) \equiv \dfrac{\pi}{2}\ [2\pi]$. D'où $(\vv{\Omega O}, \vv{\Omega E}) \equiv (\vv{\Omega_1 O}, \vv{\Omega_1 E})\ [2\pi]$ : les points $\Omega$, $E$, $O$, $\Omega_1$ sont cocycliques.
+
+\textbf{5.} $\bullet$ \underline{Le triangle $\Omega AI$ est rectangle isocèle.} Comme $r(I) = A$, alors $\Omega A = \Omega I$ et $(\vv{\Omega I}, \vv{\Omega A}) \equiv -\dfrac{\pi}{2}\ [2\pi]$. D'où le triangle $\Omega AI$ est rectangle isocèle en $\Omega$.
+
+$\bullet$ \underline{Le triangle $\Omega_1 AI$ est rectangle isocèle.} Dans le triangle $AOD$ : $\Omega_1 \in [AO]$, $I \in [AD]$ et $(\Omega_1 I) \parallel (OD)$. D'après Thalès, $\dfrac{A\Omega_1}{AO} = \dfrac{\Omega_1 I}{OD}$, donc $\dfrac{A\Omega_1}{\Omega_1 I} = \dfrac{AO}{OD} = 1$, d'où $A\Omega_1 = \Omega_1 I$. De plus, $(\vv{\Omega_1 I}, \vv{\Omega_1 A}) = (\vv{IE}, \vv{OA}) \equiv \dfrac{\pi}{2}\ [2\pi]$. Donc le triangle $\Omega_1 AI$ est rectangle isocèle en $\Omega_1$.
+
+Les triangles $\Omega AI$ et $\Omega_1 AI$ sont rectangles isocèles d'hypoténuse commune $[AI]$. Donc le quadrilatère $A\Omega_1 I\Omega$ est un carré.
+
+\textbf{6.} $S(ABCD) = A\Omega_1 I\Omega$. La similitude $S$ vérifie $S(A) = A$ et $S(B) = \Omega_1$. D'où $S$ est la similitude de centre $A$, d'angle $(\vv{AB}, \vv{A\Omega_1}) \equiv \dfrac{\pi}{4}\ [2\pi]$ et de rapport :
+\[ \frac{A\Omega_1}{AB} = \frac{\frac{1}{4}AC}{AB} = \frac{1}{4} \cdot \frac{1}{\cos\frac{\pi}{4}} = \frac{\sqrt{2}}{4}. \]
+
+\textbf{7.} $\bullet$ $S(B) = \Omega_1$ et $S(C) = I$. Comme $K$ est le milieu de $[BC]$, alors $S(K) = K'$ est le milieu de $[\Omega_1 I]$.
+
+$\bullet$ $S(C) = I$ et $S(D) = \Omega$. Comme $L$ est le milieu de $[CD]$, alors $S(L) = L'$ est le milieu de $[I\Omega]$.
+
+\textbf{8.} $\overline{S}(Q) = Q$. $\overline{S}$ est une similitude plane indirecte de centre $Q$, d'axe $(OD)$ et de rapport $\dfrac{1}{2}$.
+
+\textbf{9. a.} $\overline{S}(C) = J$. $\overline{S}(C) = h_{(Q,\frac{1}{2})} \circ S_{OD}(C) = h_{(Q,\frac{1}{2})}(A)$. On en déduit que $h_{(Q,\frac{1}{2})}(A) = J$. D'où $\vv{QJ} = \dfrac{1}{2}\vv{QA}$.
+
+\textbf{b.}
+\begin{align*}
+\vv{QJ} = \frac{1}{2}\vv{QA} &\Longleftrightarrow \vv{QB} + \vv{BJ} = \frac{1}{2}\vv{QB} + \frac{1}{2}\vv{BA} \\
+&\Longleftrightarrow \vv{QB} + \vv{BJ} = \frac{1}{2}\vv{QB} + \vv{BJ} \Longleftrightarrow \vv{QB} = \vv{0} \Longleftrightarrow Q = B
+\end{align*}
+
+\textbf{10. a.} $f$ est une affinité orthogonale d'axe $(OE)$, de rapport $\dfrac{1}{2}$.
+
+\textbf{b.} Voir figure.
+
+\textbf{c.} $(C')$ est une ellipse.
+
+\end{document}

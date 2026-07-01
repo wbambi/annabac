@@ -1,0 +1,128 @@
+\documentclass[11pt]{article}
+\input{style-corrige}
+
+\begin{document}
+
+\entetesujet{Correction bac 2011 -- Série C}
+
+% ====================== EXERCICE 1 ======================
+\exo{1}{}
+
+\textbf{1.} $\displaystyle A + B = \int_0^{\frac{\pi}{2}} x\,dx = \left[\frac{x^2}{2}\right]_0^{\frac{\pi}{2}} = \frac{\pi^2}{8}$.
+
+\textbf{2.} $\displaystyle A - B = \int_0^{\frac{\pi}{2}} x(\cos^2 x - \sin^2 x)\,dx = \int_0^{\frac{\pi}{2}} x\cos(2x)\,dx$.
+
+En posant $u(x) = x$, $v'(x) = \cos(2x)$, donc $u'(x) = 1$, $v(x) = \dfrac{1}{2}\sin(2x)$, on a en intégrant par parties :
+\[ A - B = \left[\tfrac{1}{2}x\sin(2x)\right]_0^{\frac{\pi}{2}} - \frac{1}{2}\int_0^{\frac{\pi}{2}}\sin(2x)\,dx = -\frac{1}{2}\int_0^{\frac{\pi}{2}}\sin(2x)\,dx = \left[\tfrac{1}{4}\cos(2x)\right]_0^{\frac{\pi}{2}} = -\frac{1}{2}. \]
+
+\textbf{3.}
+\[ \begin{cases} A + B = \dfrac{\pi^2}{8} & (1) \\[1ex] A - B = -\dfrac{1}{2} & (2) \end{cases} \]
+En additionnant (1) et (2), on en déduit $A = \dfrac{\pi^2}{16} - \dfrac{1}{4}$. En soustrayant, on en déduit $B = \dfrac{\pi^2}{16} + \dfrac{1}{4}$.
+
+% ====================== EXERCICE 2 ======================
+\exo{2}{}
+
+\textbf{1.} \begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[->] (0,0)--(7,0) node[right]{$x$};
+  \draw[->] (0,0)--(0,4.4) node[above]{$y$};
+  \foreach \x in {1,2,3,4,5,6}{\draw (\x,0.05)--(\x,-0.05) node[below]{\scriptsize$\x$};}
+  \foreach \yv/\lab in {0.8/20,1.6/40,2.4/60,3.2/80,4/100}{\draw (0.05,\yv)--(-0.05,\yv) node[left]{\scriptsize\lab};}
+  % points (y scaled by 0.04)
+  \foreach \px/\py in {1/96.1,2/63.5,3/49.2,4/41.5,5/35.7}{\fill (\px,{0.04*\py}) circle (2pt);}
+  % droite y=-14.28x+100.04 (scaled)
+  \draw[thick] (0,{0.04*100.04})--(6.5,{0.04*(100.04-14.28*6.5)});
+  \node at (5.5,1.4){\scriptsize droite de régression};
+\end{tikzpicture}
+\end{center}
+
+\textbf{2.} L'équation de la droite de régression linéaire de $y$ en $x$ est $y = ax + b$ où $a = \dfrac{\mathrm{Cov}(x, y)}{V(x)}$ et $b = \overline{y} - a\overline{x}$.
+
+\underline{Moyennes :}
+\[ \overline{x} = \frac{1}{5}\sum_{i=1}^5 x_i = \frac{1 + 2 + 3 + 4 + 5}{5} = 3, \qquad \overline{y} = \frac{96{,}1 + 63{,}5 + 49{,}2 + 41{,}5 + 35{,}7}{5} = 57{,}2 \]
+\underline{Covariance, variance :}
+\[ \mathrm{Cov}(x, y) = \frac{1}{5}\sum_{i=1}^5 x_i y_i - \overline{x}\cdot\overline{y} = \frac{1 \times 96{,}1 + \cdots + 5 \times 35{,}7}{5} - 3 \times 57{,}2 = -28{,}56 \]
+\[ V(x) = \frac{1}{5}\sum_{i=1}^5 x_i^2 - \overline{x}^2 = \frac{1^2 + 2^2 + 3^2 + 4^2 + 5^2}{5} - 3^2 = 2 \]
+\[ a = \frac{-28{,}56}{2} = -14{,}28 \;;\quad b = 57{,}2 - (-14{,}28) \times 3 = 100{,}04. \]
+D'où l'équation de la droite de régression linéaire : $y = -14{,}28\,x + 100{,}04$.
+
+\textbf{3.} Pour $x = 6$, $y = -14{,}28 \times 6 + 100{,}04 = 14{,}36$ (milliers de francs). Le bénéfice au 6\textsuperscript{e} mois est estimé à 14\,360 francs CFA.
+
+% ====================== PROBLÈME ======================
+\prob{}
+
+\partieT{A}
+\textbf{1.} \begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.9,every node/.style={font=\footnotesize}]
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (2,0);
+  \coordinate (C) at ({4*cos(30)},{4*sin(30)});
+  \draw[thick] (A)--(B)--(C)--cycle;
+  % carré ABDE (sur AB, vers le bas)
+  \draw (A)--(0,-2)--(2,-2)--(B);
+  \node at (1,-1.6){$ABDE$};
+  % carré ACFG (sur AC, exterieur)
+  \coordinate (Cv) at ({4*cos(30)},{4*sin(30)});
+  \coordinate (perp) at ({4*cos(120)},{4*sin(120)});
+  \draw (A)--($(A)+(perp)$)--($(C)+(perp)$)--(C);
+  \node at (-1.3,2.6){$ACFG$};
+  % ellipse 4x^2+y^2=4 centre A (demi-axes 1 et 2)
+  \draw[densely dashed] (A) ellipse (1 and 2);
+  \node at (1.1,1.7){$(E)$};
+  \fill (A) circle (1.5pt) node[below left]{$A$};
+  \fill (B) circle (1.5pt) node[below right]{$B$};
+  \fill (C) circle (1.5pt) node[right]{$C$};
+  \draw (1,0) arc[start angle=0,end angle=30,radius=1];
+  \node at (1.35,0.2){\scriptsize$\frac{\pi}{6}$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{2.} \underline{Les triangles $ABC$ et $EAK$ sont isométriques.}
+\begin{itemize}
+  \item $AB = EA$.
+  \item $AC = EK$. En effet, comme $\vv{GK} = \vv{AE}$, alors $GKEA$ est un parallélogramme. On en déduit que $EK = AG$. Or $AG = AC$. D'où $AC = EK$.
+  \item $(\vv{AB}, \vv{AC}) \equiv (\vv{EA}, \vv{EK})\ [2\pi]$. En effet, $(AB) \perp (EA)$ et $(AC) \perp (EK)$ ; ce sont deux angles aigus à côtés perpendiculaires.
+\end{itemize}
+Donc les triangles $ABC$ et $EAK$ sont isométriques (un angle de même mesure compris entre deux côtés de même longueur).
+
+\underline{Existence de $R_1$ telle que $R_1(ABC) = EAK$.} Comme $AB = EA$ et $\vv{AB} \ne \vv{EA}$, il existe une rotation $R_1$ d'angle $(\vv{AB}, \vv{EA}) \equiv \dfrac{\pi}{2}\ [2\pi]$, qui transforme $A$ en $E$ et $B$ en $A$. On montre ensuite que $R_1(C) = K$ : soit $K'$ tel que $R_1(ABC) = EAK'$ ; on a $AC = EK' = EK$ et $(\vv{EA}, \vv{EK'}) \equiv (\vv{EA}, \vv{EK})\ [2\pi]$, donc $K = K'$ et $R_1(C) = K$.
+
+\underline{Construction de $\Omega_1$.} $\Omega_1$ est le point d'intersection des médiatrices des segments $[AE]$ et $[BA]$.
+
+\textbf{3.} Soit $\Omega$ le centre du parallélogramme $GKEA$. La rotation $R_0$ de centre $\Omega$ et d'angle $\pi$ transforme $EAK$ en $GKA$. D'où $R_2 = R_0 \circ R_1$ transforme $ABC$ en $GKA$.
+
+\underline{Angle de $R_2$.} Comme $\pi + \dfrac{\pi}{2} = \dfrac{3\pi}{2} \ne 0\ [2\pi]$, alors $R_2$ est une rotation d'angle $\dfrac{3\pi}{2}$.
+
+\underline{Construction de $\Omega_2$.} $R_2(A) = G$ et $R_2(C) = A$. $\Omega_2$ est le point d'intersection des médiatrices de $[AG]$ et $[CA]$, c'est-à-dire le centre du carré $ACFG$.
+
+\textbf{4. a.} $f = R_1 \circ R_2$ est la composée de deux rotations de centres distincts dont la somme des angles $\dfrac{\pi}{2} + \dfrac{3\pi}{2} \equiv 0\ [2\pi]$. C'est donc une translation.
+
+\textbf{b.} $f(C) = R_1 \circ R_2(C) = R_1(A) = E$. $\vv{CE}$ est le vecteur de translation de $f$.
+
+\textbf{5.} $\bullet$ $(\vv{IB}, \vv{IA}) \equiv \dfrac{\pi}{2}\ [2\pi]$ : comme $R_1(B) = A$ et $R_1(C) = K$, alors $(\vv{BC}, \vv{AK}) \equiv \dfrac{\pi}{2}\ [2\pi]$ ; or $(\vv{BC}, \vv{AK}) = (\vv{IB}, \vv{IA})$.
+
+$\bullet$ $(\vv{\Omega_1 B}, \vv{\Omega_1 A}) \equiv \dfrac{\pi}{2}\ [2\pi]$ car $\Omega_1$ est le centre du carré $ABDE$.
+
+On en déduit que les triangles $IAB$ et $\Omega_1 AB$ sont rectangles, d'hypoténuse commune $[AB]$. Donc les points $A$, $B$, $I$ et $\Omega_1$ sont sur le même cercle $(C)$ de centre $O$, milieu de $[AB]$.
+
+\textbf{6.} $\bullet$ $(\vv{JA}, \vv{JG}) \equiv \dfrac{\pi}{2}\ [2\pi]$. \quad $\bullet$ $(\vv{\Omega_2 G}, \vv{\Omega_2 A}) \equiv \dfrac{\pi}{2}\ [2\pi]$. On en déduit que les triangles $JAG$ et $\Omega_2 AG$ sont rectangles, d'hypoténuse commune $[AG]$. Donc les points $A$, $G$, $J$ et $\Omega_2$ sont sur le même cercle $(C')$ de centre $O'$, milieu de $[AG]$.
+
+\partieT{B}
+\textbf{7.} $S(A) = A$ et $S(O) = O'$. $S$ est la similitude de centre $A$, de rapport $\dfrac{AO'}{AO} = 2$ et d'angle $(\vv{AO}, \vv{AO'}) \equiv \dfrac{\pi}{6} + \dfrac{\pi}{2} \equiv \dfrac{2\pi}{3}\ [2\pi]$.
+
+\textbf{8.} L'expression complexe de $S$ est $z' - z_A = 2e^{i\frac{2\pi}{3}}(z - z_A)$ avec $z_A = 0$. D'où $z' = (-1 + i\sqrt{3})z$.
+
+\textbf{9.} Comme $z' = 2e^{i\frac{2\pi}{3}}z$, on en déduit $z = \dfrac{1}{2}e^{-i\frac{2\pi}{3}}z' = \left(-\dfrac{1}{4} - i\dfrac{\sqrt{3}}{4}\right)z'$. En remplaçant $z = x + iy$ et $z' = x' + iy'$, on obtient après identification :
+\[ x = \frac{1}{4}(-x' + \sqrt{3}\,y') \quad \text{et} \quad y = -\frac{1}{4}(\sqrt{3}\,x' + y'). \]
+
+\partieT{C}
+\textbf{10.} $4x^2 + y^2 = 4 \Longleftrightarrow \dfrac{x^2}{1^2} + \dfrac{y^2}{2^2} = 1$. $(E)$ est une ellipse :
+\begin{itemize}
+  \item de centre $A(0, 0)$ ;
+  \item de sommets : $B(1, 0)$ ; $J(-1, 0)$ ; $(0, 2)$ ; $(0, -2)$ ;
+  \item de demi-distance focale $c = \sqrt{2^2 - 1^2} = \sqrt{3}$ et de foyers $F(0, \sqrt{3})$ et $F'(0, -\sqrt{3})$.
+\end{itemize}
+
+\textbf{11.} En remplaçant $x$ par $\dfrac{1}{4}(-x' + \sqrt{3}\,y')$ et $y$ par $-\dfrac{1}{4}(\sqrt{3}\,x' + y')$ dans l'équation $4x^2 + y^2 = 4$, on a : $7x'^2 - 6\sqrt{3}\,x'y' + 13y'^2 = 64$. D'où une équation de $(E') : 7x^2 - 6\sqrt{3}\,xy + 13y^2 = 64$.
+
+\end{document}
