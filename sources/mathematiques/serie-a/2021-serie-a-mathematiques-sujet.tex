@@ -1,0 +1,72 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2021 -- Série A}
+
+\exo{1}{8 points}
+\partie{A}
+On considère les trois fractions suivantes : $a = \dfrac{9}{10}$ ; $b = \dfrac{18}{25}$ et $c = \dfrac{4}{30}$.
+\begin{questions}
+  \item Simplifier au maximum, s'il y a lieu, chacune des fractions $a$, $b$ et $c$.
+  \item Trouver le $\mathrm{PPCM}(10, 25, 15)$.
+  \item On rappelle que le plus petit commun dénominateur de deux ou plusieurs fractions est le PPCM des dénominateurs de ces fractions. On considère que le $\mathrm{PPCM}(10, 25, 15)$ est 150.
+  \begin{sousq}
+    \item Réduire les fractions $\dfrac{9}{10}$, $\dfrac{18}{25}$ et $\dfrac{2}{15}$ au plus petit commun dénominateur.
+    \item En déduire le calcul de la somme algébrique $S = \dfrac{9}{10} - \dfrac{18}{25} + \dfrac{4}{30}$. \underline{NB.} On doit détailler les calculs.
+  \end{sousq}
+\end{questions}
+
+\partie{B}
+Soit $P$ la fonction polynôme définie sur $\R$ par $P(x) = 2x^3 + 3x^2 - 11x - 6$.
+\begin{questions}
+  \item \begin{sousq}
+    \item Montrer que $P(x) = (2x + 1)(x^2 + x - 6)$.
+    \item Résoudre, dans $\R$, l'équation $x^2 + x - 6 = 0$.
+    \item En déduire les solutions de l'équation $P(x) = 0$.
+  \end{sousq}
+  \item Résoudre, dans $\R$, l'équation $(E) : 2(\ln t)^3 + 3(\ln t)^2 - 11\ln t - 6 = 0$.
+\end{questions}
+
+\exo{2}{8 points}
+Soit la fonction numérique $g$ de la variable réelle $x$ définie dans $\R^*$ par : $g(x) = \dfrac{x - 1}{x}$. On désigne par $(\mathcal{C}_g)$ la courbe représentative de la fonction $g$ dans un plan muni d'un repère orthonormé $(O,\vi,\vj)$. Unité graphique : 1 cm.
+\begin{questions}
+  \item \begin{sousq}
+    \item Écrire l'ensemble de définition sous forme de réunion d'intervalles.
+    \item Écrire $g(x)$ sous forme : $\dfrac{x - 1}{x} = 1 + \dfrac{a}{x}$ où $a$ est un réel que l'on déterminera.
+    \item Étudier la limite de $g$ en $-\infty$ et en $0$ à gauche et à droite.
+  \end{sousq}
+  \item \begin{sousq}
+    \item Trouver la fonction dérivée $g'$ de $g$.
+    \item Préciser le signe de $g'(x)$ pour tout $x \in \R^*$.
+    \item Dresser le tableau de variation de $g$. On donne $\lim\limits_{x\to+\infty} g(x) = 1$.
+  \end{sousq}
+  \item \begin{sousq}
+    \item Trouver les coordonnées des points $A$, $B$ et $C$ d'abscisses respectives $x_A = -1$, $x_B = 1$ et $x_C = 2$.
+    \item Représenter dans le plan muni du repère $(O,\vi,\vj)$ la courbe $(\mathcal{C}_g)$ et la droite asymptote horizontale d'équation $y = 1$.
+  \end{sousq}
+\end{questions}
+
+\exo{3}{4 points}
+On considère la série statistique $(X, Y, n_i)$ liée à l'étude du poids $Y_i$ de la larve mesuré en fonction de l'âge $X_i$ de l'insecte. Les résultats de l'étude sont contenus dans le tableau suivant :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$X$ (Âge en mois) & 1 & 2 & 3 & 4 & 5 & 6 \\
+\hline
+$Y$ (Poids en mg) & 1{,}2 & 1{,}8 & 2{,}3 & 2{,}5 & 3 & 3{,}5 \\
+\hline
+\end{tabular}
+\end{center}
+\begin{questions}
+  \item Calculer les coordonnées du point moyen $G(\overline{X}, \overline{Y})$ du nuage de la série.
+  \item \begin{sousq}
+    \item Partager le tableau en deux sous-tableaux $T_1$ et $T_2$ tels que dans $T_1$ il y ait les 3 premières valeurs de $X$ et dans $T_2$ les 3 dernières valeurs.
+    \item Trouver les points moyens partiels $G_1$ et $G_2$ correspondant respectivement à $T_1$ et $T_2$.
+    \item Trouver la droite d'ajustement linéaire de cette série par la méthode de Mayer.
+  \end{sousq}
+  \item On considère l'équation : $1{,}24x - 3y + 2{,}8 = 0$ représentant une droite d'ajustement de notre nuage. Estimer le poids de la larve au $7^{\text{e}}$ mois si l'évolution se produit dans les mêmes conditions.
+\end{questions}
+
+\end{document}

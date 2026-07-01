@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2019 -- Série A}
+
+\exo{1}{8 points}
+\partie{1}
+\begin{questions}
+  \item \begin{sousq}
+    \item Décomposer les nombres $1\,155$ et $300$ en produit de puissances de nombres premiers.
+    \item En déduire le $\mathrm{PGCD}(1155\,;300)$.
+  \end{sousq}
+  \item Rendre irréductible la fraction $\dfrac{1\,155}{300}$.
+  \item La fraction $\dfrac{1\,155}{300}$ est-elle décimale ?
+
+  \underline{NB.} On utilisera la propriété suivante : une fraction est décimale si le dénominateur de sa fraction irréductible ne contient que les puissances de 2 et/ou de 5.
+\end{questions}
+
+\partie{2}
+\begin{questions}
+  \item On donne le polynôme $p(x) = -2x^3 + 9x^2 - 7x - 6$. En considérant $x_0 = 2$, une solution évidente de l'équation $p(x) = 0$, déterminer les réels $a$ et $b$ tels que $p(x) = (x - 2)(ax^2 + 5x + b)$.
+  \item Considérons $a = -2$ et $b = 3$.
+  \begin{sousq}
+    \item Résoudre dans $\R$ l'équation $-2x^2 + 5x + 3 = 0$.
+    \item En déduire les solutions de l'équation $p(x) = 0$ dans $\R$.
+  \end{sousq}
+  \item Résoudre dans $\R$ l'équation $(E) : -(e^{t})^3 + 9(e^{t})^2 - 7\,e^{t} - 6 = 0$.
+  \item \begin{sousq}
+    \item Trouver la valeur de $Y$ dans le système $S$ pour $X = -1$. On donne $S : \begin{cases} -2X + Y = 4 \\ 3X + 2Y = 1 \end{cases}$
+    \item En déduire, dans $\R^2$, les solutions du système $(S') : \begin{cases} -2\ln x + e^{y} = 4 \\ 3\ln x + 2\,e^{y} = 1 \end{cases}$
+  \end{sousq}
+\end{questions}
+
+\exo{2}{8 points}
+On considère la fonction numérique $f$ de la variable réelle $x$ définie par : $f(x) = \dfrac{ax + 3}{x + 1}$ avec $a$ un réel. On désigne par $(\mathcal{C}_f)$ la courbe représentative de $f$ dans un plan $(\mathcal{P})$ muni d'un repère orthonormé $(O,\vi,\vj)$. Unité graphique : 1 cm.
+\begin{questions}
+  \item Déterminer l'ensemble de définition $E_f$ de $f$ sous forme d'une réunion d'intervalles.
+  \item Trouver le réel $a$ pour que la courbe de $f$ passe par $A(1\,;1)$.
+  \item Dans la suite, on posera $a = -1$.
+  \begin{sousq}
+    \item Calculer la limite de $f$ en $-\infty$ et la limite de $f$ en $-1$ à gauche.
+    \item Donner l'interprétation graphique des limites à l'infini et en $-1$ calculées au a.
+  \end{sousq}
+  \item \begin{sousq}
+    \item Calculer la fonction dérivée $f'$ de $f$.
+    \item Préciser le signe de $f'(x)$ pour $x \in E_f$.
+    \item Préciser le sens de variation de $f$ sur chacun des intervalles de $E_f$.
+    \item Dresser le tableau de variation de $f$. On donne $\lim\limits_{x\to+\infty} f(x) = -1$ et $\lim\limits_{x\to-1^+} f(x) = +\infty$.
+  \end{sousq}
+  \item Construire, dans le plan $(\mathcal{P})$ muni du repère $(O,\vi,\vj)$, la courbe $(\mathcal{C})$ et les droites $(\mathcal{D}_1) : x = -1$ et $(\mathcal{D}_2) : y = -1$ qui sont les asymptotes à la courbe.
+\end{questions}
+
+\exo{3}{4 points}
+Chaque année le taux de natalité est calculé en divisant le nombre de naissances par le nombre d'habitants d'un pays. Dans un pays en développement, on a constaté lors d'une étude statistique que le taux de natalité était en baisse. Voici ci-dessous le tableau des résultats constatés.
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+Rang de l'année ($x_i$) & 4 & 6 & 8 & 10 & 12 \\
+\hline
+Taux de natalité en \% ($y_i$) & 1{,}5 & 3{,}1 & 2{,}8 & 2{,}5 & 1{,}3 \\
+\hline
+\end{tabular}
+\end{center}
+\begin{questions}
+  \item Construire le nuage des points $M_i(x_i, y_i)$ associé à cette série statistique dans un plan muni d'un repère orthogonal. On prendra : sur l'axe $(x'Ox)$, 1 cm pour une année ; sur l'axe $(y'Oy)$, 1 cm pour 1 \%.
+  \item On désigne par $G_1(x_{G_1}, y_{G_1})$ le point moyen du sous-nuage associé au tableau suivant :
+  \begin{center}\renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{|c|c|c|}\hline Rang de l'année ($x_i$) & 4 & 6 \\\hline Taux de natalité en \% ($y_i$) & 1{,}5 & 3{,}1 \\\hline\end{tabular}
+  \end{center}
+  De même $G_2(x_{G_2}, y_{G_2})$ le point moyen du sous-nuage associé au tableau ci-après :
+  \begin{center}\renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{|c|c|c|c|}\hline Rang de l'année ($x_i$) & 8 & 10 & 12 \\\hline Taux de natalité en \% ($y_i$) & 2{,}8 & 2{,}5 & 1{,}3 \\\hline\end{tabular}
+  \end{center}
+  \begin{sousq}
+    \item Calculer les coordonnées de $G_1$ et de $G_2$.
+    \item Déterminer, sous la forme $y = ax + b$ (avec $a$ et $b$ des réels), l'équation de la droite $(G_1G_2)$.
+    \item On suppose que le taux de natalité $y$ est donné en fonction du rang de l'année par la formule : $y = -\dfrac{1}{50}x + \dfrac{12}{5}$. Déterminer le taux de natalité à la quatorzième ($14^{\text{e}}$) année.
+  \end{sousq}
+\end{questions}
+
+\end{document}

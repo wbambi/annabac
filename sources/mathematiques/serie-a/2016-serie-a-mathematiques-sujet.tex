@@ -1,0 +1,89 @@
+\documentclass[11pt]{article}
+\input{style-sujet}
+
+\begin{document}
+
+\entetesujet{Sujet bac 2016 -- Série A}
+
+\exo{1}{8 points}
+On donne les nombres $A = 2\cdot 10^{-4} + 103\cdot 10^{-2}$ et $B = 301\cdot 10^{-3} \times 11\cdot 10^{-2}$.
+\begin{questions}
+  \item Effectuer les calculs des nombres $A$ et $B$. On donnera les réponses sans puissances de 10.
+  \item On donne : $P(x) = -x^3 + 2x^2 + x - 2$.
+  \begin{sousq}
+    \item Calculer $P(1)$.
+    \item Déterminer les réels $a$ et $b$ tels que $P(x) = (x - 1)(-x^2 + ax + b)$.
+    \item Résoudre l'équation : $-x^2 + x + 2 = 0$. En déduire les solutions de $P(x) = 0$.
+    \item En déduire les solutions de l'équation $-e^{3x} + 2\,e^{2x} + e^{x} - 2 = 0$.
+  \end{sousq}
+  \item Résoudre dans $\R^2$ le système d'équations suivant : $S_1 \begin{cases} x - y = 2 \\ 2x + 3y = -1 \end{cases}$
+
+  En déduire les solutions du système suivant : $S_2 \begin{cases} \ln x - \ln y = 2 \\ 2\ln x + 3\ln y = -1 \end{cases}$
+\end{questions}
+
+\exo{2}{8 points}
+On considère la fonction numérique $f$ à variable réelle $x$ définie par :
+\[ f(x) = \frac{2 - x}{x - 1} \]
+On désigne par $(\mathcal{C})$ la courbe représentative de $f$ dans le repère orthonormé $(O,\vi,\vj)$ du plan. Unité graphique : 2 cm.
+\begin{questions}
+  \item Déterminer l'ensemble de définition de $f$.
+  \item Déterminer les réels $a$ et $b$ tels que pour tout $x \ne 1$, on a : $f(x) = a + \dfrac{b}{x - 1}$.
+  \item On donne $\lim\limits_{x\to-\infty} f(x) = -1$ et $\lim\limits_{x\to+\infty} f(x) = -1$. Calculer la limite de $f$ à gauche et à droite en $x = 1$.
+  \item \begin{sousq}
+    \item Calculer la dérivée $f'$ de $f$.
+    \item Dresser le tableau de variation de $f$.
+    \item Que représentent les droites d'équations $x = 1$ et $y = -1$ pour la courbe $(\mathcal{C})$ de $f$ ?
+  \end{sousq}
+  \item \begin{sousq}
+    \item Compléter le tableau de valeurs ci-dessous :
+    \begin{center}\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    $x$ & $-3$ & $-2$ & $-1$ & $0$ & $1$ & $2$ & $3$ \\
+    \hline
+    $y$ & & & & & & & \\
+    \hline
+    \end{tabular}
+    \end{center}
+    \item Construire, dans le repère $(O,\vi,\vj)$ du plan, la courbe $(\mathcal{C})$ de $f$ et les droites d'équations $x = 1$ ; $y = -1$.
+  \end{sousq}
+\end{questions}
+
+\exo{3}{4 points}
+Le tableau suivant donne le poids $x$ en grammes et la taille $y$ en centimètres d'une population donnée.
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Poids $x$ & 10 & 25 & 40 & 50 & 55 & 60 & 65 & 70 & 75 & 80 \\
+\hline
+Taille $y$ & 11 & 20 & 35 & 45 & 50 & 53 & 60 & 63 & 73 & 75 \\
+\hline
+\end{tabular}
+\end{center}
+\begin{questions}
+  \item Représenter le nuage des points dans le plan muni d'un repère orthogonal. 1 cm pour 10 g et 1 cm pour 10 cm.
+  \item La série ci-dessus est divisée en deux sous-séries telles que :
+
+  \underline{Sous-série A}
+  \begin{center}\renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{|c|c|c|c|c|c|}
+  \hline Poids $x$ & 10 & 25 & 40 & 50 & 55 \\\hline Taille $y$ & 11 & 20 & 35 & 45 & 50 \\\hline
+  \end{tabular}\end{center}
+
+  \underline{Sous-série B}
+  \begin{center}\renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{|c|c|c|c|c|c|}
+  \hline Poids $x$ & 60 & 65 & 70 & 75 & 80 \\\hline Taille $y$ & 53 & 60 & 63 & 73 & 75 \\\hline
+  \end{tabular}\end{center}
+  \begin{sousq}
+    \item Calculer les coordonnées de $G_1$ et $G_2$ points moyens respectifs des sous-séries A et B.
+    \item Placer les points $G_1$ et $G_2$, puis tracer la droite $(G_1G_2)$ dans le repère orthogonal précédent. Que représente cette droite pour la série ?
+  \end{sousq}
+  \item On suppose $G_1(36\,;32{,}2)$ et $G_2(70\,;64{,}8)$.
+  \begin{sousq}
+    \item Déterminer une équation cartésienne de la droite $(G_1G_2)$.
+    \item À l'aide de l'équation de la droite $(G_1G_2)$ obtenue, estimer la taille d'une personne ayant un poids de 97 grammes.
+  \end{sousq}
+\end{questions}
+
+\end{document}
