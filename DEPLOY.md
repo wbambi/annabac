@@ -212,6 +212,22 @@ crée directement la table à jour.
 Le projet est public et open source. Quelques précautions, surtout tant que
 tout repose sur des comptes personnels (GitHub, Cloudflare, carte bancaire).
 
+### En-têtes de sécurité (CSP)
+
+Les en-têtes HTTP (CSP, X-Frame-Options, Referrer-Policy, Permissions-Policy,
+cache des PDF et des assets) sont servis par Cloudflare Pages depuis
+[public/_headers](public/_headers). Points d'attention :
+
+- La CSP interdit les scripts inline, **sauf** le script anti-FOUC du thème
+  (dans `src/layouts/Layout.astro`), autorisé par son **hash SHA-256**. Si ce
+  script change, recalculer le hash après build (commande en commentaire de
+  `_headers`) et le reporter dans la directive `script-src`.
+- `astro.config.mjs` force l'externalisation des scripts et styles bundlés
+  (`assetsInlineLimit: 0`, `inlineStylesheets: 'never'`) : ne pas ajouter de
+  `<script is:inline>` sans mettre à jour la CSP.
+- Les `_headers` ne s'appliquent pas sous `astro dev` : tester avec
+  `npm run build` puis `wrangler pages dev dist`.
+
 ### Garde-fous déjà en place côté code
 
 - **Admin** : vérification cryptographique du jeton `Cf-Access-Jwt-Assertion`

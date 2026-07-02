@@ -10,19 +10,28 @@ consultation hors-ligne.
 ## Stack technique
 
 - **[Astro](https://astro.build)** : site statique, HTML rapide, JS minimal.
-- **Content Collections** : contenu en fichiers Markdown versionnables.
-- **Tailwind CSS v4** : interface mobile-first (bleu nuit + turquoise).
+- **Content Collections** : contenu en fichiers Markdown versionnables, schémas
+  Zod avec une **taxonomie partagée** prête pour d'autres types de ressources
+  (cours, fiches…) — voir `src/lib/ressources.ts`.
+- **Tailwind CSS v4** : interface mobile-first (bleu nuit + turquoise), design
+  tokens sémantiques (`src/styles/global.css`) et **mode sombre** (bascule
+  clair / sombre / système dans l'en-tête, clair par défaut, sans flash au
+  chargement).
 - **PWA** (`@vite-pwa/astro`) : installation et consultation hors-ligne.
+- **Sécurité** : en-têtes HTTP durcis via `public/_headers` — CSP stricte (les
+  scripts inline sont interdits, à l'exception du script anti-FOUC autorisé
+  par hash), X-Frame-Options, Referrer-Policy, Permissions-Policy.
 - **SEO / partage** : Open Graph + Twitter Card, données structurées schema.org,
   image de partage générée (`public/og.png`).
 - **Cloudflare** (Pages Functions + R2 + D1) : API de soumission et file de
   modération, **Turnstile** (anti-spam), **Web Analytics** (sans cookie).
   L'espace admin est protégé par **Cloudflare Access** avec vérification
   cryptographique du jeton (JWT). Voir [DEPLOY.md](DEPLOY.md).
-- **Pagefind** : moteur de recherche statique (présent mais désactivé pour
-  l'instant côté interface).
+- **Pagefind** : recherche plein texte statique sur `/recherche` (facettes
+  série / matière / année), indexée à chaque build, utilisable hors-ligne.
 - **Vitest** : tests unitaires des fonctions pures (helpers de données, nommage
-  des fichiers).
+  des fichiers) et **garde-fou de contrastes WCAG AA** sur les couleurs des
+  deux thèmes (`src/styles/tokens.test.ts`).
 
 ## Concept
 
@@ -55,29 +64,34 @@ la messagerie de l'utilisateur via un lien `mailto`, sans rien enregistrer.
 ```bash
 npm install
 npm run dev        # serveur de développement (http://localhost:4321)
-npm run build      # génère le site statique dans dist/
+npm run build      # génère le site statique dans dist/ + index de recherche Pagefind
 npm run preview    # prévisualise le site généré
 npm test           # lance les tests unitaires (Vitest)
 npm run test:watch # tests en mode interactif
 ```
 
+> La page `/recherche` n'est fonctionnelle qu'après un build (l'index Pagefind
+> n'existe pas sous `astro dev`) : utilisez `npm run build && npm run preview`.
+
 ## Structure
 
 ```
 src/
-  content/config.ts      # schémas (Zod) des collections
+  content/config.ts      # schémas (Zod) des collections + taxonomie partagée
   content/series/*.md     # séries (A, C, D)
   content/sujets/*.md     # fiches : métadonnées + chemins des PDF
-  components/             # SujetCarte, Filtres, Icone, BadgeStatut, Fil…
-  layouts/Layout.astro    # gabarit + SEO/Open Graph + PWA
-  pages/                  # accueil, /series, /annees, /matieres, /sujets, /contribuer, /contributeurs, /a-propos, 404
+  components/             # SujetCarte, Filtres, Icone, BadgeStatut, Fil, BasculeTheme…
+  layouts/Layout.astro    # gabarit + SEO/Open Graph + PWA + anti-FOUC du thème
+  pages/                  # accueil, /series, /annees, /matieres, /sujets, /recherche, /contribuer, /contributeurs, /a-propos, 404
   pages/admin/            # modération (protégé par Cloudflare Access)
-  lib/data.ts             # helpers (tri, regroupements, statut, couleurs/icônes)
+  lib/data.ts             # helpers annales (tri, regroupements, statut, pastilles/icônes)
+  lib/ressources.ts       # registre des catégories de ressources (nav/accueil en dérivent)
+  styles/global.css       # design tokens (clair/sombre) + utilitaires
   **/*.test.ts            # tests unitaires (Vitest), co-localisés avec le code
 functions/                # Pages Functions : /api/submit, /api/admin/* (+ _lib)
 scripts/make-og-image.mjs # génère l'image de partage Open Graph
 test/stubs/               # stubs pour les tests (ex. astro:content)
-public/                   # favicon, icône PWA, og.png, PDF des sujets
+public/                   # favicon, icône PWA, og.png, PDF des sujets, _headers (CSP)
 wrangler.toml, schema.sql # config Cloudflare (D1/R2) + schéma de modération
 vitest.config.ts          # configuration des tests
 ```
@@ -89,6 +103,11 @@ Tests unitaires avec **Vitest**, ciblant les fonctions pures (helpers de
 [functions/_lib/util.ts](functions/_lib/util.ts)) : pas de dépendance à Astro ni
 à Cloudflare au runtime. Le module virtuel `astro:content` est remplacé par un
 stub (voir [vitest.config.ts](vitest.config.ts)).
+
+[src/styles/tokens.test.ts](src/styles/tokens.test.ts) vérifie en outre que
+chaque paire fond/texte des deux thèmes (clair et sombre) atteint un contraste
+**WCAG AA ≥ 4.5:1** : ajouter une paire `--x-bg` / `--x-fg` dans
+`global.css` suffit pour qu'elle soit couverte.
 
 ```bash
 npm test           # une passe
