@@ -30,6 +30,11 @@ l'historique Git public.
 > cliquez sur **Valider** — le PDF et la fiche sont commités automatiquement
 > dans le dépôt et le site se reconstruit. Voir [DEPLOY.md](DEPLOY.md).
 
+Pour un document produit en **LaTeX** (sujets retranscrits, corrigés rédigés),
+suivez les conventions de [sources/README.md](sources/README.md) — style sobre
+N&B, entête `\entetecorrige` et encadrés pédagogiques (`methode`, `rappel`,
+`piege`) pour les corrigés.
+
 Pour ajouter un document **à la main** dans la bibliothèque :
 
 1. Déposez le(s) PDF dans `public/pdfs/`, par ex.
