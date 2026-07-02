@@ -1,0 +1,182 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+
+\begin{document}
+
+\entetesujet{Corrigé bac 2019 -- Série D}
+
+\matiere{CHIMIE}{8 points}
+\partie{A : vérification des connaissances}
+
+\question{1. Texte à trous}
+Lorsque les noyaux de certains \emph{atomes} se désintègrent, ils émettent d'une part des \emph{particules}, d'autre part un \emph{rayonnement} électromagnétique de très courte \emph{longueur} d'onde.
+
+\question{2. Question à réponse construite}
+À la suite d'une émission radioactive, un noyau père se transforme en un noyau fils, qui peut être instable et se transformer à son tour jusqu'à obtenir un noyau stable. On appelle \textbf{famille radioactive} l'ensemble formé par le noyau père et ses descendants.
+
+\question{3.}
+\textbf{a) Vrai.} Un indicateur coloré est une solution dont l'acide et la base conjuguée ont des teintes différentes ; sa \emph{zone de virage} est l'intervalle de pH où il change de teinte.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[->] (0,0)--(8.3,0) node[right]{pH};
+  \draw (0,-0.05)--(0,0.05) node[below=3pt]{$0$}; \draw (8,-0.05)--(8,0.05) node[below=3pt]{$14$};
+  \draw[dashed] (3,-0.15)--(3,0.6); \draw[dashed] (4.3,-0.15)--(4.3,0.6);
+  \node at (1.5,0.35){\scriptsize teinte acide}; \node at (1.5,0.05){}; \node at (1.5,-0.35){\scriptsize AH prédomine};
+  \node at (3.65,0.75){\scriptsize zone de virage}; \node[below] at (3.65,-0.1){\scriptsize p$K_A$};
+  \node at (6,0.35){\scriptsize teinte basique}; \node at (6,-0.35){\scriptsize $\ch{A^-}$ prédomine};
+\end{tikzpicture}
+\end{center}
+Exemple :
+\begin{center}\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|}
+\hline Nom & Teinte acide & Zone de virage & Teinte basique \\
+\hline Bleu de bromothymol (BBT) & jaune & 6,0 -- 7,6 & bleu \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{b) Faux.} Les niveaux d'énergie (eV) de l'atome d'hydrogène sont $E_n = \dfrac{-13{,}6}{n^2}$ ($n \in \N^*$). Le niveau le plus bas $E_1 = -13{,}6$ eV ($n=1$) est le niveau fondamental (état le plus stable).
+
+\textbf{c) Vrai.} La température d'ébullition d'un solvant augmente après ajout d'un soluté non volatil. L'élévation ébulliométrique $\Delta T_{eb} = K_{eb}\dfrac{n_{\text{soluté}}}{m_{\text{solvant}}} = K_{eb}\dfrac{m_{\text{soluté}}}{M_{\text{soluté}}\,m_{\text{solvant}}}$ : $\Delta T_{eb}$ est inversement proportionnelle à la masse molaire du soluté.
+
+\textbf{d) Faux.} Deux erreurs : le volume molaire s'exprime en L/mol (et non mol/L) ; et cette loi s'applique aux \emph{gaz parfaits} (dans les CNTP, $1{,}013\cdot10^{5}$ Pa et $0\,^\circ$C, une mole occupe 22,4 L).
+
+\textbf{e) Faux.} Pour $\alpha A + \beta B \rightleftharpoons \gamma C + \delta D$, la constante d'équilibre $K = \dfrac{[C]_{eq}^{\gamma}[D]_{eq}^{\delta}}{[A]_{eq}^{\alpha}[B]_{eq}^{\beta}}$ ne dépend que de la réaction considérée et de la température.
+
+\partie{B : application des connaissances}
+
+\question{1.} Pour $\ch{2\,NO_2 \longrightarrow 2\,NO + O_2}$ (un seul réactif), $v = k[\ch{NO_2}]^n$ ($n$ = ordre global). Des mesures :
+\[ \begin{cases} 0{,}39 = k(0{,}85)^n \\ 0{,}65 = k(1{,}10)^n \\ 1{,}38 = k(1{,}6)^n \end{cases} \]
+En divisant (2) par (1) : $\dfrac{0{,}65}{0{,}39} = \left(\dfrac{1{,}10}{0{,}85}\right)^n$, d'où $n = \dfrac{\ln(0{,}65/0{,}39)}{\ln(1{,}10/0{,}85)} = 2$. La réaction est d'ordre global 2.
+
+Constante de vitesse : $k = \dfrac{v}{[\ch{NO_2}]^2}$, en $\text{L}\cdot\text{mol}^{-1}\cdot\text{s}^{-1}$. Avec (3) : $k = \dfrac{1{,}38}{(1{,}6)^2} = 0{,}54\ \text{L}\cdot\text{mol}^{-1}\cdot\text{s}^{-1}$.
+
+\question{2.} Loi de vitesse : $v = 0{,}54\,[\ch{NO_2}]^2$. Or $v = -\dfrac{1}{2}\dfrac{d[\ch{NO_2}]}{dt}$, d'où $-\dfrac{d[\ch{NO_2}]}{[\ch{NO_2}]^2} = 2k\,dt$. En intégrant : $\dfrac{1}{[\ch{NO_2}]} - \dfrac{1}{[\ch{NO_2}]_0} = 2k\,t = 1{,}08\,t$.
+
+\question{3.} À $t_{1/2}$, $[\ch{NO_2}] = \frac{[\ch{NO_2}]_0}{2}$ : $\dfrac{2}{[\ch{NO_2}]_0} - \dfrac{1}{[\ch{NO_2}]_0} = 2k\,t_{1/2}$, d'où $t_{1/2} = \dfrac{1}{2k[\ch{NO_2}]_0} = \dfrac{1}{2\times 0{,}54\times 1{,}10} = 0{,}84$ s.
+
+\question{4.} Pour $[\ch{NO_2}] = \frac{1}{4}[\ch{NO_2}]_0$ : $\dfrac{4}{[\ch{NO_2}]_0} - \dfrac{1}{[\ch{NO_2}]_0} = 2k\,t$, soit $t = \dfrac{3}{2k[\ch{NO_2}]_0} = \dfrac{3}{2\times 0{,}54\times 1{,}10} = 2{,}52$ s.
+
+\matiere{PHYSIQUE}{12 points}
+\partie{A : vérification des connaissances}
+
+\question{1. Appariement}
+$A_1 = B_2$ ; \quad $A_4 = B_4$ ; \quad $A_2 = B_5$ ; \quad $A_3 = B_1$.
+
+Toute mesure comporte une incertitude. L'\textbf{incertitude absolue} $\Delta X$ est l'écart maximum entre la valeur mesurée et la valeur exacte (nombre concret ; ex. $L = 100 \pm 5$ cm). L'\textbf{incertitude relative} $\dfrac{\Delta X}{X}$ est sans unité (souvent en \%) ; ex. $m = 2{,}12 \pm 0{,}25$ g donne $\dfrac{0{,}25}{2{,}12} = 12\,\%$.
+
+\underline{Expérience de Melde} (corde tendue entre un vibreur et une poulie) :
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \fill (0,0.6) rectangle (0.5,0.75); \node[below] at (0.25,0.55){\scriptsize vibreur};
+  \draw (0.5,0.675)--(5.3,0.675);
+  \draw (5.6,0.675) circle (0.3); \draw (5.9,0.675)--(5.9,-0.1); \fill (5.75,-0.35) rectangle (6.05,-0.1);
+  \node at (3,-0.5){\scriptsize Figure 1};
+\end{tikzpicture}
+\end{center}
+Pour certaines fréquences, on observe des \textbf{fuseaux} fixes (onde stationnaire) :
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \fill (0,0.6) rectangle (0.5,0.75);
+  \draw[thick] plot[domain=0.5:5.3,samples=100] (\x,{0.675+0.32*sin(deg(pi*(\x-0.5)/1.2))});
+  \draw[thick] plot[domain=0.5:5.3,samples=100] (\x,{0.675-0.32*sin(deg(pi*(\x-0.5)/1.2))});
+  \draw (5.6,0.675) circle (0.3); \draw (5.9,0.675)--(5.9,-0.1); \fill (5.75,-0.35) rectangle (6.05,-0.1);
+  \draw[->] (1.7,-0.2)--(1.7,0.5); \node[below] at (1.7,-0.2){\scriptsize ventre};
+  \draw[->] (2.9,-0.2)--(2.9,0.6); \node[below] at (2.9,-0.2){\scriptsize nœud};
+  \node at (3,-0.75){\scriptsize Figure 2};
+\end{tikzpicture}
+\end{center}
+Les \textbf{nœuds} sont les points d'amplitude nulle ; les \textbf{ventres}, les points d'amplitude maximale.
+
+\question{2.} La tension à appliquer entre anode et cathode d'une cellule photoélectrique pour annuler le courant est le \textbf{potentiel d'arrêt}. La cathode éclairée émet des électrons (effet photoélectrique), captés par l'anode (potentiel positif) : il en résulte un faible courant.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw (0,-0.8) rectangle (4,1);
+  \draw[thick] (1,-0.4)--(1,0.6); \node[above] at (1,0.6){\scriptsize cathode};
+  \draw[thick] (3,-0.4)--(3,0.6); \node[above] at (3,0.6){\scriptsize anode};
+  \draw[->,thick] (4.4,1.4)--(1.2,0.3); \node[right] at (4,1.3){\scriptsize lumière};
+  \draw[->] (1.2,0.1)--(2.8,0.1); \node at (2,0.28){\scriptsize $e^-$};
+  \node[below] at (1,-0.4){\scriptsize émetteur}; \node[below] at (3,-0.4){\scriptsize collecteur};
+\end{tikzpicture}
+\end{center}
+
+\question{3.} Pour un mouvement circulaire uniformément accéléré, $\vv{a} = \vv{a_N} + \vv{a_T}$ ($\vv{a_N}$ centripète, $\vv{a_T}$ tangentiel de même sens que $\vv{v}$) : $\vv{a}$ est orienté vers l'intérieur de la courbure sans être centripète.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw (0,0) circle (1.5); \fill (0,0) circle (1pt) node[below]{$O$};
+  \coordinate (M) at (-1.3,0.75);
+  \fill (M) circle (1.5pt) node[left]{$M$};
+  \draw[->,thick] (M)--++(1.3,0.75) node[above]{$\vv{v}$};
+  \draw[->,thick] (M)--++(0.75,-1.3) node[right]{$\vv{a_N}$};
+  \draw[->,thick] (M)--++(0.65,0.375) node[above]{$\vv{a_T}$};
+  \draw[->,thick,red] (M)--++(1.0,-0.55) node[right]{$\vv{a}$};
+  \draw[->] (-1.6,-0.4) arc[start angle=200,end angle=250,radius=1.5];
+  \node[left] at (-1.7,0){\scriptsize sens};
+\end{tikzpicture}
+\end{center}
+
+\partie{B : application des connaissances}
+
+\question{1.} \textbf{Phase 1 :} l'ascenseur est en mouvement rectiligne uniformément accéléré (MRUA). \textbf{Phase 2 :} mouvement rectiligne uniforme (vitesse constante). \textbf{Phase 3 :} mouvement rectiligne uniformément décéléré/ralenti (MRUD/MRUR).
+
+\question{2.}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \fill[pattern=north east lines] (-0.4,3)rectangle(0.4,3.15); \draw (-0.4,3)--(0.4,3);
+  \draw[decorate,decoration={coil,segment length=5pt,amplitude=5pt}] (0,3)--(0,1);
+  \draw[<->] (-0.9,3)--(-0.9,1); \node[left] at (-0.9,2){$L_0$};
+  \fill (-0.2,0.6) rectangle (0.2,1);
+  \draw[<->] (0.9,3)--(0.9,0.8); \node[right] at (0.9,1.9){$L$};
+  \draw[<->] (0.55,1)--(0.55,0.8); \node[right] at (0.55,0.9){$\Delta L$};
+  \draw[->,thick,blue] (0,0.8)--(0,1.5) node[above]{$\vv{T}$};
+  \draw[->,thick,green!60!black] (0,0.6)--(0,-0.1) node[below]{$\vv{P}$};
+\end{tikzpicture}
+\end{center}
+\textbf{a.} TCI : $\vv{P} + \vv{T} = m\vv{a}$, soit $-mg + k(L - L_0) = ma$, d'où $\boxed{L = \dfrac{m}{k}(g + a) + L_0}$.
+
+\textbf{b.} \underline{Phase 1 (MRUA)} : $a = \dfrac{v^2 - v_0^2}{2(x - x_0)} = \dfrac{6^2}{2\times 6} = 3\ \text{m}\cdot\text{s}^{-2}$, d'où $L = \dfrac{0{,}3}{30}(10 + 3) + 0{,}2 = 0{,}33$ m $= 33$ cm.
+
+\underline{Phase 2} ($a = 0$) : $L = \dfrac{m}{k}g + L_0 = \dfrac{0{,}3}{30}\times 10 + 0{,}2 = 0{,}3$ m $= 30$ cm.
+
+\underline{Phase 3 (MRUD)} : $a = \dfrac{v - v_0}{t} = \dfrac{0 - 6}{2{,}5} = -2{,}4\ \text{m}\cdot\text{s}^{-2}$, d'où $L = \dfrac{0{,}3}{30}(10 - 2{,}4) + 0{,}2 = 0{,}276$ m $= 27{,}6$ cm.
+
+\partie{C : résolution d'un problème}
+
+\question{1.}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \fill[pattern=north east lines] (-0.4,3)rectangle(0.4,3.15); \draw (-0.4,3)--(0.4,3);
+  \draw[decorate,decoration={coil,segment length=5pt,amplitude=5pt}] (0,3)--(0,1.1);
+  \draw[<->] (-0.9,3)--(-0.9,1.4); \node[left] at (-0.9,2.2){$L_1$};
+  \fill (-0.2,0.7) rectangle (0.2,1.1);
+  \draw[->,thick,blue] (0,1.1)--(0,1.7) node[above]{$\vv{T}$};
+  \draw[->,thick,red] (0,0.7)--(0,0.0) node[below]{$\vv{P}$};
+\end{tikzpicture}
+\end{center}
+À l'équilibre $\vv{P} + \vv{T} = \vec{0}$ : $-mg + k(L_1 - L_0) = 0$, d'où $k = \dfrac{mg}{L_1 - L_0} = \dfrac{0{,}2\times 10}{0{,}3 - 0{,}2} = 20\ \text{N}\cdot\text{m}^{-1}$.
+
+\question{2.} Le ressort-pendule tourne autour de l'axe vertical $(\Delta)$, la masse $S$ décrivant un cercle horizontal (rayon $R = L_2\sin\alpha$).
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[dashed] (0,2.6)--(0,-0.6); \node[left] at (0,-0.4){$(\Delta)$};
+  \coordinate (O) at (0,2.4); \fill (O) circle (1pt) node[above right]{$O$};
+  \coordinate (S) at (1.7,0.6);
+  \draw[decorate,decoration={coil,segment length=4pt,amplitude=3.5pt}] (O)--(S);
+  \fill (S) circle (2pt) node[right]{$(S)$};
+  \draw[dashed] (S)++(-1.7,0) ellipse (1.7 and 0.4);
+  \draw (0,1.9) arc[start angle=-90,end angle=-32,radius=0.5]; \node at (0.28,1.7){\scriptsize$\alpha$};
+  \draw[->,thick,blue] (S)--($(O)!0.5!(S)$) node[midway,above right]{$\vv{T}$};
+  \draw[->,thick,blue] (S)--++(0,0.85) node[above]{$\vv{T_y}$};
+  \draw[->,thick,blue] (S)--++(-0.85,0) node[left]{$\vv{T_x}$};
+  \draw[->,thick,red] (S)--++(0,-0.9) node[below]{$\vv{P}$};
+\end{tikzpicture}
+\end{center}
+$a_T = 0$ (uniforme), $a = a_N = L_2\omega^2\sin\alpha$. PFD $\vv{P} + \vv{T} = m\vv{a}$ donne $\begin{cases} T = mL_2\omega^2 & (1) \\ T\cos\alpha = mg & (2) \end{cases}$.
+
+\textbf{b.1} De (2) : $k(L_2 - L_0)\cos\alpha = mg$, d'où $L_2 = \dfrac{mg}{k\cos\alpha} + L_0 = \dfrac{0{,}2\times 10}{20\times\cos 30^\circ} + 0{,}2 = 0{,}315$ m $= 31{,}5$ cm.
+
+\textbf{b.2} En divisant (1) par (2) : $\dfrac{1}{\cos\alpha} = \dfrac{L_2\omega^2}{g}$, d'où $\omega = \sqrt{\dfrac{g}{L_2\cos\alpha}} = \sqrt{\dfrac{10}{0{,}315\times\cos 30^\circ}} = 6{,}05$ rad/s.
+
+\textbf{b.3} $T = \dfrac{2\pi}{\omega} = \dfrac{2\pi}{6{,}05} = 1{,}04$ s.
+
+\end{document}
