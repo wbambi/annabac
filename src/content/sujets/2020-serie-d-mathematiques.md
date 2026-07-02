@@ -5,4 +5,5 @@ matiere: "Mathématiques"
 session: "Normale"
 sujetPdf: "/pdfs/2020-serie-d-mathematiques-sujet.pdf"
 corrigePdf: "/pdfs/2020-serie-d-mathematiques-corrige.pdf"
+credit: "wbambi"
 ---

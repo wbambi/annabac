@@ -5,4 +5,5 @@ matiere: "Mathématiques"
 session: "Normale"
 sujetPdf: "/pdfs/2011-serie-c-mathematiques-sujet.pdf"
 corrigePdf: "/pdfs/2011-serie-c-mathematiques-corrige.pdf"
+credit: "wbambi"
 ---
