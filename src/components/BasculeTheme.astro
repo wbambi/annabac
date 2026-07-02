@@ -1,7 +1,7 @@
 ---
 // Bascule de thème à trois états : clair → sombre → système.
-// La préférence vit dans localStorage('theme') : 'light' | 'dark' | absente
-// (= suivre le système), en cohérence avec le script anti-FOUC du Layout.
+// La préférence vit dans localStorage('theme') : 'dark' | 'system' | absente
+// (= clair, le défaut du site), en cohérence avec l'anti-FOUC du Layout.
 import Icone from './Icone.astro';
 
 interface Props {
@@ -16,13 +16,13 @@ const { class: cls = '' } = Astro.props;
     'js-bascule-theme flex h-9 w-9 items-center justify-center rounded-full text-[color:var(--color-muted)] transition hover:bg-[color:var(--color-line)]/50 hover:text-[color:var(--color-ink)]',
     cls,
   ]}
-  data-pref="system"
-  aria-label="Thème : suit le système — activer le thème clair"
+  data-pref="light"
+  aria-label="Thème clair — activer le thème sombre"
   title="Changer de thème"
 >
-  <span data-ic="light" hidden><Icone nom="sun" taille={18} /></span>
+  <span data-ic="light"><Icone nom="sun" taille={18} /></span>
   <span data-ic="dark" hidden><Icone nom="moon" taille={18} /></span>
-  <span data-ic="system"><Icone nom="monitor" taille={18} /></span>
+  <span data-ic="system" hidden><Icone nom="monitor" taille={18} /></span>
 </button>
 
 <script>
@@ -42,16 +42,16 @@ const { class: cls = '' } = Astro.props;
   function prefStockee(): Pref {
     try {
       const v = localStorage.getItem('theme');
-      if (v === 'light' || v === 'dark') return v;
+      if (v === 'dark' || v === 'system') return v;
     } catch {
-      /* localStorage indisponible (navigation privée) : mode système */
+      /* localStorage indisponible (navigation privée) : thème clair */
     }
-    return 'system';
+    return 'light';
   }
 
   function memoriser(pref: Pref) {
     try {
-      if (pref === 'system') localStorage.removeItem('theme');
+      if (pref === 'light') localStorage.removeItem('theme');
       else localStorage.setItem('theme', pref);
     } catch {
       /* tant pis : la préférence ne survivra pas à la page */

@@ -90,7 +90,7 @@ const estActif = (href: string) =>
         } catch (e) {}
         var sombre =
           pref === 'dark' ||
-          (pref !== 'light' &&
+          (pref === 'system' &&
             window.matchMedia('(prefers-color-scheme: dark)').matches);
         document.documentElement.dataset.theme = sombre ? 'dark' : 'light';
         if (sombre) {
