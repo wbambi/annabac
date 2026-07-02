@@ -4,7 +4,7 @@
 
 \begin{document}
 
-\entetesujet{Correction bac 2020 -- Série C}
+\entetecorrige{2020}{C}{Mathématiques}
 
 % ====================== EXERCICE 1 ======================
 \exo{1}{}
@@ -22,6 +22,20 @@ D'où les équations $(E_0)$ et $(E_1)$ sont équivalentes.
 \[ \begin{cases} 2x \equiv 3\ [7] \\ 2 \times (-9) \equiv 3\ [7] \end{cases} \Longleftrightarrow 2x \equiv 2 \times (-9)\ [7] \Longleftrightarrow 2(x + 9) \equiv 0\ [7] \Longleftrightarrow 7 \mid 2(x + 9). \]
 Comme 7 est premier avec 2, d'après Gauss, 7 divise $x + 9$. Il existe donc $k \in \Z$ tel que $x + 9 = 7k$. D'où $x = -9 + 7k$. Les solutions de $(E_1)$ sont $\{-9 + 7k\,;k \in \Z\}$.
 
+\begin{rappel}
+Théorème de Gauss : si un entier $a$ divise un produit $bc$ et si $a$ est
+premier avec $b$, alors $a$ divise $c$. C'est lui qui permet de passer de
+$7 \mid 2(x+9)$ à $7 \mid x+9$, car 7 et 2 sont premiers entre eux.
+\end{rappel}
+
+\begin{methode}
+Pour résoudre une congruence $ax \equiv b\ [n]$ : \textbf{1)} chercher une
+solution particulière $x_0$ (essais successifs, ou identité de Bézout comme
+ici) ; \textbf{2)} soustraire les deux congruences pour obtenir
+$a(x - x_0) \equiv 0\ [n]$ ; \textbf{3)} conclure avec le théorème de Gauss
+lorsque $a$ et $n$ sont premiers entre eux : $x \equiv x_0\ [n]$.
+\end{methode}
+
 \textbf{3.} En remplaçant $x$ par $-9 + 7k$ dans $(E_0) : 2x - 7y = 3$, on obtient $y = -3 + 2k$. L'ensemble des solutions de $(E_0)$ est $\{(-9 + 7k\,,\,-3 + 2k)\,;k \in \Z\}$.
 
 \textbf{4. a.} $A = \{1\,;5\,;19\,;95\}$.
@@ -36,6 +50,12 @@ Comme 7 est premier avec 2, d'après Gauss, 7 divise $x + 9$. Il existe donc $k 
   \item $2 \times 19 - 7 \times 5 = 3$ : $(19, 5)$ est solution.
 \end{itemize}
 D'où $(19, 5)$ est le seul couple solution du système.
+
+\begin{piege}
+Un couple qui vérifie $xy = 95$ n'est pas forcément solution du système :
+chaque candidat doit aussi être testé dans $2x - 7y = 3$, sans en oublier
+(y compris les couples négatifs), avant de conclure.
+\end{piege}
 
 \underline{Autre méthode :} $(x, y)$ vérifie $2x - 7y = 3$, donc d'après 3., $(x, y) = (-9 + 7k\,,\,-3 + 2k)$, $k \in \Z$. Ce couple vérifie $xy = 95$ si $(-9 + 7k)(-3 + 2k) = 95$, soit $14k^2 - 39k - 68 = 0$, qui admet dans $\Z$ une seule solution $k = 4$. En remplaçant : $(-9 + 28\,,\,-3 + 8) = (19, 5)$. Donc $(19, 5)$ est le seul couple solution.
 
