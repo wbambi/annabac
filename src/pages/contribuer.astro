@@ -52,11 +52,11 @@ const champ =
       <label
         id="dropzone"
         for="fichier-input"
-        class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-6 py-10 text-center text-[color:var(--color-muted)] transition hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-ink)]"
+        class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-6 py-10 text-center text-[color:var(--color-muted)] transition hover:border-[color:var(--color-brand)] hover:text-[color:var(--color-ink)]"
       >
         <Icone nom="upload" taille={28} />
         <span class="text-sm text-[color:var(--color-ink)]">
-          <span class="font-medium text-[color:var(--color-accent)]">Choisir un fichier</span>
+          <span class="font-medium text-[color:var(--color-brand)]">Choisir un fichier</span>
           ou le glisser-déposer ici
         </span>
         <span class="text-xs">PDF uniquement, 5 Mo maximum.</span>
@@ -71,7 +71,7 @@ const champ =
           <Icone nom="file" taille={18} />
           <span class="truncate" data-nom></span>
         </span>
-        <button type="button" id="fichier-retirer" class="shrink-0 text-xs font-medium text-rose-600 hover:underline">
+        <button type="button" id="fichier-retirer" class="shrink-0 text-xs font-medium text-err hover:underline">
           Retirer
         </button>
       </div>
@@ -81,12 +81,12 @@ const champ =
     <fieldset class="flex flex-col gap-2 text-sm">
       <legend class="font-medium">De quoi s'agit-il ?</legend>
       <div class="grid gap-3 sm:grid-cols-2">
-        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-accent)] has-[:checked]:bg-[color:var(--color-canvas)] has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[color:var(--color-accent)]">
+        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-brand)] has-[:checked]:bg-[color:var(--color-canvas)] has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[color:var(--color-brand)]">
           <input type="radio" name="Type" value="sujet" required class="sr-only" />
           <span class="font-medium">Un sujet</span>
           <span class="text-xs text-[color:var(--color-muted)]">L'énoncé de l'épreuve</span>
         </label>
-        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-accent)] has-[:checked]:bg-[color:var(--color-canvas)] has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[color:var(--color-accent)]">
+        <label class="flex cursor-pointer flex-col gap-0.5 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] px-4 py-3 transition has-[:checked]:border-[color:var(--color-brand)] has-[:checked]:bg-[color:var(--color-canvas)] has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[color:var(--color-brand)]">
           <input type="radio" name="Type" value="corrige" class="sr-only" />
           <span class="font-medium">Un corrigé</span>
           <span class="text-xs text-[color:var(--color-muted)]">La correction d'un sujet existant</span>
@@ -169,14 +169,16 @@ const champ =
       </span>
     </label>
 
-    {sitekey && <div class="cf-turnstile" data-sitekey={sitekey} data-language="fr" />}
+    {/* data-theme="auto" : le widget suit le thème de l'OS (pas l'override
+        manuel du site — limitation acceptée du rendu implicite Turnstile). */}
+    {sitekey && <div class="cf-turnstile" data-sitekey={sitekey} data-language="fr" data-theme="auto" />}
 
     <div class="flex items-center gap-4">
       <button type="submit" class="btn btn-primary disabled:cursor-not-allowed disabled:opacity-40" disabled>
         <span
           data-spinner
           hidden
-          class="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"
+          class="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-[color:var(--btn-primary-fg)]/40 border-t-[color:var(--btn-primary-fg)]"
           aria-hidden="true"
         ></span>
         <span data-label>Envoyer pour vérification</span>
@@ -201,7 +203,7 @@ const champ =
   )}
 
   <section class="mt-12 max-w-2xl">
-    <h2 class="text-lg font-medium tracking-tight text-[color:var(--color-navy)]">
+    <h2 class="text-lg font-medium tracking-tight text-[color:var(--color-brand)]">
       Que deviennent les documents ?
     </h2>
     <ol class="mt-3 list-decimal space-y-1.5 pl-5 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
@@ -277,13 +279,13 @@ const champ =
   ['dragenter', 'dragover'].forEach((evt) =>
     dropzone?.addEventListener(evt, (e) => {
       e.preventDefault();
-      dropzone.classList.add('border-[color:var(--color-accent)]', 'text-[color:var(--color-ink)]');
+      dropzone.classList.add('border-[color:var(--color-brand)]', 'text-[color:var(--color-ink)]');
     })
   );
   ['dragleave', 'drop'].forEach((evt) =>
     dropzone?.addEventListener(evt, (e) => {
       e.preventDefault();
-      dropzone.classList.remove('border-[color:var(--color-accent)]', 'text-[color:var(--color-ink)]');
+      dropzone.classList.remove('border-[color:var(--color-brand)]', 'text-[color:var(--color-ink)]');
     })
   );
   dropzone?.addEventListener('drop', (e) => {
@@ -339,7 +341,7 @@ const champ =
     etat.textContent = texte;
     etat.className =
       'text-sm ' +
-      (type === 'ok' ? 'text-emerald-700' : type === 'err' ? 'text-rose-600' : 'text-[color:var(--color-muted)]');
+      (type === 'ok' ? 'text-ok' : type === 'err' ? 'text-err' : 'text-[color:var(--color-muted)]');
   }
 
   function validerPdf(f: File | null): string | null {
@@ -495,7 +497,7 @@ const champ =
     let cls = 'text-[color:var(--color-muted)]';
     if (type === 'corrige' && !sujetExiste) {
       msg = "Aucun sujet n'est encore publié pour cette combinaison : envoyez d'abord le sujet.";
-      cls = 'text-rose-600';
+      cls = 'text-err';
     } else if (type === 'corrige' && corrigeExiste) {
       msg = 'Un corrigé existe déjà ici ; vous pouvez tout de même en proposer un autre.';
     } else if (type === 'sujet' && sujetExiste) {

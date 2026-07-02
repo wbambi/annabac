@@ -67,8 +67,10 @@ const jsonLd = {
   />
   <div class="flex items-center gap-4">
     <span
-      class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl"
-      style={`background:${styleMatiere(matiereNom).bg};color:${styleMatiere(matiereNom).fg}`}
+      class:list={[
+        'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl',
+        styleMatiere(matiereNom).classe,
+      ]}
     >
       <Icone nom={styleMatiere(matiereNom).icon} taille={28} />
     </span>

@@ -1,0 +1,27 @@
+# En-têtes servis par Cloudflare Pages (fichiers statiques uniquement).
+#
+# CSP : le seul script inline autorisé est l'anti-FOUC du Layout, référencé
+# par son hash SHA-256. Si ce script change, recalculer le hash après build :
+#   node -e "const m=require('fs').readFileSync('dist/index.html','utf8').match(/<script>([\s\S]*?)<\/script>/);console.log('sha256-'+require('crypto').createHash('sha256').update(m[1]).digest('base64'))"
+#
+# - challenges.cloudflare.com : widget Turnstile (script + iframe)
+# - static.cloudflareinsights.com / cloudflareinsights.com : beacon analytics
+# - 'wasm-unsafe-eval' : Pagefind (recherche plein texte en WebAssembly)
+# - style-src 'unsafe-inline' : styles inline injectés par le loader Turnstile
+#   (compromis assumé ; les styles du site sont en fichiers externes)
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-zh4ub9WgAKpMoDT+TUWmGCSKfY2Nw5ZPVxtNM+UT2eI=' 'wasm-unsafe-eval' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()
+
+# Assets Vite : noms hachés par contenu, cache long sans risque.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# PDF : 7 jours (pas immutable — une re-soumission approuvée peut remplacer
+# un document au même chemin public/pdfs/{base}-*.pdf).
+/pdfs/*
+  Cache-Control: public, max-age=604800

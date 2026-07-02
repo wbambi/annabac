@@ -30,52 +30,55 @@ export function cleSujet(data: {
   return `${data.annee}|${data.serie}|${data.matiere}|${data.session}`;
 }
 
-/** Couleur (fond clair + texte/icône foncé) et icône par matière. */
+/**
+ * Style d'une matière : classe de pastille + icône. Les couleurs vivent dans
+ * global.css (classes .pastille-*, déclinées en clair et en sombre) — jamais
+ * de hex ici, pour que tout suive le thème actif.
+ */
 export interface StyleMatiere {
-  bg: string;
-  fg: string;
+  classe: string;
   icon: string;
 }
 
 const STYLES_MATIERE: Record<string, StyleMatiere> = {
-  Mathématiques: { bg: '#E6F1FB', fg: '#0C447C', icon: 'calculator' },
-  'Physique-Chimie': { bg: '#EEEDFE', fg: '#3C3489', icon: 'atom' },
-  SVT: { bg: '#EAF3DE', fg: '#27500A', icon: 'leaf' },
-  Philosophie: { bg: '#FAEEDA', fg: '#633806', icon: 'bulb' },
-  Français: { bg: '#FAECE7', fg: '#712B13', icon: 'book' },
-  'Histoire-Géographie': { bg: '#E1F5EE', fg: '#085041', icon: 'globe' },
-  Anglais: { bg: '#FBEAF0', fg: '#72243E', icon: 'language' },
-  Espagnol: { bg: '#FCEBEB', fg: '#791F1F', icon: 'language' },
+  Mathématiques: { classe: 'pastille-maths', icon: 'calculator' },
+  'Physique-Chimie': { classe: 'pastille-physique', icon: 'atom' },
+  SVT: { classe: 'pastille-svt', icon: 'leaf' },
+  Philosophie: { classe: 'pastille-philo', icon: 'bulb' },
+  Français: { classe: 'pastille-francais', icon: 'book' },
+  'Histoire-Géographie': { classe: 'pastille-histoire-geo', icon: 'globe' },
+  Anglais: { classe: 'pastille-anglais', icon: 'language' },
+  Espagnol: { classe: 'pastille-espagnol', icon: 'language' },
 };
 
-const RAMPS_FALLBACK: { bg: string; fg: string }[] = [
-  { bg: '#E6F1FB', fg: '#0C447C' },
-  { bg: '#EEEDFE', fg: '#3C3489' },
-  { bg: '#EAF3DE', fg: '#27500A' },
-  { bg: '#FAEEDA', fg: '#633806' },
-  { bg: '#FAECE7', fg: '#712B13' },
-  { bg: '#E1F5EE', fg: '#085041' },
-  { bg: '#FBEAF0', fg: '#72243E' },
-  { bg: '#FCEBEB', fg: '#791F1F' },
-];
+const NB_RAMPS = 8;
+
+/** Ensemble fini des classes de pastille existant dans global.css. */
+export const CLASSES_PASTILLE: ReadonlySet<string> = new Set([
+  ...Object.values(STYLES_MATIERE).map((s) => s.classe),
+  ...Array.from({ length: NB_RAMPS }, (_, i) => `pastille-ramp-${i}`),
+  'pastille-serie-a',
+  'pastille-serie-c',
+  'pastille-serie-d',
+  'pastille-serie-defaut',
+]);
 
 export function styleMatiere(matiere: string): StyleMatiere {
   const trouve = STYLES_MATIERE[matiere];
   if (trouve) return trouve;
   let h = 0;
   for (const c of matiere) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-  return { ...RAMPS_FALLBACK[h % RAMPS_FALLBACK.length], icon: 'file' };
+  return { classe: `pastille-ramp-${h % NB_RAMPS}`, icon: 'file' };
 }
 
-/** Couleur par série. */
-const STYLES_SERIE: Record<string, { bg: string; fg: string }> = {
-  A: { bg: '#FAECE7', fg: '#712B13' },
-  C: { bg: '#E6F1FB', fg: '#0C447C' },
-  D: { bg: '#E1F5EE', fg: '#085041' },
-};
+/** Classe de pastille par série. */
+const SERIES_CONNUES = new Set(['a', 'c', 'd']);
 
-export function styleSerie(code: string): { bg: string; fg: string } {
-  return STYLES_SERIE[code] ?? { bg: '#F1EFE8', fg: '#2C2C2A' };
+export function styleSerie(code: string): { classe: string } {
+  const c = code.toLowerCase();
+  return {
+    classe: SERIES_CONNUES.has(c) ? `pastille-serie-${c}` : 'pastille-serie-defaut',
+  };
 }
 
 /** Slug d'URL (sans accents, minuscule, tirets) pour matières/séries. */

@@ -5,15 +5,15 @@ import Fil from '../components/Fil.astro';
 const depot = 'https://github.com/Bac-242/annabac';
 
 const valeurs = [
-  { label: 'Gratuit', bg: '#E1F5EE', fg: '#085041' },
-  { label: 'Libre (open source)', bg: '#E6ECF7', fg: '#14245C' },
-  { label: 'Collaboratif', bg: '#FAEEDA', fg: '#633806' },
+  { label: 'Gratuit', pastille: 'pastille-teal' },
+  { label: 'Libre (open source)', pastille: 'pastille-brand' },
+  { label: 'Collaboratif', pastille: 'pastille-ambre' },
 ];
 
 const lien =
-  'font-medium text-[color:var(--color-accent)] underline-offset-2 hover:underline';
+  'font-medium text-[color:var(--color-brand)] underline-offset-2 hover:underline';
 const titreSection =
-  'text-lg font-medium tracking-tight text-[color:var(--color-navy)]';
+  'text-lg font-medium tracking-tight text-[color:var(--color-brand)]';
 ---
 
 <Layout
@@ -31,10 +31,7 @@ const titreSection =
     </p>
     <div class="mt-5 flex flex-wrap gap-2.5">
       {valeurs.map((v) => (
-        <span
-          class="rounded-full px-3.5 py-1.5 text-[13px] font-medium"
-          style={`background:${v.bg};color:${v.fg}`}
-        >
+        <span class:list={['rounded-full px-3.5 py-1.5 text-[13px] font-medium', v.pastille]}>
           {v.label}
         </span>
       ))}

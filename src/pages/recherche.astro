@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Fil from '../components/Fil.astro';
+---
+
+<Layout
+  titre="Recherche"
+  description="Rechercher un sujet ou un corrigé du baccalauréat congolais par matière, série ou année."
+  horsRecherche
+>
+  <Fil items={[{ href: '/', label: 'Accueil' }, { label: 'Recherche' }]} />
+  <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Recherche</h1>
+  <p class="mt-2 text-[color:var(--color-muted)]">
+    Cherchez une épreuve par matière, série ou année — par exemple
+    « mathématiques série C 2020 ».
+  </p>
+
+  <div id="recherche" class="mt-6"></div>
+
+  <noscript>
+    <p class="mt-4 text-sm text-[color:var(--color-muted)]">
+      La recherche nécessite JavaScript. Vous pouvez aussi parcourir les
+      annales par <a href="/series" class="text-[color:var(--color-brand)] underline">série</a>,
+      <a href="/annees" class="text-[color:var(--color-brand)] underline">année</a> ou
+      <a href="/matieres" class="text-[color:var(--color-brand)] underline">matière</a>.
+    </p>
+  </noscript>
+</Layout>
+
+<style is:global>
+  /* Thème de la Pagefind UI mappé sur nos tokens : suit le clair/sombre. */
+  #recherche {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: var(--brand);
+    --pagefind-ui-text: var(--ink);
+    --pagefind-ui-background: var(--surface);
+    --pagefind-ui-border: var(--line);
+    --pagefind-ui-tag: var(--line);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 0.75rem;
+    --pagefind-ui-font: var(--font-sans);
+  }
+</style>
+
+<script>
+  // L'index Pagefind est produit au build (`pagefind --site dist`, cf.
+  // package.json) : il n'existe pas sous `astro dev`, d'où le repli.
+  // pagefind-ui.js est un script classique (pas un module ES) qui expose
+  // window.PagefindUI — on le charge donc via une balise <script>.
+  function chargerScript(src: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error(`échec de chargement : ${src}`));
+      document.head.append(s);
+    });
+  }
+
+  async function initialiser() {
+    const conteneur = document.getElementById('recherche');
+    if (!conteneur) return;
+    try {
+      const feuille = document.createElement('link');
+      feuille.rel = 'stylesheet';
+      feuille.href = '/pagefind/pagefind-ui.css';
+      document.head.append(feuille);
+      await chargerScript('/pagefind/pagefind-ui.js');
+      // @ts-expect-error global défini par pagefind-ui.js
+      new window.PagefindUI({
+        element: '#recherche',
+        showSubResults: false,
+        showImages: false,
+        autofocus: true,
+        translations: {
+          placeholder: 'Matière, série, année…',
+          zero_results: 'Aucun résultat pour « [SEARCH_TERM] »',
+        },
+      });
+    } catch {
+      conteneur.textContent =
+        "L'index de recherche n'est pas encore construit. En développement : " +
+        '« npm run build » puis « npm run preview ».';
+      conteneur.className = 'mt-6 text-sm text-[color:var(--color-muted)]';
+    }
+  }
+  initialiser();
+</script>

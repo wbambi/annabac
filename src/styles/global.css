@@ -1,25 +1,174 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-/* Palette : bleu nuit dominant + turquoise en accent */
+/* Variante `dark:` pilotée par l'attribut data-theme posé sur <html>
+   (voir le script anti-FOUC dans Layout.astro). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ---------------------------------------------------------------------------
+   Tokens bruts. La valeur effective dépend du thème actif : Tailwind les
+   expose via `@theme inline` plus bas, donc les utilitaires générés
+   référencent var(...) et suivent le thème au runtime.
+   Palette : bleu nuit dominant + turquoise en accent.
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --canvas: #f6f8fb; /* fond de page (bleuté très clair) */
+  --surface: #ffffff; /* cartes */
+  --ink: #1b2433; /* texte principal */
+  --muted: #5b6472; /* texte secondaire */
+  --line: #e6e8ee; /* filets / bordures discrètes */
+
+  --brand: #14245c; /* marque : titres, liens, logo */
+  --brand-hover: #1d3275;
+  --teal: #0a7355; /* turquoise interactif (assombri : AA sur fond clair) */
+  --teal-hover: #085e46;
+  --teal-vif: #0f9e75; /* turquoise décoratif (pastilles sur fond navy) */
+
+  /* Fonds pleins de marque : restent bleu nuit dans les deux thèmes. */
+  --hero: #14245c;
+
+  /* Boutons pleins : paires fond/texte qui s'inversent en sombre. */
+  --btn-primary-bg: #14245c;
+  --btn-primary-bg-hover: #1d3275;
+  --btn-primary-fg: #ffffff;
+  --btn-teal-bg: #0a7355;
+  --btn-teal-bg-hover: #085e46;
+  --btn-teal-fg: #ffffff;
+
+  /* Tons de statut (badges, messages, états). */
+  --ok-bg: #ecfdf5;
+  --ok-fg: #047857;
+  --info-bg: #f0f9ff;
+  --info-fg: #0369a1;
+  --corrige-bg: #f5f3ff;
+  --corrige-fg: #6d28d9;
+  --err-bg: #fff1f2;
+  --err-fg: #be123c;
+
+  --skeleton-hi: #eef1f6; /* reflet du shimmer */
+
+  /* Pastilles matières (paires fond/texte, AA ≥ 4.5:1). */
+  --mat-maths-bg: #e6f1fb;
+  --mat-maths-fg: #0c447c;
+  --mat-physique-bg: #eeedfe;
+  --mat-physique-fg: #3c3489;
+  --mat-svt-bg: #eaf3de;
+  --mat-svt-fg: #27500a;
+  --mat-philo-bg: #faeeda;
+  --mat-philo-fg: #633806;
+  --mat-francais-bg: #faece7;
+  --mat-francais-fg: #712b13;
+  --mat-histoire-geo-bg: #e1f5ee;
+  --mat-histoire-geo-fg: #085041;
+  --mat-anglais-bg: #fbeaf0;
+  --mat-anglais-fg: #72243e;
+  --mat-espagnol-bg: #fcebeb;
+  --mat-espagnol-fg: #791f1f;
+  --serie-defaut-bg: #f1efe8;
+  --serie-defaut-fg: #2c2c2a;
+
+  /* Pastilles génériques (accueil, à-propos). */
+  --pastille-teal-bg: #e1f5ee;
+  --pastille-teal-fg: #0a7355;
+  --pastille-brand-bg: #e6ecf7;
+  --pastille-brand-fg: #14245c;
+  --pastille-ambre-bg: #faeeda;
+  --pastille-ambre-fg: #633806;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --canvas: #0f1522;
+  --surface: #171f2e;
+  --ink: #e7ebf3;
+  --muted: #9aa4b5;
+  --line: #2a3345;
+
+  --brand: #a9bcf5;
+  --brand-hover: #c2d0fa;
+  --teal: #35c496;
+  --teal-hover: #5ad3ab;
+  --teal-vif: #34d7a6;
+
+  --btn-primary-bg: #a9bcf5;
+  --btn-primary-bg-hover: #c2d0fa;
+  --btn-primary-fg: #101730;
+  --btn-teal-bg: #35c496;
+  --btn-teal-bg-hover: #5ad3ab;
+  --btn-teal-fg: #072e21;
+
+  --ok-bg: #0b2e23;
+  --ok-fg: #5fd4a5;
+  --info-bg: #0c2a3b;
+  --info-fg: #67c3f0;
+  --corrige-bg: #241b3e;
+  --corrige-fg: #c4b0f5;
+  --err-bg: #3b111c;
+  --err-fg: #f49cb1;
+
+  --skeleton-hi: #232e42;
+
+  --mat-maths-bg: #132a42;
+  --mat-maths-fg: #93c3f2;
+  --mat-physique-bg: #211e45;
+  --mat-physique-fg: #b3acf2;
+  --mat-svt-bg: #1d2e12;
+  --mat-svt-fg: #afd48c;
+  --mat-philo-bg: #33270f;
+  --mat-philo-fg: #e5b877;
+  --mat-francais-bg: #38200f;
+  --mat-francais-fg: #eda98d;
+  --mat-histoire-geo-bg: #10302a;
+  --mat-histoire-geo-fg: #7fd6bd;
+  --mat-anglais-bg: #351622;
+  --mat-anglais-fg: #efa9c2;
+  --mat-espagnol-bg: #361616;
+  --mat-espagnol-fg: #f0a8a8;
+  --serie-defaut-bg: #2b2a26;
+  --serie-defaut-fg: #d6d3c8;
+
+  --pastille-teal-bg: #10302a;
+  --pastille-teal-fg: #7fd6bd;
+  --pastille-brand-bg: #1b2540;
+  --pastille-brand-fg: #a9bcf5;
+  --pastille-ambre-bg: #33270f;
+  --pastille-ambre-fg: #e5b877;
+}
+
 @theme {
-  --color-ink: #1b2433; /* texte principal */
-  --color-muted: #5b6472; /* texte secondaire */
-  --color-line: #e6e8ee; /* filets / bordures discrètes */
-  --color-surface: #ffffff; /* cartes */
-  --color-canvas: #f6f8fb; /* fond de page (bleuté très clair) */
-
-  --color-navy: #14245c; /* couleur de marque (hero, boutons, liens) */
-  --color-navy-hover: #1d3275;
-  --color-teal: #0f9e75; /* turquoise d'accent (bandeau, pastilles) */
-  --color-teal-hover: #0c8763;
-
-  --color-accent: #14245c; /* alias : liens & bouton primaire */
-  --color-accent-hover: #1d3275;
-
   --font-sans:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto,
     Helvetica, Arial, sans-serif;
+}
+
+/* Expose les tokens à Tailwind sans figer leur valeur : les utilitaires
+   (bg-canvas, text-ink, border-line…) suivent le thème actif. */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-teal: var(--teal);
+  --color-teal-hover: var(--teal-hover);
+  --color-teal-vif: var(--teal-vif);
+  --color-hero: var(--hero);
+
+  /* Statuts : `bg-ok-soft text-ok`, `bg-err-soft text-err`… */
+  --color-ok: var(--ok-fg);
+  --color-ok-soft: var(--ok-bg);
+  --color-info: var(--info-fg);
+  --color-info-soft: var(--info-bg);
+  --color-corrige: var(--corrige-fg);
+  --color-corrige-soft: var(--corrige-bg);
+  --color-err: var(--err-fg);
+  --color-err-soft: var(--err-bg);
 }
 
 html {
@@ -27,6 +176,71 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Chiffres tabulaires : années, compteurs et tailles restent alignés. */
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pastilles colorées (matières, séries, accents). Le fallback des matières
+   inconnues (ramp-N) réutilise les mêmes palettes que les matières connues.
+   styleMatiere()/styleSerie() de src/lib/data.ts ne renvoient que ces classes. */
+.pastille-maths,
+.pastille-ramp-0,
+.pastille-serie-c {
+  background-color: var(--mat-maths-bg);
+  color: var(--mat-maths-fg);
+}
+.pastille-physique,
+.pastille-ramp-1 {
+  background-color: var(--mat-physique-bg);
+  color: var(--mat-physique-fg);
+}
+.pastille-svt,
+.pastille-ramp-2 {
+  background-color: var(--mat-svt-bg);
+  color: var(--mat-svt-fg);
+}
+.pastille-philo,
+.pastille-ramp-3 {
+  background-color: var(--mat-philo-bg);
+  color: var(--mat-philo-fg);
+}
+.pastille-francais,
+.pastille-ramp-4,
+.pastille-serie-a {
+  background-color: var(--mat-francais-bg);
+  color: var(--mat-francais-fg);
+}
+.pastille-histoire-geo,
+.pastille-ramp-5,
+.pastille-serie-d {
+  background-color: var(--mat-histoire-geo-bg);
+  color: var(--mat-histoire-geo-fg);
+}
+.pastille-anglais,
+.pastille-ramp-6 {
+  background-color: var(--mat-anglais-bg);
+  color: var(--mat-anglais-fg);
+}
+.pastille-espagnol,
+.pastille-ramp-7 {
+  background-color: var(--mat-espagnol-bg);
+  color: var(--mat-espagnol-fg);
+}
+.pastille-serie-defaut {
+  background-color: var(--serie-defaut-bg);
+  color: var(--serie-defaut-fg);
+}
+.pastille-teal {
+  background-color: var(--pastille-teal-bg);
+  color: var(--pastille-teal-fg);
+}
+.pastille-brand {
+  background-color: var(--pastille-brand-bg);
+  color: var(--pastille-brand-fg);
+}
+.pastille-ambre {
+  background-color: var(--pastille-ambre-bg);
+  color: var(--pastille-ambre-fg);
 }
 
 body {
@@ -49,21 +263,21 @@ h4 {
   @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition;
 }
 .btn-primary {
-  background-color: var(--color-navy);
-  @apply text-white;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
 }
 .btn-primary:hover {
-  background-color: var(--color-navy-hover);
+  background-color: var(--btn-primary-bg-hover);
 }
 .btn-teal {
-  background-color: var(--color-teal);
-  @apply text-white;
+  background-color: var(--btn-teal-bg);
+  color: var(--btn-teal-fg);
 }
 .btn-teal:hover {
-  background-color: var(--color-teal-hover);
+  background-color: var(--btn-teal-bg-hover);
 }
 .btn-ghost {
-  @apply text-[color:var(--color-accent)] hover:underline;
+  @apply text-[color:var(--color-brand)] hover:underline;
 }
 
 /* Carte de base */
@@ -74,6 +288,24 @@ h4 {
 .card-hover:hover {
   @apply -translate-y-0.5 shadow-[0_8px_30px_rgba(0,0,0,0.06)];
 }
+[data-theme='dark'] .card-hover:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Transition douce lors d'un changement de thème : la classe est posée
+   brièvement par BasculeTheme (jamais au chargement, pour éviter de voir
+   la page « fondre » au premier rendu). */
+html.theme-anim,
+html.theme-anim *,
+html.theme-anim *::before,
+html.theme-anim *::after {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    fill 0.2s ease,
+    stroke 0.2s ease !important;
+}
 
 /* Squelettes de chargement (effet « shimmer ») */
 .skeleton {
@@ -81,7 +313,7 @@ h4 {
   background-image: linear-gradient(
     90deg,
     var(--color-line) 25%,
-    #eef1f6 37%,
+    var(--skeleton-hi) 37%,
     var(--color-line) 63%
   );
   background-size: 400% 100%;

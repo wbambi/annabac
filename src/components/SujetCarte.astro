@@ -18,8 +18,7 @@ const style = styleMatiere(data.matiere);
 <a href={href} class="card card-hover group flex flex-col p-5">
   <div class="flex items-start gap-3">
     <span
-      class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-      style={`background:${style.bg};color:${style.fg}`}
+      class:list={['flex h-11 w-11 shrink-0 items-center justify-center rounded-xl', style.classe]}
     >
       <Icone nom={style.icon} taille={22} />
     </span>

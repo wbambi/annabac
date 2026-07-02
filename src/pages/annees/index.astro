@@ -144,8 +144,10 @@ const champClass =
               const st = styleSerie(s.code);
               return (
                 <span
-                  class="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium"
-                  style={`background:${st.bg};color:${st.fg}`}
+                  class:list={[
+                    'inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium',
+                    st.classe,
+                  ]}
                 >
                   Série {s.code}
                   <span class="opacity-70">{s.n}</span>
@@ -188,7 +190,9 @@ const champClass =
       window.history.replaceState(null, '', url);
     }
 
-    function appliquer() {
+    // Filtrer (masquer/compter) et trier (réordonner le DOM) sont séparés :
+    // la recherche et le filtre série n'ont pas besoin de re-trier la grille.
+    function filtrer() {
       const q = (recherche?.value ?? '').trim();
       const serie = filtreSerie?.value ?? '';
 
@@ -202,7 +206,18 @@ const champClass =
         if (visible) visibles++;
       }
 
+      if (compteur) compteur.textContent = String(visibles);
+      if (compteurLabel) compteurLabel.textContent = visibles > 1 ? 'sessions' : 'session';
+      if (vide) vide.hidden = visibles > 0;
+
+      synchroniserUrl(q, serie, tri?.value ?? 'recent');
+    }
+
+    let modeTrie = 'recent'; // ordre du HTML généré : le plus récent d'abord
+    function trier() {
       const mode = tri?.value ?? 'recent';
+      if (mode === modeTrie) return;
+      modeTrie = mode;
       const ordonnees = [...cartes].sort((a, b) => {
         const aA = Number(a.dataset.annee), bA = Number(b.dataset.annee);
         const aN = Number(a.dataset.nombre), bN = Number(b.dataset.nombre);
@@ -210,18 +225,16 @@ const champClass =
         if (mode === 'volume') return bN - aN || bA - aA;
         return bA - aA;
       });
-      for (const carte of ordonnees) grille!.appendChild(carte);
-
-      if (compteur) compteur.textContent = String(visibles);
-      if (compteurLabel) compteurLabel.textContent = visibles > 1 ? 'sessions' : 'session';
-      if (vide) vide.hidden = visibles > 0;
-
-      synchroniserUrl(q, serie, mode);
+      grille!.append(...ordonnees);
     }
 
-    recherche?.addEventListener('input', appliquer);
-    filtreSerie?.addEventListener('change', appliquer);
-    tri?.addEventListener('change', appliquer);
-    appliquer();
+    recherche?.addEventListener('input', filtrer);
+    filtreSerie?.addEventListener('change', filtrer);
+    tri?.addEventListener('change', () => {
+      trier();
+      filtrer(); // met à jour l'URL (?tri=…)
+    });
+    trier(); // si l'URL a restauré un tri différent de « récent »
+    filtrer();
   });
 </script>

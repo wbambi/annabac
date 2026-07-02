@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import pkg from '../../package.json';
 import Icone from '../components/Icone.astro';
+import BasculeTheme from '../components/BasculeTheme.astro';
+import { CATEGORIES } from '../lib/ressources';
 
 const version = pkg.version;
 
@@ -10,6 +12,8 @@ interface Props {
   description?: string;
   jsonLd?: Record<string, unknown>;
   noindex?: boolean;
+  /** Exclure la page de l'index de recherche Pagefind (défaut : indexée). */
+  horsRecherche?: boolean;
 }
 
 const {
@@ -17,6 +21,7 @@ const {
   description = 'Sujets et corrigés du baccalauréat congolais, gratuits pour tous les élèves.',
   jsonLd,
   noindex = false,
+  horsRecherche = false,
 } = Astro.props;
 const titreComplet =
   titre === 'Accueil' ? 'Bac 242' : `${titre} · Bac 242`;
@@ -48,10 +53,11 @@ const orgJsonLd = {
     "Bibliothèque collaborative, libre et gratuite d'annales du baccalauréat congolais.",
 };
 
+// Navigation principale, dérivée du registre des ressources. Tant qu'il n'y a
+// qu'une catégorie (les annales), ses axes sont exposés à plat ; à partir de
+// deux catégories, remplacer par un menu par catégorie (cf. ressources.ts).
 const liens = [
-  { href: '/series', label: 'Séries' },
-  { href: '/annees', label: 'Années' },
-  { href: '/matieres', label: 'Matières' },
+  ...CATEGORIES.flatMap((c) => c.axes.map((a) => ({ href: a.href, label: a.label }))),
   { href: '/contribuer', label: 'Contribuer' },
 ];
 // Liens secondaires (à propos du projet), regroupés dans un sous-menu « Le projet ».
@@ -73,7 +79,32 @@ const estActif = (href: string) =>
     {noindex && <meta name="robots" content="noindex, follow" />}
     {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
     <meta name="theme-color" content="#f6f8fb" />
+    <!-- Anti-FOUC : pose le thème avant le premier rendu. Script volontairement
+         stable au byte près : son hash SHA-256 est référencé par la CSP
+         (public/_headers) — le recalculer à chaque modification. -->
+    <script is:inline>
+      (function () {
+        var pref = null;
+        try {
+          pref = localStorage.getItem('theme');
+        } catch (e) {}
+        var sombre =
+          pref === 'dark' ||
+          (pref !== 'light' &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = sombre ? 'dark' : 'light';
+        if (sombre) {
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', '#0f1522');
+        }
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- PWA : @vite-pwa/astro génère manifest.webmanifest et registerSW.js au
+         build mais n'injecte rien dans le HTML — ces deux lignes font le lien.
+         Sans elles, le service worker n'est jamais enregistré. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script is:inline defer src="/registerSW.js"></script>
     <link rel="canonical" href={canonical} />
     <title>{titreComplet}</title>
 
@@ -104,7 +135,7 @@ const estActif = (href: string) =>
       <nav class="mx-auto flex h-12 max-w-7xl items-center gap-6 px-5">
         <a href="/" class="flex items-center gap-2">
           <img src="/favicon.svg" alt="" width="28" height="28" />
-          <span class="text-[17px] font-semibold tracking-tight text-[color:var(--color-navy)]">
+          <span class="text-[17px] font-semibold tracking-tight text-[color:var(--color-brand)]">
             Bac <span style="color:var(--color-teal)">242</span>
           </span>
         </a>
@@ -161,13 +192,26 @@ const estActif = (href: string) =>
               ))}
               <button
                 type="button"
-                class="js-contact block w-full rounded-lg px-3 py-2 text-left font-medium text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-line)]/40"
+                class="js-contact block w-full rounded-lg px-3 py-2 text-left font-medium text-[color:var(--color-brand)] transition hover:bg-[color:var(--color-line)]/40"
               >
                 Contactez-nous
               </button>
             </div>
           </li>
         </ul>
+
+        <!-- Recherche plein texte (Pagefind) -->
+        <a
+          href="/recherche"
+          aria-label="Rechercher"
+          title="Rechercher"
+          class="ml-auto flex h-9 w-9 items-center justify-center rounded-full text-[color:var(--color-muted)] transition hover:bg-[color:var(--color-line)]/50 hover:text-[color:var(--color-ink)] sm:ml-0"
+        >
+          <Icone nom="search" taille={18} />
+        </a>
+
+        <!-- Bascule clair / sombre / système (bureau + mobile) -->
+        <BasculeTheme />
 
         <!-- Bouton menu (mobile) -->
         <button
@@ -176,7 +220,7 @@ const estActif = (href: string) =>
           aria-label="Ouvrir le menu"
           aria-expanded="false"
           aria-controls="menu-mobile"
-          class="ml-auto flex h-9 w-9 items-center justify-center rounded-full text-[color:var(--color-ink)] hover:bg-[color:var(--color-line)]/50 sm:hidden"
+          class="flex h-9 w-9 items-center justify-center rounded-full text-[color:var(--color-ink)] hover:bg-[color:var(--color-line)]/50 sm:hidden"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <line x1="4" y1="7" x2="20" y2="7" />
@@ -228,7 +272,7 @@ const estActif = (href: string) =>
             <li>
               <button
                 type="button"
-                class="js-contact block w-full rounded-lg px-3 py-2.5 text-left font-medium text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-line)]/40"
+                class="js-contact block w-full rounded-lg px-3 py-2.5 text-left font-medium text-[color:var(--color-brand)] transition hover:bg-[color:var(--color-line)]/40"
               >
                 Contactez-nous
               </button>
@@ -285,7 +329,12 @@ const estActif = (href: string) =>
       });
     </script>
 
-    <main class="mx-auto w-full max-w-7xl flex-1 px-5 py-10 sm:py-14">
+    {/* data-pagefind-body : seules les pages indexables nourrissent l'index
+        de recherche (exclut /admin, /offline — noindex — et /recherche). */}
+    <main
+      class="mx-auto w-full max-w-7xl flex-1 px-5 py-10 sm:py-14"
+      data-pagefind-body={(!noindex && !horsRecherche) || undefined}
+    >
       <slot />
     </main>
 
@@ -304,7 +353,7 @@ const estActif = (href: string) =>
     >
       <form id="contact-form" class="flex flex-col gap-4 p-6">
         <div class="flex items-start justify-between gap-4">
-          <h2 class="text-lg font-medium tracking-tight text-[color:var(--color-navy)]">Nous contacter</h2>
+          <h2 class="text-lg font-medium tracking-tight text-[color:var(--color-brand)]">Nous contacter</h2>
           <button
             type="button"
             id="contact-fermer"
@@ -358,14 +407,18 @@ const estActif = (href: string) =>
       const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
 
       // Plusieurs déclencheurs possibles (menu bureau + menu mobile).
+      let dernierDeclencheur: HTMLElement | null = null;
       document.querySelectorAll('.js-contact').forEach((el) =>
         el.addEventListener('click', () => {
+          dernierDeclencheur = el as HTMLElement;
           // Referme les menus de navigation avant d'ouvrir la modale.
           document.getElementById('menu-mobile')?.setAttribute('hidden', '');
           document.getElementById('menu-projet')?.setAttribute('hidden', '');
           modal?.showModal();
         })
       );
+      // A11y : à la fermeture, rendre le focus au bouton qui a ouvert la modale.
+      modal?.addEventListener('close', () => dernierDeclencheur?.focus());
       fermerContact?.addEventListener('click', () => modal?.close());
       annuler?.addEventListener('click', () => modal?.close());
       // Clic sur l'arrière-plan : fermer.

@@ -1,0 +1,97 @@
+---
+// Bascule de thème à trois états : clair → sombre → système.
+// La préférence vit dans localStorage('theme') : 'light' | 'dark' | absente
+// (= suivre le système), en cohérence avec le script anti-FOUC du Layout.
+import Icone from './Icone.astro';
+
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={[
+    'js-bascule-theme flex h-9 w-9 items-center justify-center rounded-full text-[color:var(--color-muted)] transition hover:bg-[color:var(--color-line)]/50 hover:text-[color:var(--color-ink)]',
+    cls,
+  ]}
+  data-pref="system"
+  aria-label="Thème : suit le système — activer le thème clair"
+  title="Changer de thème"
+>
+  <span data-ic="light" hidden><Icone nom="sun" taille={18} /></span>
+  <span data-ic="dark" hidden><Icone nom="moon" taille={18} /></span>
+  <span data-ic="system"><Icone nom="monitor" taille={18} /></span>
+</button>
+
+<script>
+  type Pref = 'light' | 'dark' | 'system';
+
+  const CLAIR = '#f6f8fb';
+  const SOMBRE = '#0f1522';
+  const SUIVANT: Record<Pref, Pref> = { light: 'dark', dark: 'system', system: 'light' };
+  const LIBELLES: Record<Pref, string> = {
+    light: 'Thème clair — activer le thème sombre',
+    dark: 'Thème sombre — suivre le thème du système',
+    system: 'Thème : suit le système — activer le thème clair',
+  };
+
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function prefStockee(): Pref {
+    try {
+      const v = localStorage.getItem('theme');
+      if (v === 'light' || v === 'dark') return v;
+    } catch {
+      /* localStorage indisponible (navigation privée) : mode système */
+    }
+    return 'system';
+  }
+
+  function memoriser(pref: Pref) {
+    try {
+      if (pref === 'system') localStorage.removeItem('theme');
+      else localStorage.setItem('theme', pref);
+    } catch {
+      /* tant pis : la préférence ne survivra pas à la page */
+    }
+  }
+
+  function appliquer(pref: Pref, animer = false) {
+    const resolu = pref === 'system' ? (media.matches ? 'dark' : 'light') : pref;
+    const html = document.documentElement;
+    if (animer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      html.classList.add('theme-anim');
+      window.setTimeout(() => html.classList.remove('theme-anim'), 300);
+    }
+    html.dataset.theme = resolu;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', resolu === 'dark' ? SOMBRE : CLAIR);
+    document.querySelectorAll<HTMLButtonElement>('.js-bascule-theme').forEach((bouton) => {
+      bouton.dataset.pref = pref;
+      bouton.setAttribute('aria-label', LIBELLES[pref]);
+      bouton.querySelectorAll<HTMLElement>('[data-ic]').forEach((ic) => {
+        ic.hidden = ic.dataset.ic !== pref;
+      });
+    });
+  }
+
+  // Synchronise l'icône avec la préférence courante (le thème lui-même a déjà
+  // été posé par le script anti-FOUC du <head>).
+  appliquer(prefStockee());
+
+  document.querySelectorAll<HTMLButtonElement>('.js-bascule-theme').forEach((bouton) =>
+    bouton.addEventListener('click', () => {
+      const pref = SUIVANT[prefStockee()];
+      memoriser(pref);
+      appliquer(pref, true);
+    })
+  );
+
+  // En mode système, suivre les changements de l'OS en direct.
+  media.addEventListener('change', () => {
+    if (prefStockee() === 'system') appliquer('system', true);
+  });
+</script>

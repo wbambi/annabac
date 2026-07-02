@@ -10,6 +10,12 @@ const SITE = 'https://annabac.pages.dev';
 // https://astro.build/config
 export default defineConfig({
   site: SITE,
+  // Respecte la variable PORT si fournie (aperçu/outillage) ; 4321 sinon.
+  server: { port: Number(process.env.PORT) || 4321 },
+  // CSP stricte (public/_headers) : tous les scripts/styles bundlés sont émis
+  // en fichiers externes — le seul inline autorisé est le script anti-FOUC du
+  // Layout, référencé par son hash SHA-256 dans script-src.
+  build: { inlineStylesheets: 'never' },
   integrations: [
     sitemap({
       // Exclut les pages privées/techniques du sitemap public.
@@ -40,6 +46,9 @@ export default defineConfig({
         // Tout le HTML/CSS/JS est précaché : le site se parcourt entièrement
         // hors-ligne. Les PDF sont mis en cache au fil des consultations.
         globPatterns: ['**/*.{html,js,css,svg,woff2}'],
+        // L'index Pagefind (généré après le build Astro) n'est pas précaché :
+        // il est mis en cache à l'usage (runtimeCaching ci-dessous).
+        globIgnores: ['**/pagefind/**'],
         // Désactive le repli de navigation par défaut (sinon une NavigationRoute
         // sert une page précachée sans tenter le réseau, masquant la logique
         // ci-dessous et renvoyant un faux « hors-ligne » même en ligne).
@@ -66,11 +75,21 @@ export default defineConfig({
               expiration: { maxEntries: 50 },
             },
           },
+          {
+            // Recherche hors-ligne opportuniste : l'index consulté est gardé.
+            urlPattern: ({ url }) => url.pathname.startsWith('/pagefind/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'pagefind',
+              expiration: { maxEntries: 60 },
+            },
+          },
         ],
       },
     }),
   ],
   vite: {
     plugins: [tailwindcss()],
+    build: { assetsInlineLimit: 0 },
   },
 });
