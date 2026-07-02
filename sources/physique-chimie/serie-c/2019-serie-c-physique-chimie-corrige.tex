@@ -1,0 +1,171 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+
+\begin{document}
+
+\entetesujet{Corrigé bac 2019 -- Série C}
+
+\matiere{CHIMIE}{8 points}
+\partie{A : vérification des connaissances}
+
+\question{1. Appariement}
+\textbf{$1 = c$.} La constante d'acidité $K_a$ du couple $\ch{AH/A^-}$ ($\ch{AH + H_2O \rightleftharpoons A^- + H_3O^+}$) : $K_a = \dfrac{[\ch{A^-}][\ch{H_3O^+}]}{[\ch{AH}]}$.
+
+\textbf{$2 = d$.} Loi de décroissance radioactive $N(t) = N_0 e^{-\lambda t}$. La demi-vie $T$ vérifie $N(t+T) = \frac{N(t)}{2}$, d'où $T = \dfrac{\ln 2}{\lambda}$ (soit $\lambda = \dfrac{\ln 2}{T}$).
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[->] (0,0)--(5,0) node[right]{$t$}; \draw[->] (0,0)--(0,3.2) node[above]{$N(t)$};
+  \draw[thick] plot[domain=0:4.8,samples=60] (\x,{3*exp(-0.55*\x)});
+  \draw[dashed] (0,3)--(0,3); \node[left] at (0,3){$N_0$};
+  \draw[dashed] (1,0)--(1,{3*exp(-0.55)})--(0,{3*exp(-0.55)}); \node[left] at (0,1.73){$N(t)$}; \node[below] at (1,0){$t$};
+  \draw[dashed] (2.26,0)--(2.26,{3*exp(-0.55*2.26)})--(0,{3*exp(-0.55*2.26)}); \node[left] at (0,0.87){$\frac{N(t)}{2}$}; \node[below] at (2.26,0){$t{+}T$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{$3 = b$.} Pour $\alpha A + \beta B \rightleftharpoons \gamma C + \delta D$, la constante d'équilibre est $K = \dfrac{[C]_{eq}^{\gamma}[D]_{eq}^{\delta}}{[A]_{eq}^{\alpha}[B]_{eq}^{\beta}}$.
+
+\textbf{$d = 1$.} Niveaux d'énergie de l'atome d'hydrogène : un électron absorbe un photon pour monter d'un niveau $p$ à $n > p$, ou en émet un pour descendre. $\Delta E = E_0\left(\dfrac{1}{p^2} - \dfrac{1}{n^2}\right) = \dfrac{hc}{\lambda}$, d'où $\dfrac{1}{\lambda} = \dfrac{E_0}{hc}\left(\dfrac{1}{p^2} - \dfrac{1}{n^2}\right)$ ; comparé à Balmer $\frac{1}{\lambda} = R_H\left(\frac{1}{p^2} - \frac{1}{n^2}\right)$, on a $R_H = \dfrac{E_0}{hc}$.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.95,every node/.style={font=\scriptsize}]
+  \foreach \n/\y in {1/0,2/2.55,3/3.22,4/3.51,5/3.66,6/3.75}{\draw (0,\y)--(4.5,\y); \node[right] at (4.5,\y){$n=\n$};}
+  \draw (0,3.9)--(4.5,3.9); \node[right] at (4.5,3.9){$n=\infty$};
+  \node[left] at (0,0){$-13{,}6$}; \node[left] at (0,3.9){$0$}; \node[above left] at (0,3.9){$E$ (eV)};
+  % Lyman -> n=1
+  \foreach \yy in {2.55,3.22,3.51}{\draw[->] (0.5,\yy)--(0.5,0.05);}
+  \node at (0.9,-0.35){Lyman (UV)};
+  % Balmer -> n=2
+  \foreach \yy in {3.22,3.51,3.66}{\draw[->] (2.2,\yy)--(2.2,2.6);}
+  \node at (2.4,2.15){Balmer (visible)};
+  % Paschen -> n=3
+  \foreach \yy in {3.51,3.66,3.75}{\draw[->] (3.6,\yy)--(3.6,3.27);}
+  \node at (3.5,3.05){Paschen (IR)};
+\end{tikzpicture}
+\end{center}
+
+\question{2. Schéma à compléter}
+$\ch{(C_2H_5)_2NH + H_2O \rightleftharpoons (C_2H_5)_2NH_2^+ + OH^-}$. L'atome d'azote porte un doublet non liant, ce qui confère aux amines un caractère basique (Br\o nsted-Lowry).
+
+\question{3. Questions à choix multiples}
+\textbf{$3.1 = a\cdot 3$.} Pour un mélange équimolaire, le rendement d'estérification (5\,\%, 60\,\% ou 67\,\%) diminue quand la classe de l'alcool augmente : pour un alcool \emph{secondaire}, il vaut \textbf{60\,\%}.
+
+\textbf{$3.2 = b\cdot 3$.} $\lambda = \dfrac{hc}{E_n - E_p}$ est maximale si $E_n - E_p$ est minimale, c'est-à-dire pour $n = p+1$. Les plus petits écarts sont $E_2 - E_1$, $E_3 - E_2$, $E_4 - E_3$ ; le plus petit est $E_4 - E_3$. La plus grande longueur d'onde émise appartient donc à la \textbf{série de Paschen}.
+
+\partie{B : application des connaissances}
+
+\question{1.} $-\log C_0 = -\log(5\cdot10^{-2}) = 1{,}30$. Comme $\text{pH} > -\log C_0$, l'acide monochloroéthanoïque est un \textbf{acide faible}.
+
+\question{2.} $\ch{CH_2ClCOOH + H_2O \rightleftharpoons CH_2ClCOO^- + H_3O^+}$.
+
+\question{3. a.} Autoprotolyse (acide faible, dissociation limitée) :
+\[ \ch{CH_2ClCOOH + H_2O \rightleftharpoons CH_2ClCOO^- + H_3O^+} \;;\quad \ch{2\,H_2O \rightleftharpoons H_3O^+ + HO^-} \]
+\underline{Espèces :} ions \ch{H_3O^+}, \ch{OH^-}, \ch{CH_2ClCOO^-} ; molécules \ch{CH_2ClCOOH}, \ch{H_2O}.
+
+$\bullet$ $[\ch{H_2O}] = \dfrac{1000}{18} = 55{,}6\ \text{mol}\cdot\text{L}^{-1}$. \quad $\bullet$ $[\ch{H_3O^+}] = 10^{-2{,}1} = 7{,}94\cdot10^{-3}\ \text{mol}\cdot\text{L}^{-1}$.
+
+$\bullet$ $[\ch{OH^-}] = \dfrac{K_e}{[\ch{H_3O^+}]} = \dfrac{10^{-14}}{7{,}94\cdot10^{-3}} = 1{,}26\cdot10^{-12}\ \text{mol}\cdot\text{L}^{-1}$.
+
+$\bullet$ Électroneutralité $[\ch{H_3O^+}] = [\ch{CH_2ClCOO^-}] + [\ch{OH^-}]$, avec $[\ch{OH^-}] \ll [\ch{H_3O^+}]$ : $[\ch{CH_2ClCOO^-}] = 7{,}94\cdot10^{-3}\ \text{mol}\cdot\text{L}^{-1}$.
+
+$\bullet$ Conservation $C_A = [\ch{CH_2ClCOOH}] + [\ch{CH_2ClCOO^-}]$ : $[\ch{CH_2ClCOOH}] = 5\cdot10^{-2} - 7{,}94\cdot10^{-3} = 4{,}21\cdot10^{-2}\ \text{mol}\cdot\text{L}^{-1}$.
+
+\textbf{b.} $\text{p}K_a = \text{pH} - \log\dfrac{[\ch{CH_2ClCOO^-}]}{[\ch{CH_2ClCOOH}]} = 2{,}1 - \log\dfrac{7{,}94\cdot10^{-3}}{4{,}21\cdot10^{-2}} = 2{,}82$.
+
+\question{4.} Dosage : $\ch{CH_2ClCOOH + OH^- \longrightarrow CH_2ClCOO^- + H_2O}$. À la demi-équivalence $\text{pH} = \text{p}K_a$ et $V_B = \dfrac{V_{BE}}{2}$. À l'équivalence $C_A V_A = C_B V_{BE}$, d'où $V_B = \dfrac{C_A V_A}{2C_B} = \dfrac{5\cdot10^{-2}\times 20\cdot10^{-3}}{2\times 0{,}1} = 5\cdot10^{-3}$ L $= 5$ mL.
+
+\matiere{PHYSIQUE}{12 points}
+\partie{A : vérification des connaissances}
+
+\question{1. Questions à choix multiples}
+\textbf{a. Vrai.} Pendule conique : boule de masse $m$, fil de longueur $l$, en mouvement circulaire uniforme autour de $(\Delta)$.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[dashed] (0,3)--(0,-0.4); \node[left] at (0,-0.2){$(\Delta)$};
+  \coordinate (S) at (0,3); \fill (S) circle (1pt);
+  \coordinate (M) at (1.6,0.6);
+  \draw[thick] (S)--(M); \fill (M) circle (2pt);
+  \draw[dashed] (M)++(-1.6,0) ellipse (1.6 and 0.4);
+  \draw (0,2.3) arc[start angle=-90,end angle=-25,radius=0.7]; \node at (0.35,2.05){\scriptsize$\theta$};
+  \node[left] at (0.9,1.7){$l$};
+  \draw[->,thick,blue] (M)--($(S)!0.55!(M)$) node[midway,above right]{$\vv{T}$};
+  \draw[->,thick,green!60!black] (M)--++(0,-1) node[below]{$\vv{P}$};
+  \draw[->,thick,red] (M)--++(-1,0) node[left]{$m\vv{a}$};
+  \draw[dashed] (M)++(-1.6,0)--(M); \node[below] at (0.7,0.55){\scriptsize$R$};
+\end{tikzpicture}
+\end{center}
+$a_T = 0$ (uniforme), $a = a_N = R\omega^2$ avec $R = l\sin\theta$, donc $a = l\omega^2\sin\theta$. PFD : $\vv{P} + \vv{T} = m\vv{a}$ donne $\begin{cases} T\sin\theta = ml\omega^2\sin\theta \\ T\cos\theta = mg \end{cases}$ ; en divisant : $\dfrac{1}{\cos\theta} = \dfrac{l\omega^2}{g}$.
+
+\textbf{b. Vrai.} L'effet photoélectrique est l'émission d'électrons par un métal recevant de l'énergie rayonnante.
+
+\textbf{c. Vrai.} En mouvement circulaire uniforme, l'accélération est normale et vaut $R\omega^2$ ($a_T = 0$).
+
+\textbf{d. Faux.} Un $RLC$ série est en résonance quand $X_L = X_C$ ; alors $Z = \sqrt{R^2 + (X_L - X_C)^2}$ est minimale et vaut $R$.
+
+\question{2. Texte à trous}
+Un ébranlement est \emph{transversal} lorsque la perturbation du milieu élastique est \emph{perpendiculaire} à la direction de propagation.
+
+\partie{B : application des connaissances}
+
+\question{1.} Courbe 1 ($y$--$t$) : période $T = 2\cdot10^{-3}$ s. Courbe 2 ($y$--$x$) : longueur d'onde $\lambda$. D'où $v = \dfrac{\lambda}{T} = \dfrac{\lambda}{2\cdot10^{-3}} = 500\lambda\ (\text{m}\cdot\text{s}^{-1})$.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.8,every node/.style={font=\scriptsize}]
+  \begin{scope}
+  \draw[->] (0,0)--(5,0) node[right]{$t$ (s)}; \draw[->] (0,-1.3)--(0,1.5) node[above]{$y$ (mm)};
+  \draw[dashed] (0,1)--(4,1); \draw[dashed] (0,-1)--(4,-1);
+  \node[left] at (0,1){$0{,}2$}; \node[left] at (0,-1){$-0{,}2$};
+  \draw[thick] plot[domain=0:4,samples=80] (\x,{sin(deg(pi*\x))});
+  \draw[<->] (0,1.25)--(2,1.25); \node[above] at (1,1.25){$T$};
+  \node at (2.2,-1.7){Courbe 1};
+  \end{scope}
+  \begin{scope}[xshift=6.2cm]
+  \draw[->] (0,0)--(5,0) node[right]{$x$}; \draw[->] (0,-1.3)--(0,1.5) node[above]{$y$ (mm)};
+  \draw[dashed] (0,1)--(4,1); \draw[dashed] (0,-1)--(4,-1);
+  \node[left] at (0,1){$0{,}2$}; \node[left] at (0,-1){$-0{,}2$};
+  \draw[thick] plot[domain=0:4,samples=80] (\x,{sin(deg(pi*\x))});
+  \draw[<->] (0,1.25)--(2,1.25); \node[above] at (1,1.25){$\lambda$};
+  \draw[<->] (0,-1.25)--(3,-1.25); \node[below] at (1.5,-1.25){$d_1$};
+  \node at (2.2,-1.7){Courbe 2};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\question{2.} $y_O(t) = a_m\sin(\omega t + \varphi)$ avec $\omega = \dfrac{2\pi}{T} = 1000\pi$, $a = 2\cdot10^{-4}$ m. Comme $y_O(0) = 0$, $\varphi = 0$ : $y_O(t) = 2\cdot10^{-4}\sin(1000\pi t)$.
+
+\question{3.} $M$ reproduit $O$ avec le retard $t_M = \dfrac{d}{v} = \dfrac{12{,}5}{500\lambda}$ : $y_M(t) = y_O(t - t_M) = 2\cdot10^{-4}\sin\left(1000\pi t - \dfrac{25\pi}{\lambda}\right)$.
+
+\question{4.} $\dfrac{\lambda}{T} = \dfrac{d_1}{t_1}$, d'où $t_1 = \dfrac{d_1}{\lambda}T$. La courbe 2 donne $\dfrac{d_1}{\lambda} = \dfrac{6}{4}$, donc $t_1 = \dfrac{6}{4}T = 3\cdot10^{-3}$ s.
+
+\partie{C : résolution d'un problème}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1.1,every node/.style={font=\footnotesize}]
+  \coordinate (O) at (0,2.2); \coordinate (B) at (0,0); \coordinate (Ap) at (2.2,2.2);
+  % arc AB (quart de cercle centre O rayon 2.2)
+  \draw[thick] (B) arc[start angle=-90,end angle=0,radius=2.2];
+  \draw[thick] (B)--(-1.8,0); \node[below] at (-1.8,0){$C$};
+  \draw[dashed] (O)--(B); \draw[dashed] (O)--(Ap);
+  \coordinate (A) at (2.2,2.2); \fill (A) circle (1.2pt) node[right]{$A$};
+  \fill (O) circle (1.2pt) node[above]{$O$}; \fill (B) circle (1.2pt) node[below]{$B$};
+  \draw (0,1.5) arc[start angle=-90,end angle=0,radius=0.7]; \node at (0.32,1.35){\scriptsize$\theta$};
+  \coordinate (I) at (0,2.2); \draw[dashed] (2.2,2.2)--(0,2.2);
+  \fill (0,1.55) circle (1pt) node[left]{$I$}; \draw[dashed] (2.2,1.55)--(0,1.55);
+  \draw[<->] (-0.18,0)--(-0.18,1.55); \node[left] at (-0.18,0.78){$h$};
+  % forces en A
+  \draw[->,thick,green!60!black] (A)--++(0,-1) node[below]{$\vv{P}$};
+  \draw[->,thick,red] (A)--++(-0.8,0.8) node[above left]{$\vv{R}$};
+  \draw[->,thick,red!60!black] (A)--++(-0.9,0.55) node[left]{$\vv{R_N}$};
+  \draw[->,thick] (A)--++(0.15,0.6) node[above]{$\vv{f}$};
+\end{tikzpicture}
+\end{center}
+
+\question{1. a.} Référentiel terrestre galiléen, système = solide de masse $m$. TEC entre $A$ et $B$ : $\frac{1}{2}mv_B^2 - \frac{1}{2}mv_A^2 = W_{\vv{P}} + W_{\vv{R}}$. La réaction normale ne travaille pas ($\vv{R_N} \perp \vv{dl}$), $W_{\vv{f}} = -f\cdot\widehat{AB}$. Avec $v_A = 0$, $\widehat{AB} = r\theta$, $OI = r\cos\theta$ et $h = r(1-\cos\theta)$ :
+\[ \frac{1}{2}mv_B^2 = mgr(1-\cos\theta) - f r\theta \;\Rightarrow\; v_B = \sqrt{2r\left[g(1-\cos\theta) - \frac{f}{m}\theta\right]}. \]
+
+\textbf{b.} Entre $B$ et $C$ (horizontal, $W_{\vv{P}} = 0$) : $\frac{1}{2}mv_C^2 - \frac{1}{2}mv_B^2 = -f\cdot BC = -2fr$, d'où
+\[ v_C = \sqrt{2r\left[g(1-\cos\theta) - \frac{f}{m}(\theta + 2)\right]}. \]
+
+\question{2. a.} En $C$, $v_C = 0$ : $g(1-\cos\theta) - \dfrac{f}{m}(\theta + 2) = 0$, d'où $f = \dfrac{mg(1-\cos\theta)}{\theta + 2}$.
+
+\textbf{b.} $f = \dfrac{60\times 10\times(1 - \cos\frac{\pi}{4})}{\frac{\pi}{4} + 2} \approx 63{,}1$ N.
+
+\textbf{c.} $v_B \approx \sqrt{2\times 5\left[10\left(1 - \cos\frac{\pi}{4}\right) - \frac{63{,}1}{60}\times\frac{\pi}{4}\right]} \approx 4{,}59\ \text{m}\cdot\text{s}^{-1}$.
+
+\end{document}

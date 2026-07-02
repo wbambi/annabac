@@ -1,0 +1,120 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+
+\begin{document}
+
+\entetesujet{Corrigé bac 2017 -- Série C}
+
+\matiere{CHIMIE}{8 points}
+\partie{A : vérification des connaissances}
+
+\question{Questions à réponse courte}
+\underline{Caractéristiques de l'estérification :} une réaction d'estérification est \emph{lente, limitée, athermique et réversible}. L'estérification est la réaction d'un acide carboxylique \ch{R{-}COOH} avec un alcool \ch{R'{-}OH} ; elle conduit à un ester et à de l'eau (la réaction inverse est l'hydrolyse de l'ester) :
+\[ \underset{\text{acide carboxylique}}{\ch{R{-}CO{-}OH}} + \underset{\text{alcool}}{\ch{R'OH}} \; \underset{\text{hydrolyse}}{\overset{\text{estérification}}{\rightleftharpoons}} \; \underset{\text{ester}}{\ch{R{-}CO{-}O{-}R'}} + \underset{\text{eau}}{\ch{H_2O}} \]
+
+\question{Texte à trous}
+Lorsque l'électron de l'atome d'\emph{hydrogène} passe d'un \emph{niveau} d'énergie inférieure à un niveau d'énergie \emph{supérieure}, il y a \emph{absorption} de photons.
+
+\question{Appariement}
+$A_1 = B_4$ ; \quad $A_2 = B_3$ ; \quad $A_3 = B_1$ ; \quad $A_4 = B_2$.
+
+$\bullet$ Formule générale des acides carboxyliques \ch{RCOOH} : l'acide est l'\textbf{acide benzoïque} \ch{C_6H_5COOH} ($\ch{R} = \ch{C_6H_5}$).
+
+$\bullet$ Formule générale des esters \ch{RCOOR'} : l'ester est l'\textbf{éthanoate de méthyle} \ch{CH_3COOCH_3} ($\ch{R} = \ch{R'} = \ch{CH_3}$).
+
+$\bullet$ \ch{NH_3} est une base gazeuse soluble ; son acide conjugué est \ch{NH_4^+}. Sa dissociation est équilibrée :
+\[ \ch{H_2O \rightleftharpoons HO^- + H^+} \;;\quad \ch{NH_3 + H^+ \rightleftharpoons NH_4^+} \;\Rightarrow\; \ch{NH_3 + H_2O \rightleftharpoons NH_4^+ + HO^-} \]
+
+$\bullet$ L'hydroxyde de sodium \ch{NaOH} (solide ionique soluble) est une base forte : $\ch{NaOH \longrightarrow Na^+ + OH^-}$ (réaction totale).
+
+\underline{À savoir :} tous les hydroxydes alcalins (cation de métal alcalin + anion \ch{HO^-}) sont des bases fortes.
+
+\partie{B : application des connaissances}
+
+\question{1.} Nombre de moles dans $m_0 = 10^{-6}$ g de $^{131}_{53}\text{I}$ : $n = \dfrac{m_0}{M_I} = \dfrac{N_0}{\mathcal{N}_A}$, d'où $N_0 = \dfrac{m_0\,\mathcal{N}_A}{M_I} = \dfrac{10^{-6}\times 6{,}02\cdot10^{23}}{131} \approx 4{,}6\cdot10^{15}$ noyaux.
+
+\question{2.} \underline{Désintégration $\beta^-$} (émission d'un électron $^{0}_{-1}e$) : $^{131}_{53}\text{I} \longrightarrow\ ^{A'}_{Z'}Y +\ ^{0}_{-1}e$. Conservation du nombre de masse : $A' = 131$ ; des charges : $Z' = 54$. L'élément est le xénon :
+\[ ^{131}_{53}\text{I} \longrightarrow\ ^{131}_{54}\text{Xe} +\ ^{0}_{-1}e \]
+
+\question{3. a.} Avec $N(t) = N_0 e^{-\lambda t}$, l'activité $A(t) = -\dfrac{dN}{dt} = \lambda N_0 e^{-\lambda t} = \lambda N(t)$. En posant $A_0 = \lambda N_0$ : $A(t) = A_0 e^{-\lambda t}$, avec $\lambda = \dfrac{\ln 2}{T}$, soit $A(t) = A_0 e^{-\frac{\ln 2}{T}t}$.
+
+\textbf{b.} $T = 8\times 24\times 3600 = 691200$ s ; $A_0 = \dfrac{\ln 2}{T}N_0 = \dfrac{\ln 2}{691200}\times 4{,}6\cdot10^{15} \approx 4{,}6\cdot10^{9}$ Bq.
+
+\textbf{c.} À $t = 5\times 3600 = 18000$ s : $A = A_0 e^{-\frac{\ln 2}{T}t} = 4{,}6\cdot10^{9}\,e^{-\frac{\ln 2}{691200}\times 18000} = 4{,}5\cdot10^{9}$ Bq.
+
+\matiere{PHYSIQUE}{12 points}
+\partie{A : vérification des connaissances}
+
+\question{1. Questions à choix multiples}
+\textbf{a. } Réponse \textbf{a$_2$}. Un pendule simple (fil inextensible de longueur $l$, masse ponctuelle $m$) a pour période $T = 2\pi\sqrt{\dfrac{l}{g}}$, indépendante de $m$.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \fill[pattern=north east lines] (-0.8,2)rectangle(0.8,2.15); \draw (-0.8,2)--(0.8,2);
+  \coordinate (O) at (0,2); \fill (O) circle (1.2pt) node[above right]{$O$};
+  \coordinate (M) at ({1.6*sin(30)},{2-1.6*cos(30)});
+  \draw[thick] (O)--(M); \fill (M) circle (2.5pt);
+  \draw[dashed] (O)--(0,0);
+  \draw (0,1.1) arc[start angle=-90,end angle=-60,radius=0.9]; \node at (0.28,0.95){\scriptsize$\theta$};
+  \draw[->,thick] (M)--($(O)!0.72!(M)$) node[midway,above right]{$\vv{T}$};
+  \draw[->,thick] (M)--++(0,-1) node[below]{$\vv{P}$};
+\end{tikzpicture}
+\end{center}
+\underline{Établissement :} système = masse $m$, référentiel du sol galiléen, forces $\vv{P}$ et $\vv{T}$. TCI : $\vv{P} + \vv{T} = m\vv{a}$. Projection sur $\vv{u_t}$ (Frenet) : $-mg\sin\theta = ml\ddot{\theta}$, soit $\ddot{\theta} + \dfrac{g}{l}\sin\theta = 0$. Pour de faibles amplitudes $\sin\theta \approx \theta$ : $\ddot{\theta} + \dfrac{g}{l}\theta = 0$ (oscillateur harmonique), de solution $\theta(t) = \theta_m\cos\left(\frac{2\pi}{T}t + \varphi\right)$. On identifie $\left(\frac{2\pi}{T}\right)^2 = \dfrac{g}{l}$, d'où $T = 2\pi\sqrt{\dfrac{l}{g}}$.
+
+\textbf{b. } Réponse \textbf{b$_3$}. Pour un $RLC$ série, $I = \dfrac{U}{Z} = \dfrac{U}{\sqrt{R^2 + (L\omega - \frac{1}{C\omega})^2}}$. À la résonance $L\omega = \dfrac{1}{C\omega}$, $\omega_0 = \dfrac{1}{\sqrt{LC}}$, $Z = R$ (minimal) et $I = I_0 = \dfrac{U}{R}$ (maximal).
+
+\question{2.}
+\textbf{a.} \textbf{Faux} : la cinématique étudie les mouvements en fonction du temps, sans se préoccuper de leurs causes.
+
+\textbf{b.} \textbf{Faux} : un ébranlement est transversal si sa direction est perpendiculaire à la direction de propagation.
+
+\textbf{c.} \textbf{Vrai} : un système est en chute libre si la seule force qu'il subit est son poids.
+
+\textbf{d.} \textbf{Vrai}.
+
+\partie{B : application des connaissances}
+Un solide $A$ (masse $M$) sur un plan incliné d'angle $\alpha$ est relié par un fil, passant sur un cylindre de moment d'inertie $J$ et de rayon $r$, à la poulie.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[thick] (0,0)--(6,3); \draw (0,0)--(6,0); \draw (1,0) arc[start angle=0,end angle=26.57,radius=1]; \node at (1.35,0.2){\scriptsize$\alpha$};
+  % bloc
+  \coordinate (M) at (2.4,1.2);
+  \draw[rotate around={26.57:(M)}] ($(M)+(-0.5,0)$)rectangle($(M)+(0.5,0.5)$);
+  \draw[->,thick] (M)++(0,0.25)--++(0,-1.5) node[below]{$\vv{P}$};
+  \draw[->] (M)++(0,0.25)--++(-0.9,0.45) node[left]{$\vv{P_x}$};
+  \draw[->] (M)++(0,0.25)--++(0.67,-1.34) node[right]{$\vv{P_y}$};
+  \draw[->,thick] (M)++(0,0.55)--++(-0.55,1.1) node[above]{$\vv{R}$};
+  \draw[->,thick] (M)++(0.4,0.45)--++(0.9,0.45) node[above]{$\vv{T}$};
+  \draw[->,thick] (M)++(0.4,0.2)--++(-0.7,-0.35) node[below left]{$\vv{f}$};
+  % cylindre en haut
+  \coordinate (Cyl) at (5.3,2.65); \draw (Cyl) circle (0.35); \fill (Cyl) circle (1pt);
+  \draw[->,thick] (Cyl)--++(0,0.9) node[above]{$\vv{R'}$};
+  \draw[->,thick] (Cyl)--++(0,-1) node[below]{$\vv{P'}$};
+  \draw[->,thick] (Cyl)++(-0.35,0)--++(-0.9,-0.45) node[left]{$\vv{T'}$};
+  \draw (M)++(0.4,0.45)++(0.9,0.45)--(Cyl);
+\end{tikzpicture}
+\end{center}
+
+\question{1. a.} \underline{Méthode dynamique.} Pour le solide $M$ (TCI projeté sur $xx'$) : $Mg\sin\alpha - f - T = Ma$, d'où $T = Mg\sin\alpha - Ma - f$ \;(*). Pour le cylindre (RFD, les forces $\vv{P'}$, $\vv{R'}$ passant par l'axe) : $T'r = J\ddot{\theta}$ avec $\ddot{\theta} = \dfrac{a}{r}$, soit $T' = J\dfrac{a}{r^2}$ \;(**). Le fil inextensible et sans masse donne $T = T'$. En combinant (*) et (**) et avec $f = \frac{1}{10}Mg$ :
+\[ a\left(M + \frac{J}{r^2}\right) = Mg\sin\alpha - f \;\Rightarrow\; \boxed{a = \dfrac{Mg\left(\sin\alpha - \frac{1}{10}\right)}{M + \frac{J}{r^2}}} \]
+\underline{Méthode énergétique.} $\Delta E_C = \sum W$ : $\frac{1}{2}Mv^2 + \frac{1}{2}J\dot{\theta}^2 = Mgl\sin\alpha - f l$ (avec $h = l\sin\alpha$, $\dot{\theta} = v/r$). En dérivant par rapport au temps ($\frac{dv}{dt} = a$, $\frac{dl}{dt} = v$) on retrouve $\left(M + \frac{J}{r^2}\right)a = Mg\left(\sin\alpha - \frac{1}{10}\right)$, d'où le même résultat.
+
+\textbf{b.} $a = \dfrac{1\times 9{,}8\times 0{,}4}{1 + \frac{9\cdot10^{-4}}{(6\cdot10^{-2})^2}} = 3{,}136\ \text{m}\cdot\text{s}^{-2}$, constante et positive : le mouvement de $A$ est rectiligne uniformément accéléré (MRUA).
+
+\question{2.} $T = J\dfrac{a}{r^2} = 9\cdot10^{-4}\times\dfrac{3{,}136}{(6\cdot10^{-2})^2} = 7{,}84\cdot10^{-1}$ N.
+
+\question{3.} Sans cylindre, pour le corps $A$ (forces $\vv{P}$, $\vv{R}$) : $Mg\sin\alpha - f = Ma'$, soit $a' = g\left(\sin\alpha - \frac{1}{10}\right)$. \underline{A.N.} : $a' = 9{,}80\times\left(\sin 30^\circ - \frac{1}{10}\right) = 3{,}92\ \text{m}\cdot\text{s}^{-2}$.
+
+\partie{C : résolution d'un problème}
+
+\question{1.} $W_0 = \dfrac{hc}{\lambda_0} = \dfrac{6{,}62\cdot10^{-34}\times 3\cdot10^{8}}{0{,}66\cdot10^{-6}} = 3{,}0\cdot10^{-19}$ J.
+
+\question{2.} $W = \dfrac{hc}{\lambda} = \dfrac{6{,}62\cdot10^{-34}\times 3\cdot10^{8}}{0{,}4\cdot10^{-6}} = 4{,}965\cdot10^{-19}$ J.
+
+\question{3.} Comme $W > W_0$, le photon extrait un électron ; le surplus devient énergie cinétique. $W = W_0 + E_{c\max}$, d'où $E_{c\max} = 1{,}965\cdot10^{-19}$ J. Puis $E_{c\max} = \frac{1}{2}m_e v_{\max}^2$ donne $v_{\max} = \sqrt{\dfrac{2E_{c\max}}{m_e}} = \sqrt{\dfrac{2\times 1{,}965\cdot10^{-19}}{9\cdot10^{-31}}} = 6{,}608\cdot10^{5}\ \text{m}\cdot\text{s}^{-1}$.
+
+\question{4. 1.} $P = NW$, d'où $N = \dfrac{P}{W} = \dfrac{7{,}4\cdot10^{-7}}{4{,}965\cdot10^{-19}} = 1{,}490\cdot10^{12}$ photons/seconde.
+
+\textbf{4. 2.} $I_S = ne$ ; le rendement $r = \dfrac{n}{N} = \dfrac{I_S}{e\,N} = \dfrac{2{,}4\cdot10^{-9}}{1{,}6\cdot10^{-19}\times 1{,}490\cdot10^{12}} = 1{,}007\cdot10^{-2} \approx 1{,}0\ \%$.
+
+\end{document}

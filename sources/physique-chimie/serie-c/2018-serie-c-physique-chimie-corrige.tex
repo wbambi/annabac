@@ -1,0 +1,128 @@
+\documentclass[11pt]{article}
+\input{style-pc}
+
+\begin{document}
+
+\entetesujet{Corrigé bac 2018 -- Série C}
+
+\matiere{CHIMIE}{8 points}
+\partie{A : vérification des connaissances}
+
+\question{1. Vrai ou faux}
+\textbf{1. a) Vrai.} Moyen mnémotechnique : le \textbf{R}éducteur \textbf{R}end des électrons, l'\textbf{O}xydant les \textbf{O}btient. D'où :
+\[ \text{Réducteur} \longrightarrow \text{Oxydant} + n\,e^- \ (1)\ \text{(oxydation)} \;;\quad \text{Oxydant} + n\,e^- \longrightarrow \text{Réducteur} \ (2)\ \text{(réduction)} \]
+
+\textbf{1. b) Vrai.} Une \textbf{solution électrolytique} contient des ions (cations et anions) qui la rendent conductrice (ex. : sels, acides, bases dans l'eau). Une \textbf{solution non-électrolytique} est formée de composants non chargés : elle ne conduit pas le courant (loi de Raoult applicable).
+
+\textbf{1. c) Faux.} Le rendement d'une hydrolyse est de 40\,\% pour un alcool \emph{secondaire}. L'estérification ($\ch{R{-}COOH} + \ch{R'OH} \rightleftharpoons \ch{R{-}COO{-}R'} + \ch{H_2O}$) et l'hydrolyse sont lentes et limitées ; le rendement dépend de la classe de l'alcool :
+\begin{center}\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|l|c|c|c|}
+\hline
+Réaction & alcool primaire & alcool secondaire & alcool tertiaire \\
+\hline
+Estérification & 67\,\% & 60\,\% & 5\,\% \\
+\hline
+Hydrolyse & 33\,\% & 40\,\% & 95\,\% \\
+\hline
+\end{tabular}
+\end{center}
+Classes d'alcool ($R, R', R''$ non hydrogène) : primaire $\ch{R{-}CH_2{-}OH}$ (C lié à 2 H) ; secondaire $\ch{R{-}CHR'{-}OH}$ (1 H) ; tertiaire $\ch{R{-}CR'R''{-}OH}$ (0 H).
+
+\textbf{1. d) Faux.} Pour $aA \longrightarrow$ produits d'ordre 1, $v = k[A]$ et $v = -\dfrac{1}{a}\dfrac{d[A]}{dt}$, d'où $\dfrac{d[A]}{[A]} = -ka\,dt$. En intégrant : $\ln[A] - \ln[A]_0 = -ka\,t$. À $t_{1/2}$, $[A] = \frac{[A]_0}{2}$ : $\ln\frac{[A]_0}{2} - \ln[A]_0 = -ka\,t_{1/2}$, soit $t_{1/2} = \dfrac{\ln 2}{ka}$ (indépendant de $[A]_0$ : donc l'affirmation $t_{1/2} = \frac{\ln 2}{k[A]_0}$ est fausse).
+
+\question{2. Texte à trous}
+L'ensemble des \emph{radiations} émises lors des \emph{transitions} aboutissant au même niveau d'\emph{énergie} constitue une \emph{série} de raies.
+
+\question{3. Question à réponse courte}
+$\text{pH} = \text{p}K_a + \log\dfrac{[\text{base}]}{[\text{acide}]}$. En effet, pour $\ch{AH + H_2O \rightleftharpoons A^- + H_3O^+}$, $K_a = \dfrac{[\ch{A^-}][\ch{H_3O^+}]}{[\ch{AH}]}$ ; en prenant $-\log$ : $\text{p}K_a = \text{pH} - \log\dfrac{[\ch{A^-}]}{[\ch{AH}]}$, d'où $\text{pH} = \text{p}K_a + \log\dfrac{[\ch{A^-}]}{[\ch{AH}]}$.
+
+\partie{B : application des connaissances}
+
+\question{1.} $C_1 = \dfrac{m}{M_{\ch{KMnO_4}}\,V}$ avec $M_{\ch{KMnO_4}} = 39 + 55 + 4\times 16 = 158$ g/mol. D'où $C_1 = \dfrac{19{,}75}{158\times 0{,}25} = 0{,}5$ mol/L.
+
+\question{2. a.} Demi-équations (milieu acide) :
+\[ \ch{H_2O_2 + 2\,H_2O \rightleftharpoons O_2 + 2\,H_3O^+ + 2\,e^-} \qquad \ch{MnO_4^- + 8\,H_3O^+ + 5\,e^- \rightleftharpoons Mn^{2+} + 12\,H_2O} \]
+
+\textbf{b.} En multipliant par 5 et 2 puis en sommant (le réducteur \ch{H_2O_2} cède autant d'électrons que l'oxydant \ch{MnO_4^-} en capte) :
+\[ \ch{2\,MnO_4^- + 5\,H_2O_2 + 6\,H_3O^+ \longrightarrow 2\,Mn^{2+} + 5\,O_2 + 14\,H_2O} \]
+
+\textbf{c.} À l'équivalence, les réactifs sont dans les proportions stœchiométriques : $5n_1 = 2n_2$, soit $5C_1V_1 = 2C_2V_2$, d'où $C_2 = \dfrac{5C_1V_1}{2V_2} = \dfrac{5\times 0{,}5\times 8\cdot10^{-3}}{2\times 10\cdot10^{-3}} = 1$ mol/L.
+
+\matiere{PHYSIQUE}{12 points}
+\partie{A : vérification des connaissances}
+
+\question{1. Questions à choix multiples}
+\textbf{1.1 $= $ c.} Pendule de torsion (fil de constante $c$, tige de moment d'inertie $J_\Delta$) : couple de rappel $\mathcal{M}_t = -c\theta$.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \fill[pattern=north east lines] (-0.4,2.3)rectangle(0.4,2.45); \draw (-0.4,2.3)--(0.4,2.3);
+  \draw[thick] (0,2.3)--(0,0.2); \draw[->] (0.12,1.5) arc[start angle=-40,end angle=40,radius=0.35];
+  \node[right] at (0,2.6){$(\Delta)$};
+  \draw[dashed] (-1.8,0.6)--(1.8,0.6);
+  \draw[thick,rotate around={-14:(0,0.6)}] (-1.7,0.6)--(1.7,0.6);
+  \node at (1.9,0.35){\scriptsize$-\theta$};
+  \draw[->,thick,blue] (0,0.6)--(0,1.4) node[above]{$\vv{T}$};
+  \draw[->,thick,red] (0,0.6)--(0,-0.2) node[below]{$\vv{P}$};
+\end{tikzpicture}
+\end{center}
+RFD de rotation : $\mathcal{M}_\Delta(\vv{P}) + \mathcal{M}_\Delta(\vv{T}) + \mathcal{M}_t = J_\Delta\ddot{\theta}$. Comme $\vv{P}$ et $\vv{T}$ ont leur ligne d'action sur $\Delta$, leurs moments sont nuls : $-c\theta = J_\Delta\ddot{\theta}$, soit $\ddot{\theta} + \dfrac{c}{J_\Delta}\theta = 0$. Solution $\theta(t) = \theta_m\cos\left(\frac{2\pi}{T_0}t + \varphi_0\right)$ ; on identifie $\left(\frac{2\pi}{T_0}\right)^2 = \dfrac{c}{J_\Delta}$, d'où $T_0 = 2\pi\sqrt{\dfrac{J_\Delta}{c}}$ et $\omega = \sqrt{\dfrac{c}{J_\Delta}}$.
+
+\textbf{1.2 $= $ c.} Un $RLC$ série est en résonance quand $X_L = X_C$ ($L\omega = \frac{1}{C\omega}$) : $Z = \sqrt{R^2 + (X_L - X_C)^2}$ est minimale et vaut $R$.
+
+\textbf{1.3 $= $ c.} Condensateur plan (deux armatures distantes de $d$, tension $U$) : champ uniforme $\vv{E}$ perpendiculaire, orienté vers l'armature négative ; $E = \dfrac{U}{d}$ (V$\cdot$m$^{-1}$). À l'extérieur, le champ est nul.
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \draw[thick] (0,1.2)--(4,1.2); \node[right] at (4,1.2){armature A};
+  \draw[thick] (0,0)--(4,0); \node[right] at (4,0){armature B};
+  \foreach \x in {0.4,0.8,...,3.6}{\node at (\x,1.35){\scriptsize$+$};}
+  \foreach \x in {0.4,0.8,...,3.6}{\node at (\x,-0.15){\scriptsize$-$};}
+  \foreach \x in {1,2,3}{\draw[->,thick] (\x,1.1)--(\x,0.1);}
+  \node at (2.2,0.6){$\vv{E}$};
+  \draw[<->] (0.15,0)--(0.15,1.2); \node[left] at (0.15,0.6){$d$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{1.4 $= $ c.} Un mouvement est rectiligne uniformément varié si la trajectoire est rectiligne et $\|\vv{a}\|$ constante ; il est accéléré si $\vv{a}$ et $\vv{v}$ sont de même sens ($\vv{v}\cdot\vv{a} = v\,a > 0$).
+
+\question{2. Texte à trous}
+Un système est dit \emph{conservatif} lorsque son énergie \emph{mécanique} reste \emph{constante} au cours du \emph{temps}.
+
+\partie{B : application des connaissances}
+
+\question{1. a.} Période $T = \dfrac{0{,}015}{3}\times 4 = 0{,}02$ s ; amplitude $a = 2$ mm $= 2\cdot10^{-3}$ m.
+
+\textbf{b.} Retard de $M$ sur $S$ : $\theta = \dfrac{0{,}015}{3}\times 2 = 0{,}01\ \text{s} = \dfrac{T}{2}$.
+
+\textbf{c.} $S$ et $M$ ont même fréquence, et les maximums de $y_S$ coïncident avec les minimums de $y_M$ : les points $S$ et $M$ sont en \textbf{opposition de phase}.
+
+\textbf{d.} $y_S(t) = 2\cdot10^{-3}\sin\left(\frac{2\pi}{T}t\right) = 2\cdot10^{-3}\sin(100\pi t)$ (m). $M$ reproduit $S$ avec le retard $\theta$ : $y_M(t) = y_S(t - \theta) = 2\cdot10^{-3}\sin(100\pi t - \pi)$ (m).
+
+\partie{C : résolution d'un problème}
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=1,every node/.style={font=\footnotesize}]
+  \fill (0,0) circle (1.5pt) node[left]{$S$};
+  \draw (2.2,-1.1)--(2.2,1.1); % plan des fentes
+  \coordinate (S1) at (2.2,0.45); \coordinate (S2) at (2.2,-0.45);
+  \fill (S1) circle (1pt) node[left]{$S_1$}; \fill (S2) circle (1pt) node[left]{$S_2$};
+  \draw (0,0)--(S1); \draw (0,0)--(S2);
+  \draw[<->] (2.05,-0.45)--(2.05,0.45); \node[left] at (2.05,0){$a$};
+  \draw[thick] (7,-1.4)--(7,1.6); \node[below right] at (7,-1.4){$(E)$};
+  \foreach \k/\y in {0/0,1/0.5,2/1.0,3/1.5}{\draw[very thick] (6.95,\y-0.05)--(6.95,\y+0.05); \node[right] at (7.05,\y){\scriptsize$k=\k$};}
+  \fill (7,0) circle (1pt) node[below left]{$O$};
+  \draw[<->] (0,-1.3)--(2.2,-1.3); \node[below] at (1.1,-1.3){$d$};
+  \draw[<->] (2.2,-1.3)--(7,-1.3); \node[below] at (4.6,-1.3){$D$};
+  \node[above] at (4.6,1.5){\scriptsize frange brillante};
+\end{tikzpicture}
+\end{center}
+
+\question{1. 1. a.} Position des franges brillantes : $x_k = \dfrac{k\lambda_1 D}{a}$, $k \in \mathbb{Z}$.
+
+\textbf{b.} Distance entre deux franges consécutives : $x_{k+1} - x_k = \dfrac{\lambda_1 D}{a}$. D'où l'interfrange $i = \dfrac{\lambda_1 D}{a}$.
+
+\textbf{1. 2. a.} 11 franges brillantes consécutives $\Rightarrow$ 10 interfranges : $10\,i = 9{,}6\cdot10^{-3}$ m, d'où $i = 9{,}6\cdot10^{-4}$ m.
+
+\textbf{b.} $\lambda_1 = \dfrac{i\,a}{D} = \dfrac{9{,}6\cdot10^{-4}\times 10^{-3}}{2} = 4{,}8\cdot10^{-7}$ m.
+
+\question{2.} La 5\textsuperscript{e} frange de $\lambda_1$ ($x_5 = \frac{5\lambda_1 D}{a}$) se superpose à la 4\textsuperscript{e} de $\lambda_2$ ($y_4 = \frac{4\lambda_2 D}{a}$) si $x_5 = y_4$, soit $\lambda_2 = \dfrac{5\lambda_1}{4} = \dfrac{5\times 4{,}8\cdot10^{-7}}{4} = 6\cdot10^{-7}$ m.
+
+\end{document}
